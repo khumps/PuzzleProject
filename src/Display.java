@@ -2,6 +2,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 
 
+<<<<<<< HEAD
 public class Display extends JFrame {
 private JComboBox menu;
 
@@ -13,5 +14,8 @@ Display()
 		// TODO Auto-generated method stub
 
 	}
+=======
+public class Display extends JFrame{
+>>>>>>> origin/master
 
 }
