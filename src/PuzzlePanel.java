@@ -3,11 +3,14 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import org.omg.CORBA.Bounds;
+
 
 public class PuzzlePanel extends JPanel {
 	
-	private Puzzle puz;
 	private PieceComponent[] p;
+	
+	private Bounds[][] b;
 	
 	public PuzzlePanel(){
 		
@@ -15,7 +18,8 @@ public class PuzzlePanel extends JPanel {
 	
 	public void paintComponent(Graphics g){
 		Graphics2D gr2 = (Graphics2D)g;
-		super.paintComponent(g);		
+		super.paintComponent(g);
+		
 	}
 	
 	public void setPiece(int row, int col){
@@ -23,6 +27,10 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public void removePiece(int row, int col){
+		
+	}
+	
+	public Bounds getBounds(int row, int col){
 		
 	}
 	
