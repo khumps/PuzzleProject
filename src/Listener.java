@@ -7,6 +7,13 @@ import java.awt.event.MouseWheelEvent;
 
 public class Listener {
 	private String command;
+	private PuzzlePanel panel;
+	private PieceComponent piece;
+	
+	public Listener(PuzzlePanel panel)
+	{
+		this.panel = panel;
+	}
 
 	public class ButtonListener implements ActionListener {
 		@Override
@@ -48,6 +55,10 @@ public class Listener {
 
 	public class MouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
+			if(e.getComponent().equals(panel.))
+			int col = (e.getX() - e.getComponent().getX()) / panel.CELL_SIZE;
+			int row = e.getY() - e.getComponent().getY() / panel.CELL_SIZE;
+			panel.
 
 		}
 
@@ -68,6 +79,7 @@ public class Listener {
 		}
 
 		public void mouseWheelMoved(MouseWheelEvent e) {
+			e.getSource().get
 
 		}
 
