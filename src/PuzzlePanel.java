@@ -5,11 +5,11 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
 	
-	private PieceComponent[] p;	
-	private Puzzle pu;
+	private PieceComponent[] pieces;	
+	private Puzzle puzzle;
 	
-	public PuzzlePanel(PieceComponent[] p){
-		this.p = p;	
+	public PuzzlePanel(PieceComponent[] pieces){
+		this.pieces = pieces;	
 	}
 	
 	public void paintComponent(Graphics g){
