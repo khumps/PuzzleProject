@@ -56,9 +56,9 @@ public class Listener {
 	public class MouseListener extends MouseAdapter {
 		public void mouseClicked(MouseEvent e) {
 			if(e.getComponent().equals(panel.))
-			int col = (e.getX() - e.getComponent().getX()) / panel.CELL_SIZE;
-			int row = e.getY() - e.getComponent().getY() / panel.CELL_SIZE;
-			panel.
+			int col = (e.getX() - e.getComponent().getX()) / PieceComponent.CELL_SIZE;
+			int row = e.getY() - e.getComponent().getY() / PieceComponent.CELL_SIZE;
+			panel.getPuzzle(row,col);
 
 		}
 
