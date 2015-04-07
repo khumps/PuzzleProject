@@ -10,7 +10,7 @@ public class PieceComponent extends JComponent {
 	private BufferedImage piecePic;
 	 
 	
-	public PieceComponent(MouseListener listener, Piece piece)
+	public PieceComponent(Listener listener, Piece piece)
 	{
 		this.piece = piece;
 		

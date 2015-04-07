@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+
 
 public class Puzzle {
+	ArrayList<Piece> unusedPieces;
+	Board board;
 	public Puzzle(int rows, int cols)
 	{
 		
@@ -47,12 +51,12 @@ public class Puzzle {
 		}
 		public Piece removePiece(int row, int col)
 		{
-			return 
+			return board.getPiece(row,col);
 		}
-/*		public List<Piece> getUnusedPieces()
+		public ArrayList<Piece> getUnusedPieces()
 		{
-			//returns a COPY
-		}*/
+			return new ArrayList<Piece>(unusedPieces);
+		}
 		public String toString()
 		{
 			return "";
