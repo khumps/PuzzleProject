@@ -7,9 +7,14 @@ public class PuzzlePanel extends JPanel {
 	
 	private PieceComponent[] pieces;	
 	private Puzzle puzzle;
+	private Piece piece;
 	
-	public PuzzlePanel(PieceComponent[] pieces){
-		this.pieces = pieces;	
+	public PuzzlePanel(Puzzle puzzle, Listener listener){
+		this.puzzle = puzzle;
+		pieces = new PieceComponent[puzzle.getUnusedPieces().size()];
+		for(Piece p: puzzle.getUnusedPieces()){
+			
+		}
 	}
 	
 	public void paintComponent(Graphics g){
@@ -17,12 +22,12 @@ public class PuzzlePanel extends JPanel {
 		super.paintComponent(g);
 	}
 	
-	public void setPiece(int row, int col){
-		Puzzle.setPiece(row,col);
+	public void setPiece(int row, int col, Piece p){
+		puzzle.setPiece(row, col, p);
 	}
 	
 	public void removePiece(int row, int col){
-		Puzzle.setPiece(row,col);
+		puzzle.removePiece(row,col);
 	}
 
 	

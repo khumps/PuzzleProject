@@ -1,3 +1,5 @@
+import java.awt.Component;
+
 
 public class Puzzle {
 	public Puzzle(int rows, int cols)
@@ -64,5 +66,9 @@ public class Puzzle {
 	        {
 	        	return true;
 	        }
+	        
+			public Piece getUnusedPieces() {
+
+			}
 
 }
