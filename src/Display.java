@@ -1,3 +1,4 @@
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,8 +11,17 @@ public class Display extends JFrame {
 	private JComboBox menu;
 	private PuzzlePanel puzzle;
 	private JPanel unusedPieces;
+	
 
 	Display() {
+		JButton clear;
+		JButton hint;
+		JButton solve;
+		JButton[] buttons = {
+				clear = Utils.newButton(Utils.button, "Clear", "clear", listener.ButtonListener);
+				solve = Utils.newButton(size, text, command, listener)
+				
+		};
 		puzzle = new PuzzlePanel();
 		listener = new Listener(puzzle);
 
