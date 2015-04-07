@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.awt.Component;
+>>>>>>> c14c7add57e3feddcbe77f788610805990755c8b
 
 
 public class Puzzle {
@@ -68,5 +72,9 @@ public class Puzzle {
 	        {
 	        	return true;
 	        }
+	        
+			public Piece getUnusedPieces() {
+
+			}
 
 }
