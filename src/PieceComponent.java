@@ -25,9 +25,4 @@ public class PieceComponent extends JComponent {
 	{
 		rotate(rotations * 90);
 	}
-	
-	public void rotate(int degrees)
-	{
-		
-	}
 }
