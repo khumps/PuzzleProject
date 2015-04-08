@@ -31,7 +31,6 @@ public class PuzzlePanel extends JPanel {
 	public PuzzlePanel(Puzzle puzzle, Listener listener){
 /*		this.puzzle = puzzle;
 		pieces = new PieceComponent[puzzle.getUnusedPieces().size()];
-		
 		for(Piece p: puzzle.getUnusedPieces()){
 			
 		}*/
@@ -50,7 +49,7 @@ public class PuzzlePanel extends JPanel {
 	
 	public PieceComponent removePiece(int row, int col){
 		puzzle.removePiece(row,col);
-		return //PieceComponent that was there
+		return null; //PieceComponent that was there
 	}
 	
 	public void solve(){
