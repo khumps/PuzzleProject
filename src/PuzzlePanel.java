@@ -55,7 +55,10 @@ public class PuzzlePanel extends JPanel {
 	public void solve(){
 		Puzzle.solve();
 	}
-
+	
+	public void clear(){
+		Puzzle.restart();
+	}
 	
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
