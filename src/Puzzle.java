@@ -40,7 +40,7 @@ public class Puzzle {
 		// adds piece to unusedPieces List
 	}
 
-		public void solve()
+		public static void solve()
 		{
 			
 		}
