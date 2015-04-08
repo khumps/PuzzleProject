@@ -1,26 +1,34 @@
+/**
+ * @author Kevin Humphreys
+ * This class listens for events in the Display class and acts on them
+ */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
 public class Listener extends MouseAdapter implements ActionListener, KeyListener {
 	private String command;
-	private PuzzlePanel panel;
-	private PieceComponent piece;
+	private Display display;
 	private boolean holdPiece = false;
 	
-	public Listener(PuzzlePanel panel)
+	/**
+	 * 
+	 * @param display a display object that contains the necessary components for the class to function
+	 */
+	public Listener(Display display)
 	{
-		this.panel = panel;
+		this.display = display;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		command = e.getActionCommand();
 		if (command == "solve") {
-
+			display.getPuzzlePanel().solve();
 		}
 
 		if (command == "clear") {
@@ -49,20 +57,20 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 		int col;
 		int row;
 		PieceComponent clickedPiece;
-		if(e.getComponent().equals(panel))
+		if(e.getComponent().equals(display.getPuzzlePanel()))
 		{
 			col = (e.getX() - e.getComponent().getX()) / PieceComponent.CELL_SIZE;
 			row = e.getY() - e.getComponent().getY() / PieceComponent.CELL_SIZE;
 			if(!holdPiece)
 			{
 				holdPiece = true;
-				if(e.getComponent().equals(panel.getUnusedPiecePanel()))
+				if(e.getComponent().equals(display.getPuzzlePanel().getUnusedPiecePanel()))
 				{
-					clickedPiece = panel.getUnusedPieces().get(col);
+					clickedPiece = display.getPuzzlePanel().getUnusedPieces().get(col);
 				}
 				else
 				{
-					clickedPiece = panel.removePiece(row, col);
+					clickedPiece = display.getPuzzlePanel().removePiece(row, col);
 				}
 			}
 		}
@@ -86,7 +94,7 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		e.getSource().get
+		//e.getSource().get
 
 	}
 
