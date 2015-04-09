@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -12,11 +13,12 @@ public class PuzzlePanel extends JPanel {
 	private ArrayList<PieceComponent> unusedPieces;
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
+	Color c = new Color(150,200,255);
 	
-	public PuzzlePanel()
-	{
+	public PuzzlePanel(){
 		
 	}
+	
 	public JPanel getUnusedPiecePanel() {
 		return unusedPiecePanel;
 	}
@@ -38,10 +40,13 @@ public class PuzzlePanel extends JPanel {
 	
 	public void paintComponent(Graphics g){
 		Graphics2D gr2 = (Graphics2D)g;
+		super.paintComponent(gr2);
 		super.paintComponent(g);
+		g.setColor(c);
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 	
+
 	public void setPiece(int row, int col, Piece p){
 		puzzle.setPiece(row, col, p);
 		
@@ -65,8 +70,9 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public static void main(String[] args) {
-		JFrame f = new JFrame();
+		JFrame f = new JFrame();	
 		f.add(new PuzzlePanel());
+		f.setSize(200, 200);
 		f.setVisible(true);
 	}
 
