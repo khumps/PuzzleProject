@@ -20,6 +20,8 @@ public class Display extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		listener = new Listener(this);
 		menu = new JMenuBar();
+		JTextField instructions = new JTextField();
+		
 		JMenuItem clear = Utils.newMenuItem(Utils.button, "Clear", "clear", listener, menu);
 		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","clear",listener,menu);
 		JMenuItem solve = Utils.newMenuItem(Utils.button, "Solve", "solve", listener, menu);
