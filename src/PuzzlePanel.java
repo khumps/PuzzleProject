@@ -60,6 +60,9 @@ public class PuzzlePanel extends JPanel {
 		Puzzle.restart();
 	}
 	
+	public Puzzle getPuzzle(){
+	}
+	
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
 		f.add(new PuzzlePanel());
