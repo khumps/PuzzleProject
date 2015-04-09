@@ -32,7 +32,7 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 		}
 
 		if (command == "clear") {
-			display.getPuzzlePanel().getPuzzle().reset();
+			display.getPuzzlePanel().getPuzzle().restart();
 		}
 
 		if (command == "hint") {
