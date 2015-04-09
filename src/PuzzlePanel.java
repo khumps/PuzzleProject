@@ -61,6 +61,7 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public Puzzle getPuzzle(){
+		return puzzle;
 	}
 	
 	public static void main(String[] args) {
