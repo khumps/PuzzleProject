@@ -14,7 +14,7 @@ public class PieceComponent extends JComponent {
 
 	public final int CELL_SIZE = 15;
 	private static Piece piece;
-	private BufferedImage piecePic;
+	private BufferedImage piecePic = null;
 
 	public PieceComponent(Listener listener, Piece piece) {
 
