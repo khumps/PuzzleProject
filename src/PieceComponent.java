@@ -10,7 +10,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.xml.bind.Marshaller.Listener;
 
 @SuppressWarnings("serial")
 public class PieceComponent extends JComponent {
@@ -19,7 +18,7 @@ public class PieceComponent extends JComponent {
 	private static Piece piece;
 	private BufferedImage piecePic;
 
-	public PieceComponent(Listener listener, Piece piece) {
+	public PieceComponent(BufferedImage img, Piece piece) {
 
 		PieceComponent.piece = piece;
 
