@@ -14,11 +14,15 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PieceComponent extends JComponent {
 
-	public static final int CELL_SIZE = 15;
-	private static Piece piece;
+	public final int CELL_SIZE = 15;
+	private static Piece piece = new Piece(5,4, 3, 2);
 	private BufferedImage piecePic;
 
+<<<<<<< HEAD
 	public PieceComponent(BufferedImage img, Piece piece) {
+=======
+	public PieceComponent(Piece piece) {
+>>>>>>> origin/master
 
 		PieceComponent.piece = piece;
 
@@ -92,7 +96,7 @@ public class PieceComponent extends JComponent {
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.drawImage(piecePic, 100, 100, 100, 100, null);
+		g2.drawImage(piecePic, 0, 0, 100, 100, null);
 		
 	}
 
