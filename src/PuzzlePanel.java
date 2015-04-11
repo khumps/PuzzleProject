@@ -73,6 +73,7 @@ public class PuzzlePanel extends JPanel {
 	public static void main(String[] args) {
 		JFrame f = new JFrame();	
 		f.add(new PuzzlePanel());
+		f.add(new PieceComponent());
 		f.setSize(200, 200);
 		f.setVisible(true);
 	}
