@@ -52,10 +52,11 @@ public class PuzzlePanel extends JPanel {
 		
 	}
 	
-	public PieceComponent removePiece(int row, int col){
-		puzzle.removePiece(row,col);
-		return null; //PieceComponent that was there
-	}
+//	For this method to work we need a PieceComponent constructor that has take int row and col
+//	public PieceComponent removePiece(int row, int col){
+//		puzzle.removePiece(row,col);
+//		return null; //PieceComponent that was there
+//	}
 	
 	public void solve(){
 		Puzzle.solve();
