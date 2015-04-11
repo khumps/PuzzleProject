@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
 	
-	private PieceComponent[] pieces;
-	private ArrayList<PieceComponent> unusedPieces;
+	private PieceComponent[][] pieces;
+	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
 	Color c = new Color(150,200,255);
@@ -32,9 +32,8 @@ public class PuzzlePanel extends JPanel {
 	}
 	public PuzzlePanel(Puzzle puzzle, Listener listener){
 		this.puzzle = puzzle;
-		pieces = new PieceComponent[puzzle.getUnusedPieces().size()];
 		for(Piece p: puzzle.getUnusedPieces()){
-			
+			unusedPieces.add(new PieceComponent(p));
 		}
 	}
 	
