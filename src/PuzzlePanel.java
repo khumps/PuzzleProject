@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -30,10 +31,11 @@ public class PuzzlePanel extends JPanel {
 	public void repaint(){
 		
 	}
-	public PuzzlePanel(Puzzle puzzle, Listener listener){
+	public PuzzlePanel(Puzzle puzzle, Listener listener, BufferedImage[] imgs){
 		this.puzzle = puzzle;
 		for(Piece p: puzzle.getUnusedPieces()){
-			unusedPieces.add(new PieceComponent(p));
+			for(BufferedImage img:imgs)
+			unusedPieces.add(new PieceComponent(img,p));
 		}
 	}
 	
