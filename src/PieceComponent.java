@@ -119,6 +119,7 @@ public class PieceComponent extends JComponent {
 		frame.add(piece);
 		piece.rotate(1);
 		frame.setVisible(true);
+		frame.setSize(1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
