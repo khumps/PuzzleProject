@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.xml.bind.Marshaller.Listener;
 
 @SuppressWarnings("serial")
 public class PieceComponent extends JComponent {
@@ -18,13 +19,10 @@ public class PieceComponent extends JComponent {
 	private static Piece piece = new Piece(5,4, 3, 2);
 	private BufferedImage piecePic;
 
-<<<<<<< HEAD
-	public PieceComponent(BufferedImage img, Piece piece) {
-=======
-	public PieceComponent(Piece piece) {
->>>>>>> origin/master
+	public PieceComponent(BufferedImage image, Piece piece) {
 
 		PieceComponent.piece = piece;
+		piecePic = image;
 
 		// Check for which piece fits the given piece, sets the correct image
 		// for it
