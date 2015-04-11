@@ -31,9 +31,9 @@ public class PuzzlePanel extends JPanel {
 	public void repaint(){
 		
 	}
-	public PuzzlePanel(Puzzle puzzle, Listener listener, BufferedImage[] imgs){
+	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
 		this.puzzle = puzzle;
-		for(Piece p: puzzle.getUnusedPieces()){
+		for(Piece p: pieces){
 			for(BufferedImage img:imgs)
 			unusedPieces.add(new PieceComponent(img,p));
 		}
