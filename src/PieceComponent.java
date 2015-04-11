@@ -19,7 +19,7 @@ public class PieceComponent extends JComponent {
 	private static Piece piece = new Piece(5,4, 3, 2);
 	private BufferedImage piecePic;
 
-	public PieceComponent(Listener listener, Piece piece) {
+	public PieceComponent(Piece piece) {
 
 		PieceComponent.piece = piece;
 
