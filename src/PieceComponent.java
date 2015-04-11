@@ -12,7 +12,7 @@ import javax.xml.bind.Marshaller.Listener;
 @SuppressWarnings("serial")
 public class PieceComponent extends JComponent {
 
-	public final int CELL_SIZE = 15;
+	public static final int CELL_SIZE = 15;
 	private static Piece piece;
 	private BufferedImage piecePic = null;
 

@@ -26,7 +26,7 @@ public class Puzzle {
 	{
 		
 	}
-	public static void restart()
+	public void restart()
 	{
 		
 	}

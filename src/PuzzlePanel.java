@@ -62,7 +62,7 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public void clear(){
-		Puzzle.restart();
+		puzzle.restart();
 	}
 	
 	public Puzzle getPuzzle(){

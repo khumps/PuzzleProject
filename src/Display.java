@@ -4,7 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -21,7 +23,9 @@ public class Display extends JFrame {
 		listener = new Listener(this);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();
-		
+		instructions.setText("To rotate a piece use the scrollwheel or the arrow keys");
+		add(instructions,BorderLayout.NORTH);
+		instructions.setEditable(false);
 		JMenuItem clear = Utils.newMenuItem(Utils.button, "Clear", "clear", listener, menu);
 		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","clear",listener,menu);
 		JMenuItem solve = Utils.newMenuItem(Utils.button, "Solve", "solve", listener, menu);
