@@ -31,11 +31,11 @@ public class PuzzlePanel extends JPanel {
 		
 	}
 	public PuzzlePanel(Puzzle puzzle, Listener listener){
-/*		this.puzzle = puzzle;
+		this.puzzle = puzzle;
 		pieces = new PieceComponent[puzzle.getUnusedPieces().size()];
 		for(Piece p: puzzle.getUnusedPieces()){
 			
-		}*/
+		}
 	}
 	
 	public void paintComponent(Graphics g){

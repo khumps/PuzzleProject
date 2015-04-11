@@ -15,15 +15,9 @@ import javax.xml.bind.Marshaller.Listener;
 @SuppressWarnings("serial")
 public class PieceComponent extends JComponent {
 
-<<<<<<< HEAD
 	public static final int CELL_SIZE = 15;
 	private static Piece piece;
-	private BufferedImage piecePic = null;
-=======
-	public final int CELL_SIZE = 15;
-	private static Piece piece = new Piece(5,4, 3, 2);
 	private BufferedImage piecePic;
->>>>>>> origin/master
 
 	public PieceComponent(Listener listener, Piece piece) {
 
