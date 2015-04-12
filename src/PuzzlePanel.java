@@ -80,6 +80,7 @@ public class PuzzlePanel extends JPanel {
 		JFrame f = new JFrame();
 		f.setSize(200, 200);
 		f.setVisible(true);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel p = new JPanel();
 		f.add(new PuzzlePanel());
 		GridBagConstraints g = new GridBagConstraints();
