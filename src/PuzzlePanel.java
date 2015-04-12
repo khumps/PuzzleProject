@@ -1,16 +1,13 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -58,11 +55,12 @@ public class PuzzlePanel extends JPanel {
 		
 	}
 	
-//	For this method to work we need a PieceComponent constructor that has take int row and col
-//	public PieceComponent removePiece(int row, int col){
-//		puzzle.removePiece(row,col);
-//		return null; //PieceComponent that was there
-//	}
+
+	public void removePiece(int row, int col){
+		puzzle.removePiece(row,col);
+		pieces = new PieceComponent[row][col];
+		unusedPieces.add(pieces);
+	}
 	
 	public void solve(){
 		Puzzle.solve();
@@ -78,11 +76,12 @@ public class PuzzlePanel extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
-		f.add(new PieceComponent());
-		f.setSize(200, 200);
-		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.add(new PuzzlePanel());
+		f.setSize(400, 500);
+		PuzzlePanel p = new PuzzlePanel();
+		f.add(new PieceComponent());
+		f.setVisible(true);
+		f.add(p);
 		f.pack();
 		
 	}
