@@ -3,10 +3,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -58,8 +55,9 @@ public class PuzzlePanel extends JPanel {
 
 	public void removePiece(int row, int col){
 		puzzle.removePiece(row,col);
-		pieces = new PieceComponent[row][col];
-		unusedPieces.add(pieces);
+		unusedPieces.add(pieces[row][col]);
+		pieces[row][col] = null;
+		
 	}
 	
 	public void solve(){
