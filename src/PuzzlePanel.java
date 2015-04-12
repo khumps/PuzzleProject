@@ -52,10 +52,10 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 
-	public PieceComponent removePiece(int row, int col){
+	public void removePiece(int row, int col){
 		puzzle.removePiece(row,col);
-		
-		return null; //PieceComponent that was there
+		pieces = new PieceComponent[row][col];
+		unusedPieces.add(pieces);
 	}
 	
 	public void solve(){
