@@ -6,8 +6,8 @@ public class Piece {
 	private final int WEST;
 	public static final int HEARTS_IN = -1;
 	public static final int HEARTS_OUT = 1;
-	public static final int DIMONDS_IN = -2;
-	public static final int DIMONDS_OUT = 2;
+	public static final int DIAMONDS_IN = -2;
+	public static final int DIAMONDS_OUT = 2;
 	public static final int SPADES_IN = -3;
 	public static final int SPADES_OUT = 3;
 	public static final int CLUBS_IN = -4;
