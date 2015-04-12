@@ -112,7 +112,7 @@ public class PieceComponent extends JComponent {
 		JFrame frame = new JFrame();
 		PieceComponent piece = new PieceComponent();
 		frame.add(piece);
-		piece.rotate(1);
+		piece.rotate(2);
 		frame.setVisible(true);
 		frame.setSize(1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
