@@ -1,11 +1,17 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -14,7 +20,7 @@ public class PuzzlePanel extends JPanel {
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
-	Color c = new Color(150,200,255);
+	static Color c = new Color(150,200,255);
 	
 	public PuzzlePanel(){
 		
@@ -71,11 +77,30 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public static void main(String[] args) {
-		JFrame f = new JFrame();	
-		f.add(new PuzzlePanel());
-		f.add(new PieceComponent());
+		JFrame f = new JFrame();
 		f.setSize(200, 200);
 		f.setVisible(true);
+		JPanel p = new JPanel();
+		f.add(new PuzzlePanel());
+		GridBagConstraints g = new GridBagConstraints();
+		f.getContentPane().add(p, BorderLayout.NORTH);
+		g.insets = new Insets(20,10,10,10);
+		
+		PieceComponent piece = new PieceComponent();
+		g.gridx = 0;
+		g.gridy = 0;
+		p.add(piece, g);
+		
+		JLabel l2 = new JLabel("Label 2");
+		g.gridx = 1;
+		g.gridy = 0;
+		p.add(l2, g);
+		JButton b = new JButton("Button");
+		g.gridx = 2;
+		g.gridy = 1;
+		p.add(b, g);
+		f.pack();
+		
 	}
 
 }
