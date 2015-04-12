@@ -19,14 +19,15 @@ public class Display extends JFrame {
 	private JMenuBar menu;
 	private PuzzlePanel puzzlePanel;
 	private JPanel unusedPieces;
-	private Puzzle puzzle;
 	private Piece[] pieces = new Piece[9];
 	private BufferedImage[] imgs = new BufferedImage[9];
 	
 
 	Display() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		createPieces();
 		loadImages();
+		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
 		listener = new Listener(this);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();

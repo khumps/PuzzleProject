@@ -41,6 +41,7 @@ public class PuzzlePanel extends JPanel {
 		for(Piece p: pieces){
 			for(BufferedImage img:imgs)
 			unusedPieces.add(new PieceComponent(img,p));
+			puzzle = new Puzzle(3,3,pieces);
 		}
 	}
 	
