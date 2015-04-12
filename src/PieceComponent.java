@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.xml.bind.Marshaller.Listener;
 
-@SuppressWarnings("serial")
+
 public class PieceComponent extends JComponent {
 
 	public final int CELL_SIZE = 15;
