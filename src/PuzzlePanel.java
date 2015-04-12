@@ -78,28 +78,11 @@ public class PuzzlePanel extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame f = new JFrame();
+		f.add(new PieceComponent());
 		f.setSize(200, 200);
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel p = new JPanel();
 		f.add(new PuzzlePanel());
-		GridBagConstraints g = new GridBagConstraints();
-		f.getContentPane().add(p, BorderLayout.NORTH);
-		g.insets = new Insets(20,10,10,10);
-		
-		PieceComponent piece = new PieceComponent();
-		g.gridx = 0;
-		g.gridy = 0;
-		p.add(piece, g);
-		
-		JLabel l2 = new JLabel("Label 2");
-		g.gridx = 1;
-		g.gridy = 0;
-		p.add(l2, g);
-		JButton b = new JButton("Button");
-		g.gridx = 2;
-		g.gridy = 1;
-		p.add(b, g);
 		f.pack();
 		
 	}
