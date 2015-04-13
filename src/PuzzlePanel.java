@@ -53,9 +53,10 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 
-	public void removePiece(int row, int col){
+	public PieceComponent removePiece(int row, int col){
 		puzzle.removePiece(row,col);
-		unusedPieces.add(pieces[row][col]);
+		unusedPieces.add(pieces[row][col]); 
+		return unusedPieces.get(unusedPieces.size() - 1);
 	}
 	
 	public void solve(){
