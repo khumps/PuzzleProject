@@ -35,7 +35,7 @@ public class Display extends JFrame {
 		add(instructions,BorderLayout.NORTH);
 		instructions.setEditable(false);
 		JMenuItem clear = Utils.newMenuItem(Utils.button, "Clear", "clear", listener, menu);
-		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","clear",listener,menu);
+		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","hint",listener,menu);
 		JMenuItem solve = Utils.newMenuItem(Utils.button, "Solve", "solve", listener, menu);
 		setJMenuBar(menu);
 		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
