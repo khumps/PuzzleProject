@@ -3,10 +3,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -79,15 +81,19 @@ public class PuzzlePanel extends JPanel {
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(400, 500);
-		//Piece pp = new Piece(1, 1, 1, 1);
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints g = new GridBagConstraints();
+		//g.insets = new Insets(10,10,10,10);
 		g.gridheight = 1;
 		g.gridwidth = 1;
 		PuzzlePanel p = new PuzzlePanel();
-		panel.add(new PieceComponent());
-		//p.setPiece(1,1,pp);
+		PieceComponent piece = new PieceComponent();
+		p.add(piece);
+		g.gridx = 0;
+		g.gridy = 0;
+		f.add(p);
 		f.setVisible(true);
+		f.add(panel);
 		f.add(p);
 		f.pack();
 		
