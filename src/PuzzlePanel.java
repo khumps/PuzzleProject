@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,6 +18,7 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 	
 	public PuzzlePanel(){
+		puzzle = new Puzzle(3,3);
 		
 	}
 	
@@ -75,11 +79,14 @@ public class PuzzlePanel extends JPanel {
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(400, 500);
-//		Piece pp = new Piece(1, 1, 1, 1);
+		//Piece pp = new Piece(1, 1, 1, 1);
+		JPanel panel = new JPanel(new GridBagLayout());
+		GridBagConstraints g = new GridBagConstraints();
+		g.gridheight = 1;
+		g.gridwidth = 1;
 		PuzzlePanel p = new PuzzlePanel();
-		f.add(new PieceComponent());
-		f.add(new PieceComponent());
-//		p.setPiece(1,1,pp);
+		panel.add(new PieceComponent());
+		//p.setPiece(1,1,pp);
 		f.setVisible(true);
 		f.add(p);
 		f.pack();

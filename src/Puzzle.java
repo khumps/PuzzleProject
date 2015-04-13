@@ -43,7 +43,7 @@ public class Puzzle {
 	}
 
 	public Piece setPiece(int row, int col, Piece piece) {
-
+		
 	}
 
 	public Piece getPiece(int row, int col) {
