@@ -47,6 +47,7 @@ public class PuzzlePanel extends JPanel {
 	
 
 	public void setPiece(int row, int col, Piece p){
+		
 		puzzle.setPiece(row, col, p);
 		
 	}
@@ -74,8 +75,11 @@ public class PuzzlePanel extends JPanel {
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(400, 500);
+//		Piece pp = new Piece(1, 1, 1, 1);
 		PuzzlePanel p = new PuzzlePanel();
 		f.add(new PieceComponent());
+		f.add(new PieceComponent());
+//		p.setPiece(1,1,pp);
 		f.setVisible(true);
 		f.add(p);
 		f.pack();
