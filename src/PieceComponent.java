@@ -13,6 +13,10 @@ import javax.swing.JFrame;
 
 public class PieceComponent extends JComponent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2012014390534205632L;
 	public final static int CELL_SIZE = 15;
 	private static Piece piece = new Piece(5,4, 3, 2);
 	private BufferedImage piecePic;
@@ -60,6 +64,15 @@ public class PieceComponent extends JComponent {
 		frame.setSize(1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+	}
+	
+	public BufferedImage getPiecePic()
+	{
+		return piecePic;
+	}
+
+	public Piece getPiece() {
+		return piece;
 	}
 
 }

@@ -41,20 +41,34 @@ public class PuzzlePanel extends JPanel {
 			unusedPieces.add(new PieceComponent(img,p));
 			puzzle = new Puzzle(3,3,pieces);
 		}
+		this.pieces = new PieceComponent[3][3];
 	}
+	
 	
 	public void paintComponent(Graphics g){
 		Graphics2D gr2 = (Graphics2D)g;
-		super.paintComponent(gr2);
+		int size = PieceComponent.CELL_SIZE;
+		int row = 0; int col = 0;
 		super.paintComponent(g);
 		g.setColor(c);
 		g.fillRect(0, 0, getWidth(), getHeight());
+		for(int i = 0; i < getWidth() && row < pieces.length; i+= size)
+		{
+			for(int j = 0; j < getHeight() && col < pieces[0].length; j += size)
+			{
+				if(pieces[row][col] != null)
+				g.drawImage(pieces[row][col].getPiecePic(), i, j, i + size , j + size, this);
+				else System.out.println(row + "  " + col);
+				row++;
+				col++;
+			}
+		}
 	}
 	
 
-	public void setPiece(int row, int col, Piece p){
-		
-		puzzle.setPiece(row, col, p);
+	public void setPiece(int row, int col, PieceComponent p){
+		pieces[row][col] = p;
+		puzzle.setPiece(row, col, p.getPiece());
 		
 	}
 	

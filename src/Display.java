@@ -77,7 +77,10 @@ public class Display extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new Display();
+		Display d = new Display();
+		System.out.println(d.getPuzzlePanel().getUnusedPieces().toString());
+		d.getPuzzlePanel().setPiece(1, 1, d.getPuzzlePanel().getUnusedPieces().get(0));
+		
 
 	}
 }

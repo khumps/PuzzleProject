@@ -42,7 +42,7 @@ public class Puzzle {
 
 	}
 
-	public Piece setPiece(int row, int col, Piece piece) {
+	public void setPiece(int row, int col, Piece piece) {
 		
 	}
 
