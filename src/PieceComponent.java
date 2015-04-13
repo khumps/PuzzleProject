@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -13,12 +14,8 @@ import javax.swing.JFrame;
 
 public class PieceComponent extends JComponent {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2012014390534205632L;
 	public final static int CELL_SIZE = 15;
-	private static Piece piece = new Piece(5,4, 3, 2);
+	private static Piece piece;
 	private BufferedImage piecePic;
 
 	public PieceComponent(BufferedImage image, Piece piece) {
@@ -29,10 +26,10 @@ public class PieceComponent extends JComponent {
 	}
 	
 	public PieceComponent() {
-		
+		piece = new Piece(Piece.HEARTS_IN, Piece.HEARTS_IN, Piece.HEARTS_IN, Piece.HEARTS_IN);
 		try {
-//			piecePic = ImageIO.read(getClass().getResourceAsStream("resources/piece_7.png"));
-			piecePic = ImageIO.read(new File("resources/piece_7.png"));
+			piecePic = ImageIO.read(getClass().getResourceAsStream("piece_1.png"));
+//			piecePic = ImageIO.read(new File("resources/piece_7.png"));
 		} catch (IOException e) {
 			System.out.println("Hi");
 		}
@@ -51,28 +48,29 @@ public class PieceComponent extends JComponent {
 		tx.rotate(rotations * Math.toRadians(90), piecePic.getWidth() / 2, piecePic.getHeight() / 2);
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 		piecePic = op.filter(piecePic, null);
-		
 		repaint();
+	}
+	
+	public Piece getPiece() {
+		return piece;
+	}
+	
+	public BufferedImage getPiecePic() {
+		return piecePic;
 	}
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		PieceComponent piece = new PieceComponent();
+		frame.setBackground(Color.BLUE);
+
 		frame.add(piece);
 		piece.rotate(2);
+		frame.setBackground(Color.BLUE);
 		frame.setVisible(true);
 		frame.setSize(1000, 1000);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-	}
-	
-	public BufferedImage getPiecePic()
-	{
-		return piecePic;
-	}
-
-	public Piece getPiece() {
-		return piece;
 	}
 
 }
