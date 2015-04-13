@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,7 +9,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -82,8 +82,10 @@ public class PuzzlePanel extends JPanel {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(400, 500);
 		JPanel panel = new JPanel(new GridBagLayout());
+		f.getContentPane().add(panel, BorderLayout.NORTH);
+		
 		GridBagConstraints g = new GridBagConstraints();
-		//g.insets = new Insets(10,10,10,10);
+		g.insets = new Insets(10,10,10,10);
 		g.gridheight = 1;
 		g.gridwidth = 1;
 		PuzzlePanel p = new PuzzlePanel();
@@ -91,7 +93,7 @@ public class PuzzlePanel extends JPanel {
 		p.add(piece);
 		g.gridx = 0;
 		g.gridy = 0;
-		f.add(p);
+		panel.add(piece, g);
 		f.setVisible(true);
 		f.add(panel);
 		f.add(p);
