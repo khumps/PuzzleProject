@@ -1,19 +1,26 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
 public class PuzzlePanel extends JPanel {
+	
 	
 	private PieceComponent[][] pieces;
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
@@ -23,39 +30,9 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 	
 	public PuzzlePanel(){
-		setLayout(new GridBagLayout());
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		for (int row = 0; row < 5; row++){
-			for(int col = 0; col < 5; col ++){
-				gbc.gridx = col;
-				gbc.gridy = row;
-				
-				CellPane cellPane = new CellPane();
-				Border border = null;
-				if (row < 4){
-					if (col < 4){
-						border = new MatteBorder(1,1,0,0,Color.GRAY);
-						
-					}else{
-						border = new MatteBorder(1,1,0,1,Color.GRAY);
-					}
-				}else{
-					if (col < 4){
-						border = new MatteBorder(1,1,1,0,Color.GRAY);
-					}else{
-						border = new MatteBorder(1,1,1,1,Color.GRAY);
-					}
-				}
-				cellPane.setBorder(border);
-				add(cellPane, gbc);
-				
-			}
-		}
 		
 	}
-	
-	
 	
 	public JPanel getUnusedPiecePanel() {
 		return unusedPiecePanel;
@@ -127,26 +104,35 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public static void main(String[] args) {
-		JFrame f = new JFrame();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(400, 500);
-		JPanel panel = new JPanel(new GridBagLayout());
-		f.getContentPane().add(panel, BorderLayout.NORTH);
-		
-		GridBagConstraints g = new GridBagConstraints();
-		g.insets = new Insets(10,10,10,10);
-		g.gridheight = 1;
-		g.gridwidth = 1;
-		PuzzlePanel p = new PuzzlePanel();
-		PieceComponent piece = new PieceComponent();
-		p.add(piece);
-		g.gridx = 0;
-		g.gridy = 0;
-		panel.add(piece, g);
-		f.setVisible(true);
-		f.add(panel);
-		f.add(p);
-		f.pack();
+		Grid g = new Grid();
+		g.run();
+//		 JFrame frame = new JFrame("Testing");
+//         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//         frame.setLayout(new BorderLayout());
+//         frame.add(new PuzzlePanel());
+//         frame.pack();
+//         frame.setLocationRelativeTo(null);
+//         frame.setVisible(true);
+//		JFrame f = new JFrame();
+//		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.setSize(400, 500);
+//		JPanel panel = new JPanel(new GridBagLayout());
+//		f.getContentPane().add(panel, BorderLayout.NORTH);
+//		
+//		GridBagConstraints g = new GridBagConstraints();
+//		g.insets = new Insets(10,10,10,10);
+//		g.gridheight = 1;
+//		g.gridwidth = 1;
+//		PuzzlePanel p = new PuzzlePanel();
+//		PieceComponent piece = new PieceComponent();
+//		p.add(piece);
+//		g.gridx = 0;
+//		g.gridy = 0;
+//		panel.add(piece, g);
+//		f.setVisible(true);
+//		f.add(panel);
+//		f.add(p);
+//		f.pack();
 		
 	}
 
