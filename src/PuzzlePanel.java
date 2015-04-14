@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Color;
@@ -105,7 +106,7 @@ public class PuzzlePanel extends JPanel {
 	
 	public static void main(String[] args) {
 		Grid g = new Grid();
-		g.run();
+		//g.run();
 		
 //		 JFrame frame = new JFrame("Testing");
 //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,7 +117,7 @@ public class PuzzlePanel extends JPanel {
 //         frame.setVisible(true);
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setSize(400, 500);
+		f.setSize(700, 700);
 		JPanel panel = new JPanel(new GridBagLayout());
 		f.getContentPane().add(panel, BorderLayout.NORTH);
 //		
@@ -127,6 +128,7 @@ public class PuzzlePanel extends JPanel {
 //		PuzzlePanel p = new PuzzlePanel();
 		PieceComponent piece = new PieceComponent();
 		f.add(piece);
+		f.add(g.run());
 //		g.gridx = 0;
 //		g.gridy = 0;
 //		panel.add(piece, g);
