@@ -1,38 +1,62 @@
-
 public class Piece {
-	private final int NORTH;
-	private final int SOUTH;
-	private final int EAST;
-	private final int WEST;
-	public static final int HEARTS_IN = -1;
-	public static final int HEARTS_OUT = 1;
-	public static final int DIAMONDS_IN = -2;
-	public static final int DIAMONDS_OUT = 2;
-	public static final int SPADES_IN = -3;
-	public static final int SPADES_OUT = 3;
-	public static final int CLUBS_IN = -4;
-	public static final int CLUBS_OUT = 4;
+	private static final int NORTH = 0, EAST = 90, SOUTH = 180, WEST = 270;
+	private static final int HEARTS_IN = -1, HEARTS_OUT = 1, SPADES_IN = -2, SPADES_OUT = 2,
+			CLUBS_IN = -3, CLUBS_OUT = 3, DIAMONDS_IN = -4, DIAMONDS_OUT = 4;
+	private int[] piece = new int[4];
+	private static int orientation;
 	
-	public Piece(int north, int east, int south, int west)
-	{
-		NORTH = north;
-		SOUTH = south;
-		EAST = east;
-		WEST = west;
+	public Piece(int north, int east, int south, int west) {
+		piece[0] = north;
+		piece[1] = east;
+		piece[2] = south;
+		piece[3] = west;
 	}
-
-/*	public Piece(int[] edges)
-	{
-		
-	}*/
-	// array containing north, east, south, west in that order
 	
-	public int getEdge(int direction)
-	{
+	public Piece(int[] edges){
+		for(int i = 0; i < edges.length; i++){
+			piece[i] = edges[i];
+		}
+	}
+	
+	public int getEdge(int direction){
+		if(direction == NORTH) return piece[0];
+		if(direction == EAST) return piece[1];
+		if(direction == SOUTH) return piece[2];
+		if(direction == WEST) return piece[3];
 		return direction;
 	}
-	public void rotate(int rotations)
-	{
-		
+	
+	public void rotate(int rotations){
+		if(rotations == 0) return;
+		rotate();
+		rotate(rotations - 1);
 	}
+	public void rotate(){
+		int temp = piece[0];
+		piece[0] = piece[3];
+		piece[3] = piece[2];
+		piece[2] = piece[1];
+		piece[1] = temp;
+		orientation++;
+		orientation = orientation % 4;
+	}
+	
+	
+	
+	public String toString(){
+		String a = "";
+		a += "[" + piece[0] + ",";
+		a += piece[1] + "," + piece[2];
+		a += "," + piece[3] + "]";
+		return a;
+	}
+	
+	public static void main(String[] args) {
+		Piece p = new Piece(1, 2, 3, 4);
+		p.rotate(3);
+		System.out.println(p.toString());
+		System.out.println(orientation);
+	}
+
 }
+
