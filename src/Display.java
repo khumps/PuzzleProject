@@ -51,7 +51,7 @@ public class Display extends JFrame {
 		for(int index = 0; index < 10; index++)
 		{
 			try{
-				imgs[index++] = ImageIO.read(new File("resources/piece_" + index + ".png"));
+				imgs[index++] = ImageIO.read(getClass().getResourceAsStream("piece_" + index + ".png"));
 			}
 			catch (IOException e) {
 				System.out.println("Hi");

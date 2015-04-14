@@ -17,6 +17,7 @@ public class PuzzlePanel extends JPanel {
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
+	public int cellSize;
 	static Color c = new Color(150,200,255);
 	
 	public PuzzlePanel(){
@@ -47,17 +48,17 @@ public class PuzzlePanel extends JPanel {
 	
 	public void paintComponent(Graphics g){
 		Graphics2D gr2 = (Graphics2D)g;
-		int size = PieceComponent.CELL_SIZE;
+		cellSize = getHeight() / 6;
 		int row = 0; int col = 0;
 		super.paintComponent(g);
 		g.setColor(c);
 		g.fillRect(0, 0, getWidth(), getHeight());
-		for(int i = 0; i < getWidth() && row < pieces.length; i+= size)
+		for(int i = 0; i < getHeight() && row < pieces.length; i+= cellSize)
 		{
-			for(int j = 0; j < getHeight() && col < pieces[0].length; j += size)
+			for(int j = 0; j < getWidth() && col < pieces[0].length; j += cellSize)
 			{
 				if(pieces[row][col] != null)
-				g.drawImage(pieces[row][col].getPiecePic(), i, j, i + size , j + size, this);
+				g.drawImage(pieces[row][col].getPiecePic(), i, j, i + cellSize , j + cellSize, this);
 				else System.out.println(row + "  " + col);
 				row++;
 				col++;
