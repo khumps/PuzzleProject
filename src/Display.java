@@ -18,7 +18,7 @@ public class Display extends JFrame {
 	private Listener listener;
 	private JMenuBar menu;
 	private PuzzlePanel puzzlePanel;
-	private JPanel unusedPieces;
+	private UnusedPiecePanel unusedPieces;
 	private Piece[] pieces = new Piece[9];
 	private BufferedImage[] imgs = new BufferedImage[9];
 	
@@ -27,7 +27,9 @@ public class Display extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		createPieces();
 		loadImages();
+
 		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
+		unusedPieces = new UnusedPiecePanel(puzzlePanel);
 		listener = new Listener(this);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();
@@ -38,7 +40,7 @@ public class Display extends JFrame {
 		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","hint",listener,menu);
 		JMenuItem solve = Utils.newMenuItem(Utils.button, "Solve", "solve", listener, menu);
 		setJMenuBar(menu);
-		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
+		getContentPane().add(unusedPieces);
 		getContentPane().add(puzzlePanel);
 		pack();
 		setVisible(true);
