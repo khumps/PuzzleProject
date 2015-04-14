@@ -15,9 +15,9 @@ import javax.swing.border.MatteBorder;
 
 public class Grid {
 
-    public static void main(String[] args) {
-        new Grid();
-    }
+//    public static void main(String[] args) {
+//        new Grid();
+//    }
 
     public Grid() {
         EventQueue.invokeLater(new Runnable() {
@@ -28,13 +28,6 @@ public class Grid {
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
                 }
 
-                JFrame frame = new JFrame("Testing");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLayout(new BorderLayout());
-                frame.add(new Pane());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
             }
         });
     }
