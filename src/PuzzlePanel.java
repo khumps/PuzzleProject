@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 
 public class PuzzlePanel extends JPanel {
 	
@@ -21,9 +23,39 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 	
 	public PuzzlePanel(){
-		puzzle = new Puzzle(3,3);
+		setLayout(new GridBagLayout());
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		for (int row = 0; row < 5; row++){
+			for(int col = 0; col < 5; col ++){
+				gbc.gridx = col;
+				gbc.gridy = row;
+				
+				CellPane cellPane = new CellPane();
+				Border border = null;
+				if (row < 4){
+					if (col < 4){
+						border = new MatteBorder(1,1,0,0,Color.GRAY);
+						
+					}else{
+						border = new MatteBorder(1,1,0,1,Color.GRAY);
+					}
+				}else{
+					if (col < 4){
+						border = new MatteBorder(1,1,1,0,Color.GRAY);
+					}else{
+						border = new MatteBorder(1,1,1,1,Color.GRAY);
+					}
+				}
+				cellPane.setBorder(border);
+				add(cellPane, gbc);
+				
+			}
+		}
 		
 	}
+	
+	
 	
 	public JPanel getUnusedPiecePanel() {
 		return unusedPiecePanel;
