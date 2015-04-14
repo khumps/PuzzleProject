@@ -1,6 +1,6 @@
 public class Piece {
-	private static final int NORTH = 0, EAST = 90, SOUTH = 180, WEST = 270;
-	private static final int HEARTS_IN = -1, HEARTS_OUT = 1, SPADES_IN = -2, SPADES_OUT = 2,
+	public static final int NORTH = 0, EAST = 90, SOUTH = 180, WEST = 270;
+	public static final int HEARTS_IN = -1, HEARTS_OUT = 1, SPADES_IN = -2, SPADES_OUT = 2,
 			CLUBS_IN = -3, CLUBS_OUT = 3, DIAMONDS_IN = -4, DIAMONDS_OUT = 4;
 	private int[] piece = new int[4];
 	private static int orientation;

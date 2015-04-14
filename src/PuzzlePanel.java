@@ -60,9 +60,11 @@ public class PuzzlePanel extends JPanel {
 				if(pieces[row][col] != null)
 				g.drawImage(pieces[row][col].getPiecePic(), i, j, i + cellSize , j + cellSize, this);
 				else System.out.println(row + "  " + col);
-				row++;
+
 				col++;
 			}
+			row++;
+			col = 0;
 		}
 	}
 	
@@ -81,7 +83,7 @@ public class PuzzlePanel extends JPanel {
 	}
 	
 	public void solve(){
-		Puzzle.solve();
+		puzzle.solve();
 	}
 	
 	public void clear(){
@@ -96,21 +98,21 @@ public class PuzzlePanel extends JPanel {
 		JFrame f = new JFrame();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(400, 500);
-//	JPanel panel = new JPanel(new GridBagLayout());
-//	f.getContentPane().add(panel, BorderLayout.NORTH);
-//		
-//		GridBagConstraints g = new GridBagConstraints();
-//		g.insets = new Insets(10,10,10,10);
-//		g.gridheight = 1;
-//		g.gridwidth = 1;
+		JPanel panel = new JPanel(new GridBagLayout());
+		f.getContentPane().add(panel, BorderLayout.NORTH);
+		
+		GridBagConstraints g = new GridBagConstraints();
+		g.insets = new Insets(10,10,10,10);
+		g.gridheight = 1;
+		g.gridwidth = 1;
 		PuzzlePanel p = new PuzzlePanel();
 		PieceComponent piece = new PieceComponent();
 		p.add(piece);
-//		g.gridx = 0;
-//		g.gridy = 0;
-//		panel.add(piece, g);
+		g.gridx = 0;
+		g.gridy = 0;
+		panel.add(piece, g);
 		f.setVisible(true);
-		//f.add(panel);
+		f.add(panel);
 		f.add(p);
 		f.pack();
 		
