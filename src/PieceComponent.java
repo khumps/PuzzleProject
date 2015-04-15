@@ -36,12 +36,7 @@ public class PieceComponent extends JComponent {
 		} catch (IOException e) {
 			System.out.println("Hi");
 		}
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> origin/master
 	}
 
 	public void paintComponent(Graphics g) {
@@ -68,19 +63,19 @@ public class PieceComponent extends JComponent {
 	public BufferedImage getPiecePic() {
 		return piecePic;
 	}
-<<<<<<< HEAD
+
 	
 	public String toString()
 	{
 		return "Piece";
 	}
-=======
+
 
 	public Point getCenter() {
 		return new Point(piecePic.getWidth() / 2, piecePic.getHeight() / 2);
 	}
 
->>>>>>> origin/master
+
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		PieceComponent piece = new PieceComponent();
