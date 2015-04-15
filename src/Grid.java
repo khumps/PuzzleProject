@@ -43,21 +43,21 @@ public class Grid extends JPanel{
 			setLayout(new GridBagLayout());
 
 			GridBagConstraints gbc = new GridBagConstraints();
-			for (int row = 0; row < 5; row++) {
-				for (int col = 0; col < 5; col++) {
+			for (int row = 0; row < 3; row++) {
+				for (int col = 0; col < 3; col++) {
 					gbc.gridx = col;
 					gbc.gridy = row;
 
 					CellPane cellPane = new CellPane();
 					Border border = null;
-					if (row < 4) {
-						if (col < 4) {
+					if (row < 2) {
+						if (col < 2) {
 							border = new MatteBorder(1, 1, 0, 0, Color.GRAY);
 						} else {
 							border = new MatteBorder(1, 1, 0, 1, Color.GRAY);
 						}
 					} else {
-						if (col < 4) {
+						if (col < 2) {
 							border = new MatteBorder(1, 1, 1, 0, Color.GRAY);
 						} else {
 							border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
