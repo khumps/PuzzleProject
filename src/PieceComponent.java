@@ -15,13 +15,14 @@ import javax.swing.JFrame;
 public class PieceComponent extends JComponent {
 
 	public final static int CELL_SIZE = 15;
-	private static Piece piece;
+	private Piece piece;
 	private BufferedImage piecePic;
 
 	public PieceComponent(BufferedImage image, Piece piece) {
 
-		PieceComponent.piece = piece;
+		this.piece = piece;
 		piecePic = image;
+		System.out.println("piece Created");
 
 	}
 	
@@ -33,6 +34,7 @@ public class PieceComponent extends JComponent {
 		} catch (IOException e) {
 			System.out.println("Hi");
 		}
+		
 		
 	}
 
@@ -59,6 +61,10 @@ public class PieceComponent extends JComponent {
 		return piecePic;
 	}
 	
+	public String toString()
+	{
+		return "Piece";
+	}
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		PieceComponent piece = new PieceComponent();

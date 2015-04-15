@@ -18,14 +18,17 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
 
-	private PieceComponent[][] pieces;
+	private PieceComponent[][] pieces = new PieceComponent[3][3];
 	private PieceComponent p;
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
-	public int cellSize;
+	private Listener listener;
 	private Rectangle puzzleArea;
 	private Grid grid;
+	public int cellSize;
+	private int pieceSize;
+	
 	static Color c = new Color(150,200,255);
 
 	public PuzzlePanel(){
@@ -52,54 +55,57 @@ public class PuzzlePanel extends JPanel {
 
 	}
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
-		grid = new Grid();
-		for(Piece p: pieces){
-			for(BufferedImage img:imgs)
-				unusedPieces.add(new PieceComponent(img,p));
-			puzzle = new Puzzle(3,3,pieces);
+		this.listener = listener;
+		for(int i = 0; i < pieces.length; i++)
+		{
+			unusedPieces.add(new PieceComponent(imgs[i],pieces[i]));
 		}
-		this.pieces = new PieceComponent[3][3];
+		puzzle = new Puzzle(3,3,pieces);
 	}
 
 
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		puzzleArea = new Rectangle();
 		//puzzleArea.setBounds(getWidth() / 5, getHeight() / 5, getWidth() / 3, getWidth() / 3);
-		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 10, 10);
+		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100, 100);
 		//puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		Graphics2D gr2 = (Graphics2D)g;
-		cellSize = getHeight() / 6;
+		cellSize =(int) (puzzleArea.getWidth() / 3);
+		pieceSize = (int)(cellSize * 1.345);
+		//1.94
 		int row = 0; int col = 0;
-		super.paintComponent(g);
-<<<<<<< HEAD
-		for(int i = (int) puzzleArea.getMinX(); i < puzzleArea.getMaxX() && row < pieces.length; i+= cellSize)
-=======
-		g.setColor(c);
-		g.drawRect(0, 0, 50,50);
-//		g.fillRect(0, 0, getWidth(), getHeight());
-		for(int i = 0; i < getHeight() && row < pieces.length; i+= cellSize)
->>>>>>> origin/master
+		
+		//g.setColor(c);
+		System.out.println("size" + cellSize);
+		for(int i = (int) puzzleArea.getMinX(); i < (int)puzzleArea.getMaxX() && col < pieces.length; i+= cellSize)
 		{
-			for(int j = (int) puzzleArea.getMinY(); j < puzzleArea.getMaxY() && col < pieces[0].length; j += cellSize)
+			for(int j = (int) puzzleArea.getMinY(); j < (int)puzzleArea.getMaxY() && row < pieces[0].length; j += cellSize)
 			{
-				g.drawRect(i, j, i + cellSize - 10, j + cellSize - 10);
-				if(pieces[row][col] != null)
-					g.drawImage(pieces[row][col].getPiecePic(), i, j, i + cellSize , j + cellSize, this);
-				
-				else System.out.println(row + "  " + col);
-				g.drawImage(unusedPieces.get(0).getPiecePic(), i, j, i + cellSize , j + cellSize, this);
-				col++;
+				System.out.println(i + " " + j);
+				g.drawRect(i , j, cellSize, cellSize);
+				try{
+					g.drawImage(pieces[row][col].getPiecePic(), i - (pieceSize - cellSize), j - (pieceSize - cellSize), i + pieceSize , j + pieceSize,0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
+					
+				}
+				catch(NullPointerException e)
+				{
+					if(pieces[row][col] != null)
+					System.out.println("No piece at: (" + row + "," + col + ")");
+				}
+				//g.drawImage(pieces[row][col].getPiecePic(), i - pieceSize + offsetX, j - pieceSize + offsetY, pieceSize + (pieceSize - cellSize) , pieceSize + (pieceSize - cellSize), this);
+				row++;
 			}
-			row++;
-			col = 0;
+			col++;
+			row = 0;
 		}
-		g.drawRect((int)puzzleArea.getMinX(), (int)puzzleArea.getMinY(), (int)puzzleArea.getMaxX(), (int)puzzleArea.getMaxY());
 	}
 
 
 	public void setPiece(int row, int col, PieceComponent p){
 		pieces[row][col] = p;
 		puzzle.setPiece(row, col, p.getPiece());
+		unusedPieces.remove(p);
 
 	}
 

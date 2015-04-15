@@ -32,7 +32,6 @@ public class Display extends JFrame {
 		setMinimumSize(new Dimension(800,800));
 
 		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
-		unusedPieces = new UnusedPiecePanel(puzzlePanel);
 		listener = new Listener(this);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();
@@ -43,7 +42,6 @@ public class Display extends JFrame {
 		JMenuItem hint = Utils.newMenuItem(Utils.button,"Hint","hint",listener,menu);
 		JMenuItem solve = Utils.newMenuItem(Utils.button, "Solve", "solve", listener, menu);
 		setJMenuBar(menu);
-		getContentPane().add(unusedPieces);
 		getContentPane().add(puzzlePanel);
 		pack();
 		setVisible(true);
@@ -53,13 +51,13 @@ public class Display extends JFrame {
 	
 	private void loadImages()
 	{
-		for(int index = 0; index < 10; index++)
+		for(int index = 0; index < 9; index++)
 		{
 			try{
-				imgs[index++] = ImageIO.read(getClass().getResourceAsStream("piece_" + index + ".png"));
+				imgs[index] = ImageIO.read(getClass().getResourceAsStream("piece_" + (index + 1) + ".png"));
 			}
 			catch (IOException e) {
-				System.out.println("Hi");
+				System.out.println("ERROR ON PIC LOAD");
 			}
 		}
 	}
@@ -82,9 +80,18 @@ public class Display extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Display d = new Display();
-		System.out.println(d.getPuzzlePanel().getUnusedPieces().toString());
-		d.getPuzzlePanel().setPiece(1, 1, d.getPuzzlePanel().getUnusedPieces().get(0));
+			Display d = new Display();
+			int i = 0;
+		d.getPuzzlePanel().setPiece(0, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(0, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(0, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(1, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(1, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(1, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(2, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(2, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(2, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
+		
 		
 
 	}
