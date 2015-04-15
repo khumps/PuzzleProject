@@ -1,7 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -15,13 +14,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.border.Border;
-import javax.swing.border.MatteBorder;
 
 public class PuzzlePanel extends JPanel {
-
 
 	private PieceComponent[][] pieces;
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
@@ -31,8 +25,12 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 
 	public PuzzlePanel(){
+		Grid g = new Grid();
+		g.run();
+		pieces = new PieceComponent[3][3];
 		PieceComponent p = new PieceComponent();
-
+		p.getPiece();
+		p.getPiecePic();
 	}
 
 	public JPanel getUnusedPiecePanel() {
@@ -112,34 +110,37 @@ public class PuzzlePanel extends JPanel {
 		f.setSize(700, 700);
 		f.setMinimumSize(dimension);
 		JPanel panel = new JPanel(new GridBagLayout());
-		JPanel pan = new JPanel(new GridBagLayout());
 		f.getContentPane().add(panel, BorderLayout.NORTH);
-		f.add(pan);
-		//f.getContentPane().add(pan);
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.gridheight = 1;
-		constraints.gridwidth = 1;
-		constraints.insets = new Insets(10,0,0,0);
-
-		Grid g = new Grid();
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		panel.add(g.run(), constraints);
-
+		PuzzlePanel p = new PuzzlePanel();
+		f.add(p);
 		PieceComponent piece = new PieceComponent();
-		constraints.gridx = 10;
-		constraints.gridy = 10;
 		f.add(piece);
+//		
+		GridBagConstraints constraints = new GridBagConstraints();
+//		constraints.gridheight = 1;
+//		constraints.gridwidth = 1;
+		constraints.insets = new Insets(10,0,0,0);
+//
+		Grid g = new Grid();
+//		constraints.gridx = 0;
+//		constraints.gridy = 0;
+		panel.add(g.run(), constraints);
+//
+//		
+//		constraints.gridx = 10;
+//		constraints.gridy = 10;
+		
 		//f.add(piece);
 		//		g.gridheight = 1;
 		//		g.gridwidth = 1;
-		PuzzlePanel p = new PuzzlePanel();
+		
 
+		
 		//		g.gridx = 0;
 		//		g.gridy = 0;
 		//		panel.add(piece, g);
 		f.setVisible(true);
-		//		f.add(panel);
+//				f.add(panel);
 		//		f.add(p);
 		//		f.pack();
 
