@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -28,6 +29,8 @@ public class PuzzlePanel extends JPanel {
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
 	public int cellSize;
+	private Rectangle puzzleArea;
+	private Grid grid;
 	static Color c = new Color(150,200,255);
 
 	public PuzzlePanel(){
@@ -47,6 +50,7 @@ public class PuzzlePanel extends JPanel {
 
 	}
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
+		grid = new Grid();
 		for(Piece p: pieces){
 			for(BufferedImage img:imgs)
 				unusedPieces.add(new PieceComponent(img,p));
@@ -57,16 +61,19 @@ public class PuzzlePanel extends JPanel {
 
 
 	public void paintComponent(Graphics g){
+		puzzleArea = new Rectangle();
+		//puzzleArea.setBounds(getWidth() / 5, getHeight() / 5, getWidth() / 3, getWidth() / 3);
+		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 10, 10);
+		//puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		Graphics2D gr2 = (Graphics2D)g;
 		cellSize = getHeight() / 6;
 		int row = 0; int col = 0;
 		super.paintComponent(g);
-		g.setColor(c);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		for(int i = 0; i < getHeight() && row < pieces.length; i+= cellSize)
+		for(int i = (int) puzzleArea.getMinX(); i < puzzleArea.getMaxX() && row < pieces.length; i+= cellSize)
 		{
-			for(int j = 0; j < getWidth() && col < pieces[0].length; j += cellSize)
+			for(int j = (int) puzzleArea.getMinY(); j < puzzleArea.getMaxY() && col < pieces[0].length; j += cellSize)
 			{
+				g.drawRect(i, j, i + cellSize - 10, j + cellSize - 10);
 				if(pieces[row][col] != null)
 					g.drawImage(pieces[row][col].getPiecePic(), i, j, i + cellSize , j + cellSize, this);
 				else System.out.println(row + "  " + col);
@@ -76,6 +83,7 @@ public class PuzzlePanel extends JPanel {
 			row++;
 			col = 0;
 		}
+		g.drawRect((int)puzzleArea.getMinX(), (int)puzzleArea.getMinY(), (int)puzzleArea.getMaxX(), (int)puzzleArea.getMaxY());
 	}
 
 
