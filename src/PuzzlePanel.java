@@ -31,7 +31,7 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 
 	public PuzzlePanel(){
-
+		PieceComponent p = new PieceComponent();
 
 	}
 
