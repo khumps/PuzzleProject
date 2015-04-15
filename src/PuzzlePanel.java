@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 public class PuzzlePanel extends JPanel {
 
 	private PieceComponent[][] pieces;
+	private PieceComponent p;
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
@@ -31,6 +32,8 @@ public class PuzzlePanel extends JPanel {
 //		PieceComponent p = new PieceComponent();
 //		p.getPiece();
 //		p.getPiecePic();
+		unusedPieces.add(p);
+		
 		
 	}
 
