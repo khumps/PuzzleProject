@@ -25,12 +25,13 @@ public class PuzzlePanel extends JPanel {
 	static Color c = new Color(150,200,255);
 
 	public PuzzlePanel(){
-		Grid g = new Grid();
-		g.run();
-		pieces = new PieceComponent[3][3];
-		PieceComponent p = new PieceComponent();
-		p.getPiece();
-		p.getPiecePic();
+//		Grid g = new Grid();
+//		g.run();
+//		pieces = new PieceComponent[3][3];
+//		PieceComponent p = new PieceComponent();
+//		p.getPiece();
+//		p.getPiecePic();
+		
 	}
 
 	public JPanel getUnusedPiecePanel() {
@@ -60,15 +61,17 @@ public class PuzzlePanel extends JPanel {
 		int row = 0; int col = 0;
 		super.paintComponent(g);
 		g.setColor(c);
-		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawRect(0, 0, 50,50);
+//		g.fillRect(0, 0, getWidth(), getHeight());
 		for(int i = 0; i < getHeight() && row < pieces.length; i+= cellSize)
 		{
 			for(int j = 0; j < getWidth() && col < pieces[0].length; j += cellSize)
 			{
 				if(pieces[row][col] != null)
 					g.drawImage(pieces[row][col].getPiecePic(), i, j, i + cellSize , j + cellSize, this);
+				
 				else System.out.println(row + "  " + col);
-
+				g.drawImage(unusedPieces.get(0).getPiecePic(), i, j, i + cellSize , j + cellSize, this);
 				col++;
 			}
 			row++;
@@ -111,8 +114,7 @@ public class PuzzlePanel extends JPanel {
 		f.setMinimumSize(dimension);
 		JPanel panel = new JPanel(new GridBagLayout());
 		f.getContentPane().add(panel, BorderLayout.NORTH);
-		PuzzlePanel p = new PuzzlePanel();
-		f.add(p);
+		
 		PieceComponent piece = new PieceComponent();
 		f.add(piece);
 //		
@@ -125,6 +127,8 @@ public class PuzzlePanel extends JPanel {
 //		constraints.gridx = 0;
 //		constraints.gridy = 0;
 		panel.add(g.run(), constraints);
+		PuzzlePanel p = new PuzzlePanel();
+		f.add(p);
 //
 //		
 //		constraints.gridx = 10;
