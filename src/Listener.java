@@ -13,7 +13,8 @@ import java.awt.event.MouseWheelEvent;
 public class Listener extends MouseAdapter implements ActionListener, KeyListener {
 	private String command;
 	private Display display;
-	private boolean holdPiece = false;
+	protected boolean holdPiece = false;
+	protected PieceComponent pieceHeld = null;
 	
 	/**
 	 * 
@@ -56,24 +57,29 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 
 	}
 	public void mouseClicked(MouseEvent e) {
+		System.out.println("mouse");
 		int col;
 		int row;
-		PieceComponent clickedPiece;
 		if(e.getComponent().equals(display.getPuzzlePanel()))
 		{
-			col = (e.getX() - e.getComponent().getX()) / PieceComponent.CELL_SIZE;
-			row = e.getY() - e.getComponent().getY() / PieceComponent.CELL_SIZE;
+			col = (e.getComponent().getX()) / display.getPuzzlePanel().cellSize;
+			row = (e.getComponent().getY()) / display.getPuzzlePanel().cellSize;
+			System.out.println(e.getComponent());
 			if(!holdPiece)
 			{
 				holdPiece = true;
-				if(e.getComponent().equals(display.getPuzzlePanel().getUnusedPiecePanel()))
+				if(e.getComponent().equals(display.getPuzzlePanel()))
+				//{
+					//col = (e.getComponent().getX() - display.getPuzzlePanel().puzzleArea.width) / display.getPuzzlePanel().cellSize;
+					//row = e.getY() - e.getComponent().getY() / display.getPuzzlePanel().cellSize;
 				{
-					clickedPiece = display.getPuzzlePanel().getUnusedPieces().get(col);
+					pieceHeld = display.getPuzzlePanel().removePiece(row, col);
 				}
 				else
 				{
-					clickedPiece = display.getPuzzlePanel().removePiece(row, col);
+					pieceHeld = display.getPuzzlePanel().getUnusedPieces().get(col);
 				}
+				
 			}
 		}
 

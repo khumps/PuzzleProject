@@ -24,10 +24,11 @@ public class PuzzlePanel extends JPanel {
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
 	private Listener listener;
-	private Rectangle puzzleArea;
+	protected Rectangle puzzleArea;
 	private Grid grid;
 	public int cellSize;
 	private int pieceSize;
+	public Point mouseLocation;
 	
 	static Color c = new Color(150,200,255);
 
@@ -56,6 +57,8 @@ public class PuzzlePanel extends JPanel {
 	}
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
 		this.listener = listener;
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 		for(int i = 0; i < pieces.length; i++)
 		{
 			unusedPieces.add(new PieceComponent(imgs[i],pieces[i]));
@@ -67,7 +70,6 @@ public class PuzzlePanel extends JPanel {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		puzzleArea = new Rectangle();
-		//puzzleArea.setBounds(getWidth() / 5, getHeight() / 5, getWidth() / 3, getWidth() / 3);
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100, 100);
 		//puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		Graphics2D gr2 = (Graphics2D)g;
@@ -75,9 +77,12 @@ public class PuzzlePanel extends JPanel {
 		pieceSize = (int)(cellSize * 1.345);
 		//1.94
 		int row = 0; int col = 0;
-		
-		//g.setColor(c);
-		System.out.println("size" + cellSize);
+		if(listener.holdPiece)
+		{
+			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x - pieceSize / 2, mouseLocation.y - pieceSize / 2,
+					mouseLocation.x + pieceSize / 2, mouseLocation.y + pieceSize / 2, 
+					0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
+		}
 		for(int i = (int) puzzleArea.getMinX(); i < (int)puzzleArea.getMaxX() && col < pieces.length; i+= cellSize)
 		{
 			for(int j = (int) puzzleArea.getMinY(); j < (int)puzzleArea.getMaxY() && row < pieces[0].length; j += cellSize)
@@ -85,7 +90,9 @@ public class PuzzlePanel extends JPanel {
 				System.out.println(i + " " + j);
 				g.drawRect(i , j, cellSize, cellSize);
 				try{
-					g.drawImage(pieces[row][col].getPiecePic(), i - (pieceSize - cellSize), j - (pieceSize - cellSize), i + pieceSize , j + pieceSize,0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
+					g.drawImage(pieces[row][col].getPiecePic(), i - (pieceSize - cellSize), j - (pieceSize - cellSize),
+							i + pieceSize , j + pieceSize,
+							0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
 					
 				}
 				catch(NullPointerException e)
@@ -99,6 +106,7 @@ public class PuzzlePanel extends JPanel {
 			col++;
 			row = 0;
 		}
+
 	}
 
 

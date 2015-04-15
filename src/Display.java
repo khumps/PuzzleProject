@@ -30,9 +30,8 @@ public class Display extends JFrame {
 		loadImages();
 		setPreferredSize(new Dimension(900,900));
 		setMinimumSize(new Dimension(800,800));
-
-		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
 		listener = new Listener(this);
+		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();
 		instructions.setText("To rotate a piece use the scrollwheel or the arrow keys");
