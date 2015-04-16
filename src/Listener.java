@@ -111,10 +111,12 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 	}
 
 	public void mouseDragged(MouseEvent e) {
-
+		display.getPuzzlePanel().repaint();
 	}
 
 	public void mouseMoved(MouseEvent e) {
+		display.getPuzzlePanel().mouseLocation = new Point(e.getPoint().x,e.getPoint().y);
+		System.out.println(display.getPuzzlePanel().mouseLocation);
 /*		Rectangle r = SwingUtilities.convertRectangle(display.getPuzzlePanel(),display.getPuzzlePanel().puzzleArea , null);
 		int row,col;
 		System.out.println(display.getPuzzlePanel().puzzleArea.x);
