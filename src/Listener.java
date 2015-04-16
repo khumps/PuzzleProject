@@ -20,7 +20,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 	private Display display;
 	protected boolean holdPiece = false;
 	protected PieceComponent pieceHeld = null;
-	int test1, test2;
 
 	/**
 	 * 
@@ -65,25 +64,66 @@ public class Listener extends MouseAdapter implements ActionListener,
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("mouse");
+		// System.out.println("mouse");
 		int x, y, row, col;
-		System.out.println(e.getComponent());
+		// System.out.println(e.getComponent());
 		if (e.getComponent().equals(display.getPuzzlePanel())) {
 			x = (e.getX() - display.getPuzzlePanel().puzzleArea.x);
 			y = (e.getY() - display.getPuzzlePanel().puzzleArea.y);
 			col = x / display.getPuzzlePanel().cellSize;
 			row = y / display.getPuzzlePanel().cellSize;
-			System.out.println(row + " " + col);
-			System.out.println(x + " " + y);
-			if (!holdPiece) {
-				holdPiece = true;
-				pieceHeld = display.getPuzzlePanel().removePiece(row, col);
-			} else {
-				holdPiece = false;
-				pieceHeld = display.getPuzzlePanel().removePiece(row, col);
+			// System.out.println(row + " " + col);
+			// System.out.println(display.getPuzzlePanel().inBoard(row,col));
+			if (display.getPuzzlePanel().inBoard(row, col)) {
+				if (!holdPiece && !display.getPuzzlePanel().isEmpty(row, col)) {/* Picks up piece off board*/
+					
+
+					holdPiece = true;
+
+					pieceHeld = display.getPuzzlePanel().removePiece(row, col);
+					// System.out.println("RAN");
+				}
+
+				else if (holdPiece
+						&& display.getPuzzlePanel().isEmpty(row, col)) {/*Places piece on board*/
+					
+					display.getPuzzlePanel().setPiece(row, col, pieceHeld);
+					// System.out.println("RAN");
+					pieceHeld = null;
+					holdPiece = false;
+				}
 			}
+			// System.out.println(holdPiece);
+			else {/*Picks up piece from unusedPieces*/
+				if (!holdPiece) {
+					
+					x = (e.getX() - display.getPuzzlePanel().unusedPieceArea.x);
+					y = (e.getY() - display.getPuzzlePanel().unusedPieceArea.y);
+					col = x / display.getPuzzlePanel().cellSize;
+					row = y / display.getPuzzlePanel().cellSize;
+					// System.out.println(col * 2 + row + "DAGSDFASDF");
+					if (col * 2 + row < display.getPuzzlePanel()
+							.getUnusedPieces().size()) {
+						holdPiece = true;
+						pieceHeld = display.getPuzzlePanel().getUnusedPieces()
+								.remove(col * 2 + row);
+					}
+				} else {/*Puts piece in unusedPieces*/
+					
+					if (col * 2 + row < display.getPuzzlePanel()
+							.getUnusedPieces().size()) {
+						display.getPuzzlePanel().getUnusedPieces()
+								.add(pieceHeld);
+						pieceHeld = null;
+						holdPiece = false;
+					}
+
+				}
+			}
+
+			display.getPuzzlePanel().repaint();
+
 		}
-		display.getPuzzlePanel().repaint();
 	}
 
 	public void mousePressed(MouseEvent e) {
@@ -112,11 +152,12 @@ public class Listener extends MouseAdapter implements ActionListener,
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		if(holdPiece)
+		// System.out.println(holdPiece);
+		if (holdPiece)
 			display.getPuzzlePanel().repaint();
 		display.getPuzzlePanel().mouseLocation = new Point(e.getPoint().x,
 				e.getPoint().y);
-		System.out.println(display.getPuzzlePanel().mouseLocation);
+		// System.out.println(display.getPuzzlePanel().mouseLocation);
 		/*
 		 * Rectangle r =
 		 * SwingUtilities.convertRectangle(display.getPuzzlePanel()
