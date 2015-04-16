@@ -81,14 +81,14 @@ public class Display extends JFrame {
 	public static void main(String[] args) {
 			Display d = new Display();
 			int i = 0;
-		d.getPuzzlePanel().setPiece(0, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
+/*		d.getPuzzlePanel().setPiece(0, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(0, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(0, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(1, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(1, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(1, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(2, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(2, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
+		d.getPuzzlePanel().setPiece(2, 1, d.getPuzzlePanel().getUnusedPieces().get(i));*/
 		d.getPuzzlePanel().setPiece(2, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
 		
 		
