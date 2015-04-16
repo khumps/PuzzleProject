@@ -32,17 +32,6 @@ public class PuzzlePanel extends JPanel {
 	
 	static Color c = new Color(150,200,255);
 
-	public PuzzlePanel(){
-//		Grid g = new Grid();
-//		g.run();
-//		pieces = new PieceComponent[3][3];
-//		PieceComponent p = new PieceComponent();
-//		p.getPiece();
-//		p.getPiecePic();
-		unusedPieces.add(p);
-		
-		
-	}
 
 	public JPanel getUnusedPiecePanel() {
 		return unusedPiecePanel;
