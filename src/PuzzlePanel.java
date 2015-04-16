@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -18,16 +19,16 @@ import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
 
-	private PieceComponent[][] pieces = new PieceComponent[3][3];
+	protected PieceComponent[][] pieces = new PieceComponent[3][3];
 	private PieceComponent p;
 	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>();
 	private Puzzle puzzle;
 	private JPanel unusedPiecePanel;
 	private Listener listener;
-	private Rectangle puzzleArea;
-	private Grid grid;
-	public int cellSize;
-	private int pieceSize;
+	protected Rectangle puzzleArea;
+	protected int cellSize;
+	protected int pieceSize;
+	public Point mouseLocation;
 	
 	static Color c = new Color(150,200,255);
 
@@ -56,6 +57,8 @@ public class PuzzlePanel extends JPanel {
 	}
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
 		this.listener = listener;
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 		for(int i = 0; i < pieces.length; i++)
 		{
 			unusedPieces.add(new PieceComponent(imgs[i],pieces[i]));
@@ -66,8 +69,8 @@ public class PuzzlePanel extends JPanel {
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		//g.fillRect(0, 0, getWidth(), getHeight());
 		puzzleArea = new Rectangle();
-		//puzzleArea.setBounds(getWidth() / 5, getHeight() / 5, getWidth() / 3, getWidth() / 3);
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100, 100);
 		//puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		Graphics2D gr2 = (Graphics2D)g;
@@ -75,37 +78,39 @@ public class PuzzlePanel extends JPanel {
 		pieceSize = (int)(cellSize * 1.345);
 		//1.94
 		int row = 0; int col = 0;
-		
-		//g.setColor(c);
-		System.out.println("size" + cellSize);
+		if(listener.holdPiece && listener.pieceHeld != null)
+		{
+			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x - pieceSize / 2, mouseLocation.y - pieceSize / 2,
+					mouseLocation.x + pieceSize / 2, mouseLocation.y + pieceSize / 2, 
+					0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
+		}
 		for(int i = (int) puzzleArea.getMinX(); i < (int)puzzleArea.getMaxX() && col < pieces.length; i+= cellSize)
 		{
 			for(int j = (int) puzzleArea.getMinY(); j < (int)puzzleArea.getMaxY() && row < pieces[0].length; j += cellSize)
 			{
-				System.out.println(i + " " + j);
 				g.drawRect(i , j, cellSize, cellSize);
-				try{
-					g.drawImage(pieces[row][col].getPiecePic(), i - (pieceSize - cellSize), j - (pieceSize - cellSize), i + pieceSize , j + pieceSize,0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
+				
+				if(pieces[row][col] != null)
+					g.drawImage(pieces[row][col].getPiecePic(), i - (pieceSize - cellSize), j - (pieceSize - cellSize),
+							i + pieceSize , j + pieceSize,
+							0,0,pieces[row][col].getPiecePic().getWidth(),pieces[row][col].getPiecePic().getHeight(), this);
 					
-				}
-				catch(NullPointerException e)
-				{
-					if(pieces[row][col] != null)
-					System.out.println("No piece at: (" + row + "," + col + ")");
-				}
 				//g.drawImage(pieces[row][col].getPiecePic(), i - pieceSize + offsetX, j - pieceSize + offsetY, pieceSize + (pieceSize - cellSize) , pieceSize + (pieceSize - cellSize), this);
 				row++;
 			}
 			col++;
 			row = 0;
 		}
+
 	}
+
 
 
 	public void setPiece(int row, int col, PieceComponent p){
 		pieces[row][col] = p;
 		puzzle.setPiece(row, col, p.getPiece());
 		unusedPieces.remove(p);
+		repaint();
 
 	}
 
@@ -113,6 +118,8 @@ public class PuzzlePanel extends JPanel {
 	public PieceComponent removePiece(int row, int col){
 		puzzle.removePiece(row,col);
 		unusedPieces.add(pieces[row][col]); 
+		pieces[row][col] = null;
+		repaint();
 		return unusedPieces.get(unusedPieces.size() - 1);
 	}
 
@@ -128,7 +135,7 @@ public class PuzzlePanel extends JPanel {
 		return puzzle;
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		Dimension dimension = new Dimension(550,550);
 		JFrame f = new JFrame("Puzzle");
@@ -171,6 +178,6 @@ public class PuzzlePanel extends JPanel {
 		//		f.add(p);
 		//		f.pack();
 
-	}
+	}*/
 
 }
