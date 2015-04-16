@@ -14,22 +14,24 @@ import java.util.Arrays;
 
 import javax.swing.SwingUtilities;
 
-public class Listener extends MouseAdapter implements ActionListener, KeyListener {
+public class Listener extends MouseAdapter implements ActionListener,
+		KeyListener {
 	private String command;
 	private Display display;
 	protected boolean holdPiece = false;
 	protected PieceComponent pieceHeld = null;
 	int test1, test2;
-	
+
 	/**
 	 * 
-	 * @param display a display object that contains the necessary components for the class to function
+	 * @param display
+	 *            a display object that contains the necessary components for
+	 *            the class to function
 	 */
-	public Listener(Display display)
-	{
+	public Listener(Display display) {
 		this.display = display;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		command = e.getActionCommand();
@@ -61,33 +63,28 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 		// TODO Auto-generated method stub
 
 	}
+
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("mouse");
-		int x,y,row,col;
+		int x, y, row, col;
 		System.out.println(e.getComponent());
-		if(e.getComponent().equals(display.getPuzzlePanel()))
-		{
-			System.out.println(Arrays.toString(display.getPuzzlePanel().pieces));
+		if (e.getComponent().equals(display.getPuzzlePanel())) {
 			x = (e.getX() - display.getPuzzlePanel().puzzleArea.x);
 			y = (e.getY() - display.getPuzzlePanel().puzzleArea.y);
-			row = x / display.getPuzzlePanel().cellSize;
-			col = y / display.getPuzzlePanel().cellSize;
+			col = x / display.getPuzzlePanel().cellSize;
+			row = y / display.getPuzzlePanel().cellSize;
 			System.out.println(row + " " + col);
 			System.out.println(x + " " + y);
-			if(!holdPiece)
-			{
+			if (!holdPiece) {
 				holdPiece = true;
-				display.getPuzzlePanel().removePiece(row, col);
-					//pieceHeld = display.getPuzzlePanel().removePiece(row, col);
-/*				else
-				{
-					pieceHeld = display.getPuzzlePanel().getUnusedPieces().get(col);
-				*/}
-				
+				pieceHeld = display.getPuzzlePanel().removePiece(row, col);
+			} else {
+				holdPiece = false;
+				pieceHeld = display.getPuzzlePanel().removePiece(row, col);
 			}
-		display.getPuzzlePanel().repaint();
 		}
-		
+		display.getPuzzlePanel().repaint();
+	}
 
 	public void mousePressed(MouseEvent e) {
 
@@ -106,7 +103,7 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		//e.getSource().get
+		// e.getSource().get
 
 	}
 
@@ -115,14 +112,21 @@ public class Listener extends MouseAdapter implements ActionListener, KeyListene
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		display.getPuzzlePanel().mouseLocation = new Point(e.getPoint().x,e.getPoint().y);
+		if(holdPiece)
+			display.getPuzzlePanel().repaint();
+		display.getPuzzlePanel().mouseLocation = new Point(e.getPoint().x,
+				e.getPoint().y);
 		System.out.println(display.getPuzzlePanel().mouseLocation);
-/*		Rectangle r = SwingUtilities.convertRectangle(display.getPuzzlePanel(),display.getPuzzlePanel().puzzleArea , null);
-		int row,col;
-		System.out.println(display.getPuzzlePanel().puzzleArea.x);
-		row = (e.getX() - display.getPuzzlePanel().puzzleArea.x) / (display.getPuzzlePanel().cellSize);
-		col = (e.getY() - display.getPuzzlePanel().puzzleArea.y) / display.getPuzzlePanel().pieceSize;
-		System.out.println(row + " " + col);*/
+		/*
+		 * Rectangle r =
+		 * SwingUtilities.convertRectangle(display.getPuzzlePanel()
+		 * ,display.getPuzzlePanel().puzzleArea , null); int row,col;
+		 * System.out.println(display.getPuzzlePanel().puzzleArea.x); row =
+		 * (e.getX() - display.getPuzzlePanel().puzzleArea.x) /
+		 * (display.getPuzzlePanel().cellSize); col = (e.getY() -
+		 * display.getPuzzlePanel().puzzleArea.y) /
+		 * display.getPuzzlePanel().pieceSize; System.out.println(row + " " +
+		 * col);
+		 */
 	}
 }
-

@@ -41,9 +41,6 @@ public class PuzzlePanel extends JPanel {
 		return unusedPieces;
 	}
 
-	public void repaint(){
-
-	}
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces){
 		this.listener = listener;
 		addMouseListener(listener);
