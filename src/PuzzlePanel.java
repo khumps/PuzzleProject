@@ -51,7 +51,9 @@ public class PuzzlePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		// g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(c);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.BLACK);
 		puzzleArea = new Rectangle();
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100,
 				100);
