@@ -155,7 +155,11 @@ public class Listener extends MouseAdapter implements ActionListener,
 		System.out.println(e.getPreciseWheelRotation());
 		if(holdingPiece)
 		{
-			pieceHeld.rotate((int) e.getPreciseWheelRotation());
+			int r = (int) e.getPreciseWheelRotation();
+			if(r  > 0)
+			pieceHeld.rotate(1);
+			if(r < 0)
+				pieceHeld.rotate(3);
 			display.getPuzzlePanel().repaint();
 		}
 
