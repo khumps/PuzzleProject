@@ -114,7 +114,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 					System.out.println(x + " " + y);
 					System.out.println(display.getPuzzlePanel().unusedPieceArea.x);
 					System.out.println(display.getPuzzlePanel().unusedPieceArea.y);
-					if (display.getPuzzlePanel().inPiecesArea(row, col)) {
+					if (display.getPuzzlePanel().inPiecesArea(x,y)) {
 						
 						System.out.println("Ran");
 						display.getPuzzlePanel().getUnusedPieces()

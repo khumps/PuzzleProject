@@ -62,6 +62,7 @@ public class PuzzlePanel extends JPanel {
 		// 1.94
 		int row = 0;
 		int col = 0;
+		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width, unusedPieceArea.height);
 		if (listener.holdPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -96,7 +97,7 @@ int index = 0;
 		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {
 			for(int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY() && j + pieceSize < getHeight() && index < 9; j+= pieceSize)
 			{
-			g.drawRect(i, j, pieceSize, pieceSize);
+		//	g.drawRect(i, j, pieceSize, pieceSize);
 			if(index < unusedPieces.size())
 				g.drawImage(unusedPieces.get(index).getPiecePic(), i, j, i+pieceSize, j+pieceSize, 0, 0, unusedPieces.get(index).getPiecePic().getWidth(),
 						unusedPieces.get(index).getPiecePic().getHeight(), this);
@@ -170,12 +171,13 @@ int index = 0;
 		return false;
 	}
 	
-	public boolean inPiecesArea(int row, int col)
+	public boolean inPiecesArea(int x, int y)
 	{
-		int val = col * 2 + row;
-		if(val < 9 && val > -1)
-			return true;
+		if(x < 0 || x > unusedPieceArea.getWidth())
 		return false;
+		if(y < 0 || y > unusedPieceArea.getHeight())
+			return false;
+		return true;
 	}
 
 	/*
