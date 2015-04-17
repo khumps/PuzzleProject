@@ -93,7 +93,7 @@ public class PuzzlePanel extends JPanel {
 
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
-			for (int j = puzzleArea.y; j < (int) puzzleArea.getMaxY()
+			for (int j = puzzleArea.y - 20; j < (int) puzzleArea.getMaxY()
 					&& row < pieces[0].length; j += cellSize) {
 				g.drawRect(i, j, cellSize, cellSize);
 
