@@ -21,7 +21,8 @@ public class PuzzlePanel extends JPanel {
 
 	protected PieceComponent[][] pieces = new PieceComponent[3][3];
 	private PieceComponent p;
-	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>(9);
+	private ArrayList<PieceComponent> unusedPieces = new ArrayList<PieceComponent>(
+			9);
 	private Puzzle puzzle;
 	private Listener listener;
 	protected Rectangle puzzleArea;
@@ -29,6 +30,7 @@ public class PuzzlePanel extends JPanel {
 	protected int cellSize;
 	protected int pieceSize;
 	public Point mouseLocation;
+	protected boolean noFit = true;
 
 	static Color c = new Color(150, 200, 255);
 
@@ -58,11 +60,11 @@ public class PuzzlePanel extends JPanel {
 		// puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		cellSize = (int) (puzzleArea.getWidth() / 3);
 		pieceSize = (int) (cellSize * 1.345);
-		//System.out.println(puzzleArea.getMaxY());
+		// System.out.println(puzzleArea.getMaxY());
 		// 1.94
 		int row = 0;
 		int col = 0;
-		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width, unusedPieceArea.height);
+
 		if (listener.holdPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -70,11 +72,25 @@ public class PuzzlePanel extends JPanel {
 							+ pieceSize / 2, 0, 0, listener.pieceHeld
 							.getPiecePic().getWidth(), listener.pieceHeld
 							.getPiecePic().getHeight(), this);
+			if(noFit)
+			{
+				noFit = false;
+				g.setColor(Color.RED);
+				g.drawLine(mouseLocation.x
+					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
+					mouseLocation.x + pieceSize / 2, mouseLocation.y
+							+ pieceSize / 2);
+				g.drawLine(mouseLocation.x
+						+ pieceSize / 2, mouseLocation.y - pieceSize / 2,
+						mouseLocation.x - pieceSize / 2, mouseLocation.y
+								+ pieceSize / 2);
+				g.setColor(Color.BLACK);
+			}
 		}
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
-			for (int j = puzzleArea.y; j < (int) puzzleArea
-					.getMaxY() && row < pieces[0].length; j += cellSize) {
+			for (int j = puzzleArea.y; j < (int) puzzleArea.getMaxY()
+					&& row < pieces[0].length; j += cellSize) {
 				g.drawRect(i, j, cellSize, cellSize);
 
 				if (pieces[row][col] != null && !isPieceHeld(pieces[row][col]))
@@ -93,15 +109,21 @@ public class PuzzlePanel extends JPanel {
 			col++;
 			row = 0;
 		}
-int index = 0;
+		int index = 0;
+		
+		/*Unused Piece Area*/
+		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width,
+				unusedPieceArea.height);
 		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {
-			for(int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY() && j + pieceSize < getHeight() && index < 9; j+= pieceSize)
-			{
-		//	g.drawRect(i, j, pieceSize, pieceSize);
-			if(index < unusedPieces.size())
-				g.drawImage(unusedPieces.get(index).getPiecePic(), i, j, i+pieceSize, j+pieceSize, 0, 0, unusedPieces.get(index).getPiecePic().getWidth(),
-						unusedPieces.get(index).getPiecePic().getHeight(), this);
-			index++;
+			for (int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY()
+					&& j + pieceSize < getHeight() && index < 9; j += pieceSize) {
+				if (index < unusedPieces.size())
+					g.drawImage(unusedPieces.get(index).getPiecePic(), i, j, i
+							+ pieceSize, j + pieceSize, 0, 0,
+							unusedPieces.get(index).getPiecePic().getWidth(),
+							unusedPieces.get(index).getPiecePic().getHeight(),
+							this);
+				index++;
 			}
 		}
 
@@ -118,14 +140,13 @@ int index = 0;
 	public PieceComponent removePiece(int row, int col) {
 		puzzle.removePiece(row, col);
 		PieceComponent removed = pieces[row][col];
-		//unusedPieces.add(removed);
+		// unusedPieces.add(removed);
 		pieces[row][col] = null;
 		repaint();
 		return removed;
 	}
-	
-	public PieceComponent getPiece(int row, int col)
-	{
+
+	public PieceComponent getPiece(int row, int col) {
 		return pieces[row][col];
 	}
 
@@ -136,48 +157,49 @@ int index = 0;
 	public void clear() {
 		puzzle.restart();
 	}
-	
-	public boolean isPieceHeld(PieceComponent p)
-	{
-		if(p != null)
-		if(p.equals(listener.pieceHeld))
-			return true;
+
+	public boolean isPieceHeld(PieceComponent p) {
+		if (p != null)
+			if (p.equals(listener.pieceHeld))
+				return true;
 		return false;
 	}
 
 	public Puzzle getPuzzle() {
 		return puzzle;
 	}
-	
-	public boolean isEmpty(int row, int col)
-	{
-		if(pieces[row][col] == null) return true;
+
+	public boolean isEmpty(int row, int col) {
+		if (pieces[row][col] == null)
+			return true;
 		return false;
 	}
 
 	public boolean inBoard(int row, int col) {
-		if(row >= pieces.length)
+		if (row >= pieces.length)
 			return false;
-		if(col >= pieces[0].length)
+		if (col >= pieces[0].length)
 			return false;
 		return true;
 	}
-	
-	public boolean inPieces(int row, int col)
-	{
+
+	public boolean inPieces(int row, int col) {
 		int val = col * 2 + row;
-		if(val < unusedPieces.size() && val > -1)
+		if (val < unusedPieces.size() && val > -1)
 			return true;
 		return false;
 	}
-	
-	public boolean inPiecesArea(int x, int y)
-	{
-		if(x < 0 || x > unusedPieceArea.getWidth())
-		return false;
-		if(y < 0 || y > unusedPieceArea.getHeight())
+
+	public boolean inPiecesArea(int x, int y) {
+		if (x < 0 || x > unusedPieceArea.getWidth())
+			return false;
+		if (y < 0 || y > unusedPieceArea.getHeight())
 			return false;
 		return true;
+	}
+
+	public boolean doesFit(int row, int col) {
+		return puzzle.doesFit(row, col, listener.pieceHeld.getPiece());
 	}
 
 	/*
