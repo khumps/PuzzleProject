@@ -67,7 +67,7 @@ public class Display extends JFrame {
 	{
 		pieces[0] = new Piece(Piece.CLUBS_OUT,Piece.HEARTS_OUT,Piece.DIAMONDS_IN,Piece.CLUBS_IN);
 		pieces[1] = new Piece(Piece.SPADES_OUT,Piece.DIAMONDS_OUT,Piece.SPADES_IN,Piece.HEARTS_IN);
-		pieces[2] = new Piece(Piece.HEARTS_OUT,Piece.SPADES_OUT,Piece.HEARTS_IN,Piece.CLUBS_IN);
+		pieces[2] = new Piece(Piece.HEARTS_OUT,Piece.SPADES_OUT,Piece.SPADES_IN,Piece.CLUBS_IN);
 		pieces[3] = new Piece(Piece.HEARTS_OUT,Piece.DIAMONDS_OUT,Piece.CLUBS_IN,Piece.CLUBS_IN);
 		pieces[4] = new Piece(Piece.SPADES_OUT,Piece.SPADES_OUT,Piece.HEARTS_IN,Piece.CLUBS_IN);
 		pieces[5] = new Piece(Piece.HEARTS_OUT,Piece.DIAMONDS_OUT,Piece.DIAMONDS_IN,Piece.HEARTS_IN);

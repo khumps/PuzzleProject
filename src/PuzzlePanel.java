@@ -68,6 +68,7 @@ public class PuzzlePanel extends JPanel {
 		int row = 0;
 		int col = 0;
 
+<<<<<<< HEAD
 		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -90,6 +91,9 @@ public class PuzzlePanel extends JPanel {
 				g.setColor(Color.BLUE);
 			}
 		}
+=======
+
+>>>>>>> origin/master
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y; j < (int) puzzleArea.getMaxY()
@@ -111,6 +115,29 @@ public class PuzzlePanel extends JPanel {
 			}
 			col++;
 			row = 0;
+		}
+		
+		if (listener.holdingPiece && listener.pieceHeld != null) {
+			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
+					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
+					mouseLocation.x + pieceSize / 2, mouseLocation.y
+							+ pieceSize / 2, 0, 0, listener.pieceHeld
+							.getPiecePic().getWidth(), listener.pieceHeld
+							.getPiecePic().getHeight(), this);
+			if(noFit)
+			{
+				noFit = false;
+				g.setColor(Color.RED);
+				g.drawLine(mouseLocation.x
+					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
+					mouseLocation.x + pieceSize / 2, mouseLocation.y
+							+ pieceSize / 2);
+				g.drawLine(mouseLocation.x
+						+ pieceSize / 2, mouseLocation.y - pieceSize / 2,
+						mouseLocation.x - pieceSize / 2, mouseLocation.y
+								+ pieceSize / 2);
+				g.setColor(Color.BLACK);
+			}
 		}
 		int index = 0;
 		
@@ -155,6 +182,7 @@ public class PuzzlePanel extends JPanel {
 
 	public void solve() {
 		puzzle.solve();
+
 	}
 
 	public void clear() {
