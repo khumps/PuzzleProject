@@ -94,13 +94,15 @@ public class Listener extends MouseAdapter implements ActionListener,
 				}
 			}
 			// System.out.println(holdPiece);
-			else {/*Picks up piece from unusedPieces*/
-				if (!holdPiece) {
+			else {
+				
+				x = (e.getX() - display.getPuzzlePanel().unusedPieceArea.x);
+				y = (e.getY() - display.getPuzzlePanel().unusedPieceArea.y);
+				col = x / display.getPuzzlePanel().pieceSize;
+				row = y / display.getPuzzlePanel().pieceSize;
+				if (!holdPiece) {/*Picks up piece from unusedPieces*/
 					
-					x = (e.getX() - display.getPuzzlePanel().unusedPieceArea.x);
-					y = (e.getY() - display.getPuzzlePanel().unusedPieceArea.y);
-					col = x / display.getPuzzlePanel().cellSize;
-					row = y / display.getPuzzlePanel().cellSize;
+
 					// System.out.println(col * 2 + row + "DAGSDFASDF");
 					if (col * 2 + row < display.getPuzzlePanel()
 							.getUnusedPieces().size()) {
@@ -109,9 +111,12 @@ public class Listener extends MouseAdapter implements ActionListener,
 								.remove(col * 2 + row);
 					}
 				} else {/*Puts piece in unusedPieces*/
-					
-					if (col * 2 + row < display.getPuzzlePanel()
-							.getUnusedPieces().size()) {
+					System.out.println(x + " " + y);
+					System.out.println(display.getPuzzlePanel().unusedPieceArea.x);
+					System.out.println(display.getPuzzlePanel().unusedPieceArea.y);
+					if (display.getPuzzlePanel().inPiecesArea(row, col)) {
+						
+						System.out.println("Ran");
 						display.getPuzzlePanel().getUnusedPieces()
 								.add(pieceHeld);
 						pieceHeld = null;

@@ -89,7 +89,7 @@ public class Display extends JFrame {
 		d.getPuzzlePanel().setPiece(1, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(2, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
 		d.getPuzzlePanel().setPiece(2, 1, d.getPuzzlePanel().getUnusedPieces().get(i));*/
-		d.getPuzzlePanel().setPiece(2, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
+		//d.getPuzzlePanel().setPiece(2, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
 		
 		
 
