@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -25,6 +26,7 @@ public class Display extends JFrame {
 	
 
 	Display() {
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		createPieces();
 		loadImages();
@@ -79,6 +81,7 @@ public class Display extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		
 			Display d = new Display();
 			int i = 0;
 /*		d.getPuzzlePanel().setPiece(0, 0, d.getPuzzlePanel().getUnusedPieces().get(i));

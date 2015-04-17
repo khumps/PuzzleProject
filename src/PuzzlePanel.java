@@ -51,6 +51,8 @@ public class PuzzlePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.BLUE);
 		// g.fillRect(0, 0, getWidth(), getHeight());
 		puzzleArea = new Rectangle();
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100,
@@ -85,7 +87,7 @@ public class PuzzlePanel extends JPanel {
 						+ pieceSize / 2, mouseLocation.y - pieceSize / 2,
 						mouseLocation.x - pieceSize / 2, mouseLocation.y
 								+ pieceSize / 2);
-				g.setColor(Color.BLACK);
+				g.setColor(Color.BLUE);
 			}
 		}
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
