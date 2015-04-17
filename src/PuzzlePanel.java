@@ -56,7 +56,6 @@ public class PuzzlePanel extends JPanel {
 		unusedPieceArea.setBounds(puzzleArea.x, (int) puzzleArea.getMaxY(),
 				pieceSize * 5, pieceSize * 2);
 		// puzzleArea.setFrameFromCenter(500, 500, 300, 300);
-		Graphics2D gr2 = (Graphics2D) g;
 		cellSize = (int) (puzzleArea.getWidth() / 3);
 		pieceSize = (int) (cellSize * 1.345);
 		//System.out.println(puzzleArea.getMaxY());
@@ -71,9 +70,9 @@ public class PuzzlePanel extends JPanel {
 							.getPiecePic().getWidth(), listener.pieceHeld
 							.getPiecePic().getHeight(), this);
 		}
-		for (int i = (int) puzzleArea.getMinX(); i < (int) puzzleArea.getMaxX()
+		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
-			for (int j = (int) puzzleArea.getMinY(); j < (int) puzzleArea
+			for (int j = puzzleArea.y; j < (int) puzzleArea
 					.getMaxY() && row < pieces[0].length; j += cellSize) {
 				g.drawRect(i, j, cellSize, cellSize);
 
@@ -94,8 +93,8 @@ public class PuzzlePanel extends JPanel {
 			row = 0;
 		}
 int index = 0;
-		for (int i = (int) unusedPieceArea.getMinX(); i < unusedPieceArea.getMaxX(); i += pieceSize) {
-			for(int j = (int) unusedPieceArea.getMinY(); j < unusedPieceArea.getMaxY() && j + pieceSize < getHeight() && index < 9; j+= pieceSize)
+		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {
+			for(int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY() && j + pieceSize < getHeight() && index < 9; j+= pieceSize)
 			{
 			g.drawRect(i, j, pieceSize, pieceSize);
 			if(index < unusedPieces.size())
@@ -161,6 +160,22 @@ int index = 0;
 		if(col >= pieces[0].length)
 			return false;
 		return true;
+	}
+	
+	public boolean inPieces(int row, int col)
+	{
+		int val = col * 2 + row;
+		if(val < unusedPieces.size() && val > -1)
+			return true;
+		return false;
+	}
+	
+	public boolean inPiecesArea(int row, int col)
+	{
+		int val = col * 2 + row;
+		if(val < 9 && val > -1)
+			return true;
+		return false;
 	}
 
 	/*
