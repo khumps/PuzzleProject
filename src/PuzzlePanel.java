@@ -68,7 +68,6 @@ public class PuzzlePanel extends JPanel {
 		int row = 0;
 		int col = 0;
 
-<<<<<<< HEAD
 		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -91,9 +90,7 @@ public class PuzzlePanel extends JPanel {
 				g.setColor(Color.BLUE);
 			}
 		}
-=======
 
->>>>>>> origin/master
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y; j < (int) puzzleArea.getMaxY()
