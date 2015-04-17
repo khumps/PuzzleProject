@@ -67,7 +67,9 @@ public class Puzzle {
 	}
 	
 	public Piece setPiece(int row, int col, Piece piece){
+		removeUsedPieceFromUnusedPieces(piece);
 		return board.setPiece(row, col, piece);
+		
 	}
 
 	public Piece removePiece(int row, int col){
@@ -388,6 +390,13 @@ public class Puzzle {
 		return s;
 	}
 	
+	public static String arrayToString(Piece[] a){
+		String s = "";
+		for(Piece n: a)
+			s += n + " ";
+		return s;
+	}
+	
 	//creat a sample 3x3 game
 	public static void main(String[] args) {
 		Piece[] pieces = new Piece[4];
@@ -405,10 +414,13 @@ public class Puzzle {
 			System.out.println("Solution is:");
 			System.out.println(pz.toString());
 		}
-		else
+		else{
 			System.out.println("There is no solution");
-			
+		}
+		
 	}
+	
+	
 
 }
 

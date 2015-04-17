@@ -27,9 +27,11 @@ public class Piece {
 	}
 	
 	public void rotate(int rotations){
+		if(rotations < 0) rotations = 4 - Math.abs(rotations % 4);
 		if(rotations == 0) return;
-		rotate();
-		rotate(rotations - 1);
+		for(int i = 0; i < rotations; i++){
+			rotate();
+		}
 	}
 	public void rotate(){
 		int temp = piece[0];
@@ -53,7 +55,8 @@ public class Piece {
 	
 	public static void main(String[] args) {
 		Piece p = new Piece(1, 2, 3, 4);
-		p.rotate(3);
+		System.out.println(p.toString());
+		p.rotate(-1);
 		System.out.println(p.toString());
 		System.out.println(orientation);
 	}

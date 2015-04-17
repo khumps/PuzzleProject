@@ -1,3 +1,4 @@
+//pieceComponent.piece
 public class Board {
 	private Piece[][] board;
 	private int rows;
