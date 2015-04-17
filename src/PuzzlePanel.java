@@ -174,15 +174,43 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public PieceComponent getPiece(int row, int col) {
+		
 		return pieces[row][col];
+	}
+	
+	/**
+	 *
+	 * @param piece piece to merge with picture
+	 * @return the correct PieceComponent
+	 */
+	public PieceComponent mergePiece(Piece piece)
+	{
+		if(piece == null) throw new IllegalArgumentException("Piece can't be null");
+		for(PieceComponent p: unusedPieces)
+		{
+			if(p.getPiece().equals(piece))
+				return p;
+		}
+		return null;
 	}
 
 	public void solve() {
 		puzzle.solve();
+		
 
 	}
 
-	public void clear() {
+	public void clear() { //FIX
+		for(PieceComponent[] a: pieces)
+		{
+			for(PieceComponent p: a)
+			{
+				if(p != null)
+					{
+					unusedPieces.add(p);
+					}
+			}
+		}
 		puzzle.restart();
 	}
 
