@@ -30,7 +30,7 @@ public class PuzzlePanel extends JPanel {
 	protected int cellSize;
 	protected int pieceSize;
 	public Point mouseLocation;
-	protected boolean noFit = true;
+	protected boolean noFit = false;
 
 	static Color c = new Color(150, 200, 255);
 
@@ -42,6 +42,7 @@ public class PuzzlePanel extends JPanel {
 		this.listener = listener;
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+		addMouseWheelListener(listener);
 		for (int i = 0; i < pieces.length; i++) {
 			unusedPieces.add(new PieceComponent(imgs[i], pieces[i]));
 		}
@@ -65,7 +66,7 @@ public class PuzzlePanel extends JPanel {
 		int row = 0;
 		int col = 0;
 
-		if (listener.holdPiece && listener.pieceHeld != null) {
+		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
 					mouseLocation.x + pieceSize / 2, mouseLocation.y
