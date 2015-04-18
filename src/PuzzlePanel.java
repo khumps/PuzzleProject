@@ -185,7 +185,6 @@ public class PuzzlePanel extends JPanel {
 	 */
 	public PieceComponent mergePiece(Piece piece)
 	{
-		if(piece == null) throw new IllegalArgumentException("Piece can't be null");
 		for(PieceComponent p: unusedPieces)
 		{
 			if(p.getPiece().equals(piece))
@@ -196,22 +195,26 @@ public class PuzzlePanel extends JPanel {
 
 	public void solve() {
 		puzzle.solve();
+		clear();
+		//for(int i = 0; i < puzzl)
 		
 
 	}
 
 	public void clear() { //FIX
-		for(PieceComponent[] a: pieces)
+		for(int i = 0; i < pieces[0].length; i++)
 		{
-			for(PieceComponent p: a)
+			for(int j = 0; j < pieces.length; j++)
 			{
-				if(p != null)
+				if(pieces[i][j] != null)
 					{
-					unusedPieces.add(p);
+					unusedPieces.add(pieces[i][j]);
+					pieces[i][j] = null;
 					}
 			}
 		}
 		puzzle.restart();
+		repaint();
 	}
 
 	public boolean isPieceHeld(PieceComponent p) {
