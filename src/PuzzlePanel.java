@@ -72,7 +72,6 @@ public class PuzzlePanel extends JPanel {
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y - 20; j < (int) puzzleArea.getMaxY()
 					&& row < pieces[0].length; j += cellSize) {
-				
 
 				if (pieces[row][col] != null && !isPieceHeld(pieces[row][col]))
 					g.drawImage(pieces[row][col].getPiecePic(), i
@@ -91,7 +90,7 @@ public class PuzzlePanel extends JPanel {
 			col++;
 			row = 0;
 		}
-		
+
 		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -99,24 +98,21 @@ public class PuzzlePanel extends JPanel {
 							+ pieceSize / 2, 0, 0, listener.pieceHeld
 							.getPiecePic().getWidth(), listener.pieceHeld
 							.getPiecePic().getHeight(), this);
-			if(noFit)
-			{
+			if (noFit) {
 				noFit = false;
 				g.setColor(Color.RED);
-				g.drawLine(mouseLocation.x
-					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
-					mouseLocation.x + pieceSize / 2, mouseLocation.y
-							+ pieceSize / 2);
-				g.drawLine(mouseLocation.x
-						+ pieceSize / 2, mouseLocation.y - pieceSize / 2,
-						mouseLocation.x - pieceSize / 2, mouseLocation.y
-								+ pieceSize / 2);
+				g.drawLine(mouseLocation.x - pieceSize / 2, mouseLocation.y
+						- pieceSize / 2, mouseLocation.x + pieceSize / 2,
+						mouseLocation.y + pieceSize / 2);
+				g.drawLine(mouseLocation.x + pieceSize / 2, mouseLocation.y
+						- pieceSize / 2, mouseLocation.x - pieceSize / 2,
+						mouseLocation.y + pieceSize / 2);
 				g.setColor(Color.BLACK);
 			}
 		}
 		int index = 0;
-		
-		/*Unused Piece Area*/
+
+		/* Unused Piece Area */
 		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width,
 				unusedPieceArea.height);
 		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {
@@ -152,20 +148,19 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public PieceComponent getPiece(int row, int col) {
-		
+
 		return pieces[row][col];
 	}
-	
+
 	/**
 	 *
-	 * @param piece piece to merge with picture
+	 * @param piece
+	 *            piece to merge with picture
 	 * @return the correct PieceComponent
 	 */
-	public PieceComponent mergePiece(Piece piece)
-	{
-		for(PieceComponent p: unusedPieces)
-		{
-			if(p.getPiece().equals(piece))
+	public PieceComponent mergePiece(Piece piece) {
+		for (PieceComponent p : unusedPieces) {
+			if (p.getPiece().equals(piece))
 				return p;
 		}
 		return null;
@@ -174,21 +169,17 @@ public class PuzzlePanel extends JPanel {
 	public void solve() {
 		puzzle.solve();
 		clear();
-		//for(int i = 0; i < puzzl)
-		
+		// for(int i = 0; i < puzzl)
 
 	}
 
-	public void clear() { //FIX
-		for(int i = 0; i < pieces[0].length; i++)
-		{
-			for(int j = 0; j < pieces.length; j++)
-			{
-				if(pieces[i][j] != null)
-					{
+	public void clear() { // FIX
+		for (int i = 0; i < pieces[0].length; i++) {
+			for (int j = 0; j < pieces.length; j++) {
+				if (pieces[i][j] != null) {
 					unusedPieces.add(pieces[i][j]);
 					pieces[i][j] = null;
-					}
+				}
 			}
 		}
 		puzzle.restart();

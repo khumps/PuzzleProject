@@ -5,8 +5,8 @@ import java.util.List;
 public class Puzzle {
 
 	private Board board;
-	private int rows;
-	private int cols;
+	protected final int rows;
+	protected final int cols;
 	private Piece[] unusedPieces;
 	private boolean isSolved = false;
 	
