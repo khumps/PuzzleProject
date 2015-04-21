@@ -86,7 +86,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 
 				else if (holdingPiece
 						&& display.getPuzzlePanel().isEmpty(row, col)) {/*Places piece on board*/
-					if(display.getPuzzlePanel().doesFit(row, col))
+					if(display.getPuzzlePanel().doesFit(row, col,pieceHeld))
 					{
 						display.getPuzzlePanel().setPiece(row, col, pieceHeld);
 					

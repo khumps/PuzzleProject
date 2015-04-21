@@ -131,10 +131,13 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public void setPiece(int row, int col, PieceComponent p) {
+		if(doesFit(row,col,p))
+		{
 		pieces[row][col] = p;
 		puzzle.setPiece(row, col, p.getPiece());
 		unusedPieces.remove(p);
 		repaint();
+		}
 
 	}
 
@@ -167,9 +170,15 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public void solve() {
-		puzzle.solve();
 		clear();
-		// for(int i = 0; i < puzzl)
+		puzzle.solve();
+		 for(int i = 0; i < puzzle.rows; i++)
+		 {
+			 for(int j = 0; j  < puzzle.cols; j++)
+			 {
+				 setPiece(i,j,mergePiece(puzzle.getPiece(i, j)));
+			 }
+		 }
 
 	}
 
@@ -226,8 +235,9 @@ public class PuzzlePanel extends JPanel {
 		return true;
 	}
 
-	public boolean doesFit(int row, int col) {
-		return puzzle.doesFit(row, col, listener.pieceHeld.getPiece());
+	public boolean doesFit(int row, int col, PieceComponent p) {
+		System.out.println(row + " " + col);
+		return puzzle.doesFit(row, col, p.getPiece());
 	}
 
 	/*
