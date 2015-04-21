@@ -109,7 +109,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 
 					// System.out.println(col * 2 + row + "DAGSDFASDF");
 					if (col * 2 + row < display.getPuzzlePanel()
-							.getUnusedPieces().size()) {
+							.getUnusedPieces().size() &&  display.getPuzzlePanel().inPiecesArea(x, y)) {
 						holdingPiece = true;
 						pieceHeld = display.getPuzzlePanel().getUnusedPieces()
 								.remove(col * 2 + row);

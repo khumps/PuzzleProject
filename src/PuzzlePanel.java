@@ -68,34 +68,11 @@ public class PuzzlePanel extends JPanel {
 		int row = 0;
 		int col = 0;
 
-		if (listener.holdingPiece && listener.pieceHeld != null) {
-			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
-					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
-					mouseLocation.x + pieceSize / 2, mouseLocation.y
-							+ pieceSize / 2, 0, 0, listener.pieceHeld
-							.getPiecePic().getWidth(), listener.pieceHeld
-							.getPiecePic().getHeight(), this);
-			if(noFit)
-			{
-				noFit = false;
-				g.setColor(Color.RED);
-				g.drawLine(mouseLocation.x
-					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
-					mouseLocation.x + pieceSize / 2, mouseLocation.y
-							+ pieceSize / 2);
-				g.drawLine(mouseLocation.x
-						+ pieceSize / 2, mouseLocation.y - pieceSize / 2,
-						mouseLocation.x - pieceSize / 2, mouseLocation.y
-								+ pieceSize / 2);
-				g.setColor(Color.BLACK);
-			}
-		}
-
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y - 20; j < (int) puzzleArea.getMaxY()
 					&& row < pieces[0].length; j += cellSize) {
-				g.drawRect(i, j, cellSize, cellSize);
+				
 
 				if (pieces[row][col] != null && !isPieceHeld(pieces[row][col]))
 					g.drawImage(pieces[row][col].getPiecePic(), i
@@ -109,6 +86,7 @@ public class PuzzlePanel extends JPanel {
 				// offsetX, j - pieceSize + offsetY, pieceSize + (pieceSize -
 				// cellSize) , pieceSize + (pieceSize - cellSize), this);
 				row++;
+				g.drawRect(i, j, cellSize, cellSize);
 			}
 			col++;
 			row = 0;
