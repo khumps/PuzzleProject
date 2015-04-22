@@ -34,7 +34,7 @@ public class Display extends JFrame {
 		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
 		menu = new JMenuBar();
 		JTextField instructions = new JTextField();
-		instructions.setText("To rotate a piece use the scrollwheel or the arrow keys");
+		instructions.setText("To rotate a piece use the scrollwheel");
 		add(instructions,BorderLayout.NORTH);
 		instructions.setEditable(false);
 		JMenuItem clear = Utils.newMenuItem(Utils.button, "Clear", "clear", listener, menu);
@@ -53,7 +53,7 @@ public class Display extends JFrame {
 		for(int index = 0; index < 9; index++)
 		{
 			try{
-				imgs[index] = ImageIO.read(getClass().getResourceAsStream("piece_" + (index + 1) + ".png"));
+				imgs[index] = ImageIO.read(getClass().getResourceAsStream("resources//piece_" + (index + 1) + ".png"));
 			}
 			catch (IOException e) {
 				System.out.println("ERROR ON PIC LOAD");

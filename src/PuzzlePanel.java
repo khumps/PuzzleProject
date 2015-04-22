@@ -40,9 +40,12 @@ public class PuzzlePanel extends JPanel {
 
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces) {
 		this.listener = listener;
-		addMouseListener(listener);
+		addMouseListener(listener); 
 		addMouseMotionListener(listener);
 		addMouseWheelListener(listener);
+		addKeyListener(listener);
+		setFocusable(true);
+		requestFocusInWindow();
 		for (int i = 0; i < pieces.length; i++) {
 			unusedPieces.add(new PieceComponent(imgs[i], pieces[i]));
 		}
@@ -60,14 +63,12 @@ public class PuzzlePanel extends JPanel {
 		unusedPieceArea = new Rectangle();
 		unusedPieceArea.setBounds(puzzleArea.x, (int) puzzleArea.getMaxY(),
 				pieceSize * 5, pieceSize * 2);
-		// puzzleArea.setFrameFromCenter(500, 500, 300, 300);
 		cellSize = (int) (puzzleArea.getWidth() / 3);
 		pieceSize = (int) (cellSize * 1.345);
-		// System.out.println(puzzleArea.getMaxY());
-		// 1.94
 		int row = 0;
 		int col = 0;
-
+		
+			/* Paints the puzzle*/
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y - 20; j < (int) puzzleArea.getMaxY()
@@ -80,17 +81,13 @@ public class PuzzlePanel extends JPanel {
 							+ pieceSize, 0, 0, pieces[row][col].getPiecePic()
 							.getWidth(), pieces[row][col].getPiecePic()
 							.getHeight(), this);
-
-				// g.drawImage(pieces[row][col].getPiecePic(), i - pieceSize +
-				// offsetX, j - pieceSize + offsetY, pieceSize + (pieceSize -
-				// cellSize) , pieceSize + (pieceSize - cellSize), this);
 				row++;
 				g.drawRect(i, j, cellSize, cellSize);
 			}
 			col++;
 			row = 0;
 		}
-
+			/*Paints the piece that is being dragged*/
 		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -98,7 +95,8 @@ public class PuzzlePanel extends JPanel {
 							+ pieceSize / 2, 0, 0, listener.pieceHeld
 							.getPiecePic().getWidth(), listener.pieceHeld
 							.getPiecePic().getHeight(), this);
-			if (noFit) {
+			
+			if (noFit) {/* If the piece doesn't fit draw a red X over the dragged piece*/
 				noFit = false;
 				g.setColor(Color.RED);
 				g.drawLine(mouseLocation.x - pieceSize / 2, mouseLocation.y
@@ -110,9 +108,9 @@ public class PuzzlePanel extends JPanel {
 				g.setColor(Color.BLACK);
 			}
 		}
-		int index = 0;
 
 		/* Unused Piece Area */
+		int index = 0; /*Index to get piece from*/
 		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width,
 				unusedPieceArea.height);
 		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {

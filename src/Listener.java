@@ -50,7 +50,16 @@ public class Listener extends MouseAdapter implements ActionListener,
 	}
 
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		System.out.println("TEST");
+		if (holdingPiece) {
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+				pieceHeld.rotate(1);
+
+			if (e.getKeyCode() == KeyEvent.VK_LEFT)
+				pieceHeld.rotate(3);
+
+			display.getPuzzlePanel().repaint();
+		}
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -75,8 +84,14 @@ public class Listener extends MouseAdapter implements ActionListener,
 			// System.out.println(row + " " + col);
 			// System.out.println(display.getPuzzlePanel().inBoard(row,col));
 			if (display.getPuzzlePanel().inBoard(row, col)) {
-				if (!holdingPiece && !display.getPuzzlePanel().isEmpty(row, col)) {/* Picks up piece off board*/
-					
+				if (!holdingPiece
+						&& !display.getPuzzlePanel().isEmpty(row, col)) {/*
+																		 * Picks
+																		 * up
+																		 * piece
+																		 * off
+																		 * board
+																		 */
 
 					holdingPiece = true;
 
@@ -85,41 +100,46 @@ public class Listener extends MouseAdapter implements ActionListener,
 				}
 
 				else if (holdingPiece
-						&& display.getPuzzlePanel().isEmpty(row, col)) {/*Places piece on board*/
-					if(display.getPuzzlePanel().doesFit(row, col,pieceHeld))
-					{
+						&& display.getPuzzlePanel().isEmpty(row, col)) {/*
+																		 * Places
+																		 * piece
+																		 * on
+																		 * board
+																		 */
+					if (display.getPuzzlePanel().doesFit(row, col, pieceHeld)) {
 						display.getPuzzlePanel().setPiece(row, col, pieceHeld);
-					
-					// System.out.println("RAN");
-					pieceHeld = null;
-					holdingPiece = false;
-					}
-					else display.getPuzzlePanel().noFit = true;
+
+						pieceHeld = null;
+						holdingPiece = false;
+					} else
+						display.getPuzzlePanel().noFit = true;
 				}
 			}
 			// System.out.println(holdPiece);
 			else {
-				
+
 				x = (e.getX() - display.getPuzzlePanel().unusedPieceArea.x);
 				y = (e.getY() - display.getPuzzlePanel().unusedPieceArea.y);
 				col = x / display.getPuzzlePanel().pieceSize;
 				row = y / display.getPuzzlePanel().pieceSize;
-				if (!holdingPiece) {/*Picks up piece from unusedPieces*/
-					
+				if (!holdingPiece) {/* Picks up piece from unusedPieces */
 
 					// System.out.println(col * 2 + row + "DAGSDFASDF");
 					if (col * 2 + row < display.getPuzzlePanel()
-							.getUnusedPieces().size() &&  display.getPuzzlePanel().inPiecesArea(x, y)) {
+							.getUnusedPieces().size()
+							&& display.getPuzzlePanel().inPiecesArea(x, y)) {
 						holdingPiece = true;
 						pieceHeld = display.getPuzzlePanel().getUnusedPieces()
 								.remove(col * 2 + row);
 					}
-				} else {/*Puts piece in unusedPieces*/
+				} else {/* Puts piece in unusedPieces */
 					System.out.println(x + " " + y);
-					System.out.println(display.getPuzzlePanel().unusedPieceArea.x);
-					System.out.println(display.getPuzzlePanel().unusedPieceArea.y);
-					if (display.getPuzzlePanel().inPiecesArea(x,y)) {
-						
+					System.out
+							.println(display.getPuzzlePanel().unusedPieceArea.x);
+					System.out
+							.println(display.getPuzzlePanel().unusedPieceArea.y);
+					if (display.getPuzzlePanel().inPiecesArea(x, y)) {
+
 						System.out.println("Ran");
 						display.getPuzzlePanel().getUnusedPieces()
 								.add(pieceHeld);
@@ -153,12 +173,11 @@ public class Listener extends MouseAdapter implements ActionListener,
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		System.out.println(e.getPreciseWheelRotation());
-		if(holdingPiece)
-		{
+		if (holdingPiece) {
 			int r = (int) e.getPreciseWheelRotation();
-			if(r  > 0)
-			pieceHeld.rotate(1);
-			if(r < 0)
+			if (r > 0)
+				pieceHeld.rotate(1);
+			if (r < 0)
 				pieceHeld.rotate(3);
 			display.getPuzzlePanel().repaint();
 		}
