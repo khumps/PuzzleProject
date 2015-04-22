@@ -12,6 +12,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.Arrays;
 
+import javafx.scene.input.KeyCharacterCombination;
+import javafx.scene.input.KeyCode;
+
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 public class Listener extends MouseAdapter implements ActionListener,
@@ -20,15 +24,17 @@ public class Listener extends MouseAdapter implements ActionListener,
 	private Display display;
 	protected boolean holdingPiece = false;
 	protected PieceComponent pieceHeld = null;
+	
 
 	/**
 	 * 
 	 * @param display
-	 *            a display object that contains the necessary components for
+	 *            a Display object that contains the necessary components for
 	 *            the class to function
 	 */
 	public Listener(Display display) {
 		this.display = display;
+		pieceHeld.getInputMap().put(KeyStroke.getKeyStroke(KeyCode.LEFT, null), actionMapKey);
 	}
 
 	@Override
@@ -85,13 +91,8 @@ public class Listener extends MouseAdapter implements ActionListener,
 			// System.out.println(display.getPuzzlePanel().inBoard(row,col));
 			if (display.getPuzzlePanel().inBoard(row, col)) {
 				if (!holdingPiece
-						&& !display.getPuzzlePanel().isEmpty(row, col)) {/*
-																		 * Picks
-																		 * up
-																		 * piece
-																		 * off
-																		 * board
-																		 */
+						&& !display.getPuzzlePanel().isEmpty(row, col)) {
+					/* Picks up piece off board */
 
 					holdingPiece = true;
 
@@ -100,12 +101,8 @@ public class Listener extends MouseAdapter implements ActionListener,
 				}
 
 				else if (holdingPiece
-						&& display.getPuzzlePanel().isEmpty(row, col)) {/*
-																		 * Places
-																		 * piece
-																		 * on
-																		 * board
-																		 */
+						&& display.getPuzzlePanel().isEmpty(row, col)) {
+					/* Places piece on board */
 					if (display.getPuzzlePanel().doesFit(row, col, pieceHeld)) {
 						display.getPuzzlePanel().setPiece(row, col, pieceHeld);
 

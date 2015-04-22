@@ -48,7 +48,7 @@ public class Display extends JFrame {
 
 	}
 	
-	private void loadImages()
+	private void loadImages() /*Loops through all the images and loads them into imgs[]*/
 	{
 		for(int index = 0; index < 9; index++)
 		{
@@ -61,7 +61,7 @@ public class Display extends JFrame {
 		}
 	}
 
-	private void createPieces()
+	private void createPieces() /*Creates a piece for every image*/
 	{
 		pieces[0] = new Piece(Piece.CLUBS_OUT,Piece.HEARTS_OUT,Piece.DIAMONDS_IN,Piece.CLUBS_IN);
 		pieces[1] = new Piece(Piece.SPADES_OUT,Piece.DIAMONDS_OUT,Piece.SPADES_IN,Piece.HEARTS_IN);
@@ -79,17 +79,7 @@ public class Display extends JFrame {
 	}
 
 	public static void main(String[] args) {
-			Display d = new Display();
-			int i = 0;
-/*		d.getPuzzlePanel().setPiece(0, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(0, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(0, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(1, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(1, 1, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(1, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(2, 0, d.getPuzzlePanel().getUnusedPieces().get(i));
-		d.getPuzzlePanel().setPiece(2, 1, d.getPuzzlePanel().getUnusedPieces().get(i));*/
-		//d.getPuzzlePanel().setPiece(2, 2, d.getPuzzlePanel().getUnusedPieces().get(i));
+			Display puzzle = new Display();
 		
 		
 
