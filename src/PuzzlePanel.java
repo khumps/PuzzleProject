@@ -234,7 +234,6 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public boolean doesFit(int row, int col, PieceComponent p) {
-		System.out.println(row + " " + col);
 		return puzzle.doesFit(row, col, p.getPiece());
 	}
 

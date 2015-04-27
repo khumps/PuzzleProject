@@ -11,10 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 import java.util.Arrays;
-
-import javafx.scene.input.KeyCharacterCombination;
-import javafx.scene.input.KeyCode;
-
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
