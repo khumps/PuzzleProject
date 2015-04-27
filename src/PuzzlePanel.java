@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
@@ -40,7 +41,7 @@ public class PuzzlePanel extends JPanel {
 
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces) {
 		this.listener = listener;
-		addMouseListener(listener); 
+		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		addMouseWheelListener(listener);
 		addKeyListener(listener);
@@ -57,6 +58,9 @@ public class PuzzlePanel extends JPanel {
 		g.setColor(c);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
+		Graphics2D g2 = (Graphics2D) g;
+		g2 .setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+				RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 		puzzleArea = new Rectangle();
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100,
 				100);
@@ -67,8 +71,8 @@ public class PuzzlePanel extends JPanel {
 		pieceSize = (int) (cellSize * 1.345);
 		int row = 0;
 		int col = 0;
-		
-			/* Paints the puzzle*/
+
+		/* Paints the puzzle */
 		for (int i = puzzleArea.x; i < (int) puzzleArea.getMaxX()
 				&& col < pieces.length; i += cellSize) {
 			for (int j = puzzleArea.y - 20; j < (int) puzzleArea.getMaxY()
@@ -87,7 +91,7 @@ public class PuzzlePanel extends JPanel {
 			col++;
 			row = 0;
 		}
-			/*Paints the piece that is being dragged*/
+		/* Paints the piece that is being dragged */
 		if (listener.holdingPiece && listener.pieceHeld != null) {
 			g.drawImage(listener.pieceHeld.getPiecePic(), mouseLocation.x
 					- pieceSize / 2, mouseLocation.y - pieceSize / 2,
@@ -95,8 +99,11 @@ public class PuzzlePanel extends JPanel {
 							+ pieceSize / 2, 0, 0, listener.pieceHeld
 							.getPiecePic().getWidth(), listener.pieceHeld
 							.getPiecePic().getHeight(), this);
-			
-			if (noFit) {/* If the piece doesn't fit draw a red X over the dragged piece*/
+
+			if (noFit) {/*
+						 * If the piece doesn't fit draw a red X over the
+						 * dragged piece
+						 */
 				noFit = false;
 				g.setColor(Color.RED);
 				g.drawLine(mouseLocation.x - pieceSize / 2, mouseLocation.y
@@ -110,7 +117,7 @@ public class PuzzlePanel extends JPanel {
 		}
 
 		/* Unused Piece Area */
-		int index = 0; /*Index to get piece from*/
+		int index = 0; /* Index to get piece from */
 		g.drawRect(unusedPieceArea.x, unusedPieceArea.y, unusedPieceArea.width,
 				unusedPieceArea.height);
 		for (int i = unusedPieceArea.x; i < unusedPieceArea.getMaxX(); i += pieceSize) {
@@ -129,12 +136,11 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	public void setPiece(int row, int col, PieceComponent p) {
-		if(doesFit(row,col,p))
-		{
-		pieces[row][col] = p;
-		puzzle.setPiece(row, col, p.getPiece());
-		unusedPieces.remove(p);
-		repaint();
+		if (doesFit(row, col, p)) {
+			pieces[row][col] = p;
+			puzzle.setPiece(row, col, p.getPiece());
+			unusedPieces.remove(p);
+			repaint();
 		}
 
 	}
@@ -154,7 +160,7 @@ public class PuzzlePanel extends JPanel {
 	}
 
 	/**
-	 *
+	 * 
 	 * @param piece
 	 *            piece to merge with picture
 	 * @return the correct PieceComponent
@@ -170,13 +176,11 @@ public class PuzzlePanel extends JPanel {
 	public void solve() {
 		clear();
 		puzzle.solve();
-		 for(int i = 0; i < puzzle.rows; i++)
-		 {
-			 for(int j = 0; j  < puzzle.cols; j++)
-			 {
-				 setPiece(i,j,mergePiece(puzzle.getPiece(i, j)));
-			 }
-		 }
+		for (int i = 0; i < puzzle.rows; i++) {
+			for (int j = 0; j < puzzle.cols; j++) {
+				setPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
+			}
+		}
 
 	}
 

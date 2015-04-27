@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceListener;
@@ -8,6 +9,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -22,7 +24,6 @@ public class PieceComponent extends JComponent {
 
 		this.piece = piece;
 		piecePic = image;
-		System.out.println("piece Created");
 
 	}
 
@@ -32,9 +33,7 @@ public class PieceComponent extends JComponent {
 		try {
 			piecePic = ImageIO.read(getClass().getResourceAsStream(
 					"piece_1.png"));
-			// piecePic = ImageIO.read(new File("resources/piece_7.png"));
 		} catch (IOException e) {
-			System.out.println("Hi");
 		}
 
 	}
@@ -42,7 +41,7 @@ public class PieceComponent extends JComponent {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(piecePic, 0, 0, 100, 100, null);
-
+		g2 .setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
 	}
 
 	public void rotate(int rotations) {
