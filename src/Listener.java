@@ -34,7 +34,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 	 */
 	public Listener(Display display) {
 		this.display = display;
-		pieceHeld.getInputMap().put(KeyStroke.getKeyStroke(KeyCode.LEFT, null), actionMapKey);
 	}
 
 	@Override
