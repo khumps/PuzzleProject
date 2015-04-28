@@ -15,7 +15,7 @@ public class Point {
 	
 	// Prints the Point as a coordinate pair of the form (x, y)
 	
-	public String toString() {
+	public String toString(int x) {
 		return "(" + x + "," + y + ")";
 	}
 }
