@@ -14,11 +14,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+// Akshay Karthik, Kevin Humphreys, Vijay Jeevanandam
+
+// Creates a PieceComponent object, which can be added as a JComponent to JPanels and JFrames to display on a screen. This PieceComponent serves to display an image representing a puzzle piece. Methods create a PieceComponent, rotate it, return the values of private data points, and draw the PieceComponent onto the screen.
+
 public class PieceComponent extends JComponent {
 
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
+
+	// Constructs a PieceComponent given a BufferedImage for the image of the
+	// piece it represents as well as a Piece for the Piece object associated
+	// with that image.
 
 	public PieceComponent(BufferedImage image, Piece piece) {
 
@@ -27,9 +35,13 @@ public class PieceComponent extends JComponent {
 
 	}
 
+	// Constructs a default PieceComponent, setting piece to the Piece object
+	// associated with piece_1.png. This PieceComponent is assigned piece_1.png
+	// as its BufferedImage value for piecePic.
+
 	public PieceComponent() {
-		piece = new Piece(Piece.HEARTS_IN, Piece.HEARTS_IN, Piece.HEARTS_IN,
-				Piece.HEARTS_IN);
+		piece = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_IN,
+				Piece.CLUBS_IN);
 		try {
 			piecePic = ImageIO.read(getClass().getResourceAsStream(
 					"piece_1.png"));
@@ -38,11 +50,17 @@ public class PieceComponent extends JComponent {
 
 	}
 
+	// Paints the PieceComponent onto the screen by drawing piecePic.
+
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(piecePic, 0, 0, 100, 100, null);
-		g2 .setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+		g2.setRenderingHint(RenderingHints.KEY_RENDERING,
+				RenderingHints.VALUE_RENDER_QUALITY);
 	}
+
+	// Rotates piecePic around its center 90 degrees using AffineTransform,
+	// rotates piece and repaints the PieceComponent.
 
 	public void rotate(int rotations) {
 		piece.rotate(rotations);
@@ -55,25 +73,26 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 
+	// Returns the value of piece (private data).
+
 	public Piece getPiece() {
 		return piece;
 	}
+
+	// Returns the value of piecePic (private data).
 
 	public BufferedImage getPiecePic() {
 		return piecePic;
 	}
 
-	
-	public String toString()
-	{
-		return "Piece";
-	}
-
+	// Returns a Point representing the center coordinate for the
+	// PieceComponent.
 
 	public Point getCenter() {
 		return new Point(piecePic.getWidth() / 2, piecePic.getHeight() / 2);
 	}
 
+	// Tests the functionality of the PieceComponent class.
 
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
