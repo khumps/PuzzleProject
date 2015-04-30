@@ -19,7 +19,6 @@ public class Display extends JFrame {
 	private Listener listener;
 	private JMenuBar menu;
 	private PuzzlePanel puzzlePanel;
-	private UnusedPiecePanel unusedPieces;
 	private Piece[] pieces = new Piece[9];
 	private BufferedImage[] imgs = new BufferedImage[9];
 	
