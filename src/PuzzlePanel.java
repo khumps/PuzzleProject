@@ -176,6 +176,7 @@ public class PuzzlePanel extends JPanel {
 	public void solve() {
 		clear();
 		puzzle.solve();
+		System.out.println(puzzle.toString());
 		for (int i = 0; i < puzzle.rows; i++) {
 			for (int j = 0; j < puzzle.cols; j++) {
 				setPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
