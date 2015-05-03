@@ -5,8 +5,8 @@ import java.util.List;
 public class Puzzle {
 
 	private Board board;
-	protected int rows;
-	protected int cols;
+	protected final int rows;
+	protected final int cols;
 	private Piece[] unusedPieces;
 	private boolean isSolved = false;
 	
@@ -67,7 +67,9 @@ public class Puzzle {
 	}
 	
 	public Piece setPiece(int row, int col, Piece piece){
+		removeUsedPieceFromUnusedPieces(piece);
 		return board.setPiece(row, col, piece);
+		
 	}
 
 	public Piece removePiece(int row, int col){
@@ -92,7 +94,7 @@ public class Puzzle {
 	}
 	
 	//Question: do we need this? 
-	// remove a used piece from the unusedPieces array
+	// remove a used piece from the unsedPieces array
 	private int removeUsedPieceFromUnusedPieces(Piece p){
 		int index = -1;
 		for(int i = 0; i < unusedPieces.length; i++){
@@ -114,7 +116,7 @@ public class Puzzle {
 		if (p== null)
 			fitEast = true;
 		else{
-			if(matchEdge(piece, p, Piece.EAST))
+			if(matchEdge(piece, p, 90))
 				fitEast = true;		
 		}
 		return fitEast;
@@ -128,7 +130,7 @@ public class Puzzle {
 		if (p== null)
 			fitSouth = true;
 		else {
-			if(matchEdge(piece, p, Piece.SOUTH))
+			if(matchEdge(piece, p, 180))
 				fitSouth = true;
 		}
 		return fitSouth;
@@ -142,7 +144,7 @@ public class Puzzle {
 		if(p == null)
 			fitNorth = true;
 		else{
-			if(matchEdge(piece, p, Piece.NORTH))
+			if(matchEdge(piece, p, 0))
 				fitNorth = true;
 		}
 		return fitNorth;
@@ -157,7 +159,7 @@ public class Puzzle {
 		if(p == null)
 			fitWest = true;
 		else{
-			if(matchEdge(piece, p, Piece.WEST))
+			if(matchEdge(piece, p, 270))
 				fitWest = true;
 		}
 		return fitWest;	
@@ -388,18 +390,20 @@ public class Puzzle {
 		return s;
 	}
 	
+	public static String arrayToString(Piece[] a){
+		String s = "";
+		for(Piece n: a)
+			s += n + " ";
+		return s;
+	}
+	
 	//creat a sample 3x3 game
 	public static void main(String[] args) {
 		Piece[] pieces = new Piece[4];
 		pieces[0] = new Piece(1,0, 0, -3);
-		pieces[1] = new Piece(-4,3,0,0);
+		pieces[1] = new Piece(-4,0,0,0);
 		pieces[2] = new Piece(-2, 4, 0, 0);
 		pieces[3] = new Piece(0,-1, 2, 0);
-		//pieces[4] = new Piece();
-		//pieces[5] = new Piece();
-		//pieces[6] = new Piece();
-		//pieces[7] = new Piece();
-		//pieces[8] = new Piece();
 		Puzzle pz = new Puzzle(2,2, pieces);
 		for (int i =0; i < pieces.length; i++)
 			System.out.print( pieces[i].toString() + " ");
@@ -410,9 +414,14 @@ public class Puzzle {
 			System.out.println("Solution is:");
 			System.out.println(pz.toString());
 		}
-		else
+		else{
 			System.out.println("There is no solution");
-			
+		}
+		
 	}
+	
+	
 
 }
+
+
