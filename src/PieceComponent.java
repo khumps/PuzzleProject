@@ -92,7 +92,8 @@ public class PieceComponent extends JComponent {
 	{
 		for(int i = 0; i < 4; i++)
 		{
-			
+			if(PuzzlePanel.equals(piece, p))
+				return this;
 			rotate(1);
 		}
 		return null;
