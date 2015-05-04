@@ -72,6 +72,31 @@ public class PieceComponent extends JComponent {
 		piecePic = op.filter(piecePic, null);
 		repaint();
 	}
+	
+	public boolean isSamePiece(Piece p)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			if(PuzzlePanel.equals(piece, p))
+			{
+				return true;
+			}
+			rotate(1);
+		
+		}
+		return false;
+	}
+	
+	//isSamePiece must return true
+	public PieceComponent rotateToMatch(Piece p)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			
+			rotate(1);
+		}
+		return null;
+	}
 
 	// Returns the value of piece (private data).
 

@@ -8,6 +8,7 @@ public class Puzzle {
 	protected final int rows;
 	protected final int cols;
 	private Piece[] unusedPieces;
+	
 	private boolean isSolved = false;
 	
 	public Puzzle(int rows, int cols){
@@ -28,27 +29,7 @@ public class Puzzle {
 		this.cols = board.getCols();
 		this.board = board;
 	}
-	//restart the board
 	
-		public void restart(){
-			int c = 0;
-			Piece[] a = new Piece[rows * cols];
-			for(int b = 0; b < a.length; b++){
-				if(unusedPieces[b] != null){
-					a[c] = unusedPieces[b];
-					c++;
-				}
-			}
-			for(int i = 0; i < rows; i++){
-				for(int j = 0; j < cols; j++){
-					if(board.getPiece(i, j) != null){
-						a[c] = board.removePiece(i, j);
-						c++;
-					}
-				}
-			}
-			unusedPieces = a;
-		}
 	
 	//checks piece1's edge with piece2's opposite edge
 	public boolean matchEdge(Piece piece1, Piece piece2, int p1edge){
@@ -67,7 +48,7 @@ public class Puzzle {
 	}
 	
 	public Piece setPiece(int row, int col, Piece piece){
-		removeUsedPieceFromUnusedPieces(piece);
+		//removeUsedPieceFromUnusedPieces(piece);
 		return board.setPiece(row, col, piece);
 		
 	}
@@ -76,37 +57,28 @@ public class Puzzle {
 		return board.removePiece(row, col);
 	}
 	
-	//copy unused pieces into an array list
+	//copy refs of unused pieces into an array list
 	//in the first call, should return all pieces
 	//Question: should the unusedPices reflect the current status- i.e., should we remove pieces from it
 	//as they get used? 
 	public ArrayList<Piece> getUnusedPieces(){
 		ArrayList<Piece> unused = new ArrayList(rows*cols);
-		System.out.println("-----");
+		//System.out.println("-----");
 		for(int i = 0; i < unusedPieces.length; i++){
 			if (unusedPieces[i] != null){
-			    System.out.println("     adding " + unusedPieces[i].toString());
+			    //System.out.println("     adding " + unusedPieces[i].toString());
 			    unused.add(unusedPieces[i]);
 			}
 		}
-		System.out.println("-----");
+		//System.out.println("-----");
 		return unused;	
 	}
-	
-	//Question: do we need this? 
-	// remove a used piece from the unsedPieces array
-	private int removeUsedPieceFromUnusedPieces(Piece p){
-		int index = -1;
-		for(int i = 0; i < unusedPieces.length; i++){
-			if (unusedPieces[i] == p) {
-				unusedPieces[i] = null;
-				index = i;
-			}
-		}
-		return index;
+
+	//restart the puzzle: clear the board and restore the unused pieces
+	public void restart() {
+		board.clear();
+		isSolved = false;
 	}
-	
-	
 	//does the given piece's east edge fit in the given location 
 	public boolean checkEast(int r, int c, Piece piece){
 		if(r < 0 || r > rows) return false;
@@ -282,7 +254,8 @@ public class Puzzle {
 		int i =0;
 		while (notdone) {
 			p.rotate();
-			System.out.println("   Trying: " + p.toString() + " at " + row + "," + col + " in doesAnyRotationFit" );
+			//System.out.println("   Trying: " + p.toString() + " at " + row + "," + col + 
+			//		" in doesAnyRotationFit" );
 			i++;
 			if (doesFit(row,col, p))
 				fit= true;
@@ -292,21 +265,23 @@ public class Puzzle {
 	  return fit;
 	}
 	
-	//does a given piece fit anywhere in the board
-	//if so, return true and set the piece in the location
+
+        // Right now it is not used
+	// Does a given piece fit anywhere in the board
+	// if so, return true and set the piece in the location
 	private boolean doesFitInBoard(Piece p){
 		int i = 0;
 		boolean done = false;
 		while (!done && i< rows ){
 			int j = 0;
 			while(!done && j < cols){
-				System.out.println("       DoesFitInBoard " + p.toString() + " testing  ["+ i +"," + j +"]");
+				//System.out.println("       DoesFitInBoard " + p.toString() + " testing  ["+ i +"," + j +"]");
 				if(board.hasPiece(i, j)){
-					System.out.println("         is occupied");
+					//System.out.println("         is occupied");
 				}
 				else if (doesAnyRotationFit(i, j, p)){
 					setPiece (i,j, p);
-					System.out.println("       Piece: " + p.toString() + " fits in ["+ i +"," + j +"]");
+					//System.out.println("       Piece: " + p.toString() + " fits in ["+ i +"," + j +"]");
 					done = true;
 				}
 				j++;
@@ -316,60 +291,90 @@ public class Puzzle {
 		return done;
 	}
 	
-	//recursive solver
-	//basis case: if unused pieces array list is empty, return
-	//            other terminating condition?
-	public boolean trysolve(Board b, ArrayList<Piece> u){
-		if(u.size() == 0)
-			return true;
-		Piece p = u.remove(0);
-		removeUsedPieceFromUnusedPieces(p);
-		System.out.println(getUnusedPieces());
-		//if current piece fits anywhere, try to solve with the rest of the pieces
-		System.out.println("   Trying   Piece: " + p.toString() );
-		if (doesFitInBoard(p)) {
-			return trysolve(b, u);	
-		}
-		else
-		//The current piece does not fit- does any other piece fit?
-		{
-			if (trysolve(b,u)) { //recursively invoke the rest of the pieces and then see see if p fits 
-				if (doesFitInBoard(p))
-					return true;
-				else {
-						return false;
-				}
-			}
-			else {
-					return false;
-			}
-		}
-	}		
-			
 	
 	
-    //main solver
-	public void solve(){
-		isSolved = trysolve(board,getUnusedPieces());	
+
+    //generate a permutation of the piecses and see if it solves	
+	public void solve() {
+		permute_and_test(unusedPieces, 0);
 	}
 
-    //check if the board has a piece in every location
-	//ALTERNATIVE: have a class variable isSolved,
-	//assign the result of trysolve() to it in the solve method
-	//this isSolved can simply be the getter of that variable
-	public boolean isSolved(){
-/*	 Piece p;
-	 boolean retval = true;
-	 for (int i =0; i < rows; i++) {
-		 for (int j =0; j< cols; j++) {
-			 p= getPiece(i, j);
-			 if (p == null)
-				 retval = false;
-		 }
-	 }
-	 return retval;*/
-		return isSolved;
+    // recursive permutation of unused pieces
+    // to be invoked with k = 0
+    public void permute_and_test(Piece [] a, int k) {
+
+	//basis case
+	if (isSolved)
+		return;
+        if (k == a.length) 
+        {
+		//Test this permutation
+		board.clear();
+		ArrayList<Piece> al = getUnusedPieces();
+                System.out.println(" checking combination  "+ al);
+		if (test_solution(al)) {
+		  	isSolved= true;
+			System.out.println(toString());
+			return;
+		}
+		//else
+		 System.out.println(" this permutation did not work");
+			
+          }
+        else 
+        {
+            for (int i = k; i < a.length; i++) 
+            {
+		//swap ith and k th elements
+                Piece temp = a[k];
+                a[k] = a[i];
+                a[i] = temp;
+                permute_and_test(a, k + 1);
+		// swap back to how they were
+                temp = a[k];
+                a[k] = a[i];
+                a[i] = temp;
+            }
+        }
+
+    }
+
+
+	
+	// test_solution takes in the permutation of pieces to use provided by the top solver and 
+	// tries to see if the given permutation is a solution
+        // Since we are generating all permutation, we will be seeing if the 1st piece fits in (0,0),
+	// 2nd i (0,1), 3rd in (0,2), 4th in (1,0) etc
+	// However, for each piece we have to see whether any rotation fits in that given position
+
+	public boolean test_solution(ArrayList<Piece> a){
+		boolean retval = true;
+		Piece p;
+		int index;
+		boolean bb = false;
+		for (int i = 0; i < rows; i ++) {
+			for(int j = 0; j < cols; j++) {
+                		index = i*cols+ j;
+				p = a.get(index);
+				bb= doesAnyRotationFit(i, j,p);
+				if (bb) {
+					setPiece (i,j, p);
+					//System.out.println("       Piece: " + p.toString() + " fits in ["+ i +"," + j +"]");
+				}
+				else {
+					retval = false;
+					return retval;
+			       }
+
+			}
+		}
+		return retval;
 	}
+
+    //Puzzle is solved if isSolved is set to true
+    public boolean isSolved(){
+ 	return isSolved;
+    }
 	
 	
 	//print gameboard
@@ -399,12 +404,37 @@ public class Puzzle {
 	
 	//creat a sample 3x3 game
 	public static void main(String[] args) {
-		Piece[] pieces = new Piece[4];
-		pieces[0] = new Piece(1,0, 0, -3);
-		pieces[1] = new Piece(-4,0,0,0);
-		pieces[2] = new Piece(-2, 4, 0, 0);
-		pieces[3] = new Piece(0,-1, 2, 0);
-		Puzzle pz = new Puzzle(2,2, pieces);
+		Piece[] pieces = new Piece[9];
+		/*pieces[0] = new Piece(1,2, -3, 4);
+		pieces[3] = new Piece(3,2,1,-1);
+		pieces[6] = new Piece(-1, 3, 2, 4);
+		pieces[1] = new Piece(3,-3, 1, -2);
+		pieces[4] = new Piece(-1,-4, 1, -2);
+		pieces[7] = new Piece(-1,2,3, -3);
+		pieces[2] = new Piece(2,1, -1, 3);
+		pieces[5] = new Piece(1,2,3,4);
+		pieces[8] = new Piece(-3,4, 2, -2);*/
+		
+		/*pieces[0] = new Piece(3, 1, -4, -3);
+		pieces[1] = new Piece(2, 4, -2, -1);
+		pieces[2] = new Piece(1, 2, -2, -3);
+		pieces[3] = new Piece(1, 4, -3, -3);
+		pieces[4] = new Piece(2, 2, -1, -3);
+		pieces[5] = new Piece(1, 4, -4, -1);
+		pieces[6] = new Piece(2, 4, -1, -4);
+		pieces[7] = new Piece(3, 1, -2, -1);
+		pieces[8] = new Piece(3, -3, -4, 4);*/
+
+		pieces[0] = new Piece(Piece.CLUBS_OUT,Piece.HEARTS_OUT,Piece.DIAMONDS_IN,Piece.CLUBS_IN);
+		pieces[1] = new Piece(Piece.SPADES_OUT,Piece.DIAMONDS_OUT,Piece.SPADES_IN,Piece.HEARTS_IN);
+		pieces[2] = new Piece(Piece.HEARTS_OUT,Piece.SPADES_OUT,Piece.SPADES_IN,Piece.CLUBS_IN);
+		pieces[3] = new Piece(Piece.HEARTS_OUT,Piece.DIAMONDS_OUT,Piece.CLUBS_IN,Piece.CLUBS_IN);
+		pieces[4] = new Piece(Piece.SPADES_OUT,Piece.SPADES_OUT,Piece.HEARTS_IN,Piece.CLUBS_IN);
+		pieces[5] = new Piece(Piece.HEARTS_OUT,Piece.DIAMONDS_OUT,Piece.DIAMONDS_IN,Piece.HEARTS_IN);
+		pieces[6] = new Piece(Piece.SPADES_OUT,Piece.DIAMONDS_OUT,Piece.HEARTS_IN,Piece.DIAMONDS_IN);
+		pieces[7] = new Piece(Piece.CLUBS_OUT,Piece.HEARTS_OUT,Piece.SPADES_IN,Piece.HEARTS_IN);
+		pieces[8] = new Piece(Piece.CLUBS_OUT,Piece.CLUBS_IN,Piece.DIAMONDS_IN,Piece.DIAMONDS_OUT);
+		Puzzle pz = new Puzzle(3,3, pieces);
 		for (int i =0; i < pieces.length; i++)
 			System.out.print( pieces[i].toString() + " ");
 		System.out.println("\n  --Initial pieces-- \n");
@@ -413,6 +443,14 @@ public class Puzzle {
 		if (pz.isSolved()) {
 			System.out.println("Solution is:");
 			System.out.println(pz.toString());
+			pz.restart();
+			System.out.println("Restarted puzzle and calling solve again:");
+			pz.solve();
+			if (pz.isSolved()) {
+				System.out.println("Solution after restart is:");
+				System.out.println(pz.toString());
+			}
+			
 		}
 		else{
 			System.out.println("There is no solution");
@@ -423,5 +461,8 @@ public class Puzzle {
 	
 
 }
+
+
+
 
 

@@ -144,6 +144,12 @@ public class PuzzlePanel extends JPanel {
 		}
 
 	}
+	
+	public void addPiece(int row, int col, PieceComponent p)
+	{
+		pieces[row][col] = p;
+		unusedPieces.remove(p);
+	}
 
 	public PieceComponent removePiece(int row, int col) {
 		puzzle.removePiece(row, col);
@@ -167,7 +173,7 @@ public class PuzzlePanel extends JPanel {
 	 */
 	public PieceComponent mergePiece(Piece piece) {
 		for (PieceComponent p : unusedPieces) {
-			if (p.getPiece().equals(piece))
+			if (p.isSamePiece(piece))
 				return p;
 		}
 		return null;
@@ -178,10 +184,11 @@ public class PuzzlePanel extends JPanel {
 		puzzle.solve();
 		for (int i = 0; i < puzzle.rows; i++) {
 			for (int j = 0; j < puzzle.cols; j++) {
-				setPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
+				addPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
 			}
 		}
-
+		repaint();
+		//return new abstract final static Object;
 	}
 
 	public void clear() { // FIX
@@ -239,6 +246,15 @@ public class PuzzlePanel extends JPanel {
 
 	public boolean doesFit(int row, int col, PieceComponent p) {
 		return puzzle.doesFit(row, col, p.getPiece());
+	}
+	
+	public static boolean equals(Piece p1, Piece p2)
+	{
+		for(int i = 0; i < p1.piece.length; i++)
+		{
+			if(p1.piece[i] != p2.piece[i]) return false;
+		}
+		return true;
 	}
 
 	/*

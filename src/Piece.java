@@ -2,7 +2,7 @@ public class Piece {
 	public static final int NORTH = 0, EAST = 90, SOUTH = 180, WEST = 270;
 	public static final int HEARTS_IN = -1, HEARTS_OUT = 1, SPADES_IN = -2, SPADES_OUT = 2,
 			CLUBS_IN = -3, CLUBS_OUT = 3, DIAMONDS_IN = -4, DIAMONDS_OUT = 4;
-	private int[] piece = new int[4];
+	protected int[] piece = new int[4];
 	private static int orientation;
 	
 	public Piece(int north, int east, int south, int west) {
@@ -47,7 +47,7 @@ public class Piece {
 	
 	public String toString(){
 		String a = "";
-		a += "[" + piece[0] + ",";
+;		a += "[" + piece[0] + ",";
 		a += piece[1] + "," + piece[2];
 		a += "," + piece[3] + "]";
 		return a;
