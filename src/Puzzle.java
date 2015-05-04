@@ -311,14 +311,14 @@ public class Puzzle {
 		//Test this permutation
 		board.clear();
 		ArrayList<Piece> al = getUnusedPieces();
-                System.out.println(" checking combination  "+ al);
+                //System.out.println(" checking combination  "+ al);
 		if (test_solution(al)) {
 		  	isSolved= true;
 			System.out.println(toString());
 			return;
 		}
 		//else
-		 System.out.println(" this permutation did not work");
+		 //System.out.println(" this permutation did not work");
 			
           }
         else 
