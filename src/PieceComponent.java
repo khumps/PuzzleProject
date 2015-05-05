@@ -73,6 +73,13 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 	
+	/**
+	 * Checks if the Implicit piece is the same as
+	 * the explicit piece by rotating it and seeing if they
+	 * are equal
+	 * @param p
+	 * @return
+	 */
 	public boolean isSamePiece(Piece p)
 	{
 		for(int i = 0; i < 4; i++)
@@ -88,6 +95,12 @@ public class PieceComponent extends JComponent {
 	}
 	
 	//isSamePiece must return true
+	/**
+	 *  Given that the two pieces are the same rotates the implicit
+	 *  to match the explicit
+	 * @param p
+	 * @return
+	 */
 	public PieceComponent rotateToMatch(Piece p)
 	{
 		for(int i = 0; i < 4; i++)

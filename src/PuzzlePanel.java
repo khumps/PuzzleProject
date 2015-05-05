@@ -168,7 +168,7 @@ public class PuzzlePanel extends JPanel {
 	/**
 	 * 
 	 * @param piece
-	 *            piece to merge with picture
+	 *            piece to merge with PieceComponent
 	 * @return the correct PieceComponent
 	 */
 	public PieceComponent mergePiece(Piece piece) {
@@ -248,6 +248,12 @@ public class PuzzlePanel extends JPanel {
 		return puzzle.doesFit(row, col, p.getPiece());
 	}
 	
+	/**
+	 * Checks if the sides on the pieces are all matching
+	 * @param p1 A piece
+	 * @param p2 A piece
+	 * @return true if they match false if they don't
+	 */
 	public static boolean equals(Piece p1, Piece p2)
 	{
 		for(int i = 0; i < p1.piece.length; i++)
