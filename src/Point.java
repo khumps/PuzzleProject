@@ -6,15 +6,16 @@ public class Point {
 	protected final int x;
 	protected final int y;
 
-	// Creates a Point object given two integers that are set equal to the x- and y-coordinates, respectively.
-	
+	// Creates a Point object given two integers that are set equal to the x-
+	// and y-coordinates, respectively.
+
 	public Point(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
-	
+
 	// Prints the Point as a coordinate pair of the form (x, y)
-	
+
 	public String toString() {
 		return "(" + x + "," + y + ")";
 	}
