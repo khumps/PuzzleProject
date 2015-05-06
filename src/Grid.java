@@ -17,20 +17,18 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 
-public class Grid extends JPanel{
-
-
-	//    public static void main(String[] args) {
-	//        new Grid();
-	//    }
+public class Grid extends JPanel {
 
 	public Grid() {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (ClassNotFoundException | InstantiationException
+						| IllegalAccessException
+						| UnsupportedLookAndFeelException ex) {
 				}
 
 			}
@@ -98,16 +96,12 @@ public class Grid extends JPanel{
 	public Component run() {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException
+				| IllegalAccessException | UnsupportedLookAndFeelException ex) {
 		}
 		JComponent j = new Grid();
-		//        JFrame frame = new JFrame("Testing");
-		//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		j.setLayout(new BorderLayout());
 		j.add(new Pane());
-		//j.pack();
-		//j.setLocationRelativeTo(null);
-		//j.setVisible(true);
 		return j;
 	}
 
