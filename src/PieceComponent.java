@@ -5,11 +5,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 // Akshay Karthik, Kevin Humphreys, Vijay Jeevanandam
 
@@ -29,21 +25,6 @@ public class PieceComponent extends JComponent {
 
 		this.piece = piece;
 		piecePic = image;
-
-	}
-
-	// Constructs a default PieceComponent, setting piece to the Piece object
-	// associated with piece_1.png. This PieceComponent is assigned piece_1.png
-	// as its BufferedImage value for piecePic.
-
-	public PieceComponent() {
-		piece = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_IN,
-				Piece.CLUBS_IN);
-		try {
-			piecePic = ImageIO.read(getClass().getResourceAsStream(
-					"piece_1.png"));
-		} catch (IOException e) {
-		}
 
 	}
 
@@ -89,6 +70,7 @@ public class PieceComponent extends JComponent {
 	}
 
 	// isSamePiece must return true
+
 	/**
 	 * Given that the two pieces are the same rotates the implicit to match the
 	 * explicit
@@ -122,22 +104,6 @@ public class PieceComponent extends JComponent {
 
 	public Point getCenter() {
 		return new Point(piecePic.getWidth() / 2, piecePic.getHeight() / 2);
-	}
-
-	// Tests the functionality of the PieceComponent class.
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		PieceComponent piece = new PieceComponent();
-		frame.setBackground(Color.BLUE);
-
-		frame.add(piece);
-		piece.rotate(2);
-		frame.setBackground(Color.BLUE);
-		frame.setVisible(true);
-		frame.setSize(1000, 1000);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 	}
 
 }
