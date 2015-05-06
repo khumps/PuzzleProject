@@ -2,9 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -72,40 +69,36 @@ public class PieceComponent extends JComponent {
 		piecePic = op.filter(piecePic, null);
 		repaint();
 	}
-	
+
 	/**
-	 * Checks if the Implicit piece is the same as
-	 * the explicit piece by rotating it and seeing if they
-	 * are equal
+	 * Checks if the Implicit piece is the same as the explicit piece by
+	 * rotating it and seeing if they are equal
+	 * 
 	 * @param p
 	 * @return
 	 */
-	public boolean isSamePiece(Piece p)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(PuzzlePanel.equals(piece, p))
-			{
+	public boolean isSamePiece(Piece p) {
+		for (int i = 0; i < 4; i++) {
+			if (PuzzlePanel.equals(piece, p)) {
 				return true;
 			}
 			rotate(1);
-		
+
 		}
 		return false;
 	}
-	
-	//isSamePiece must return true
+
+	// isSamePiece must return true
 	/**
-	 *  Given that the two pieces are the same rotates the implicit
-	 *  to match the explicit
+	 * Given that the two pieces are the same rotates the implicit to match the
+	 * explicit
+	 * 
 	 * @param p
 	 * @return
 	 */
-	public PieceComponent rotateToMatch(Piece p)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(PuzzlePanel.equals(piece, p))
+	public PieceComponent rotateToMatch(Piece p) {
+		for (int i = 0; i < 4; i++) {
+			if (PuzzlePanel.equals(piece, p))
 				return this;
 			rotate(1);
 		}
