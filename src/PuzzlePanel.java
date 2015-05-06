@@ -1,21 +1,11 @@
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -59,7 +49,7 @@ public class PuzzlePanel extends JPanel {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
 		Graphics2D g2 = (Graphics2D) g;
-		g2 .setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
 				RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 		puzzleArea = new Rectangle();
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100,
@@ -144,9 +134,8 @@ public class PuzzlePanel extends JPanel {
 		}
 
 	}
-	
-	public void addPiece(int row, int col, PieceComponent p)
-	{
+
+	public void addPiece(int row, int col, PieceComponent p) {
 		pieces[row][col] = p;
 		unusedPieces.remove(p);
 	}
@@ -154,7 +143,6 @@ public class PuzzlePanel extends JPanel {
 	public PieceComponent removePiece(int row, int col) {
 		puzzle.removePiece(row, col);
 		PieceComponent removed = pieces[row][col];
-		// unusedPieces.add(removed);
 		pieces[row][col] = null;
 		repaint();
 		return removed;
@@ -188,7 +176,6 @@ public class PuzzlePanel extends JPanel {
 			}
 		}
 		repaint();
-		//return new abstract final static Object;
 	}
 
 	public void clear() { // FIX
@@ -247,47 +234,21 @@ public class PuzzlePanel extends JPanel {
 	public boolean doesFit(int row, int col, PieceComponent p) {
 		return puzzle.doesFit(row, col, p.getPiece());
 	}
-	
+
 	/**
 	 * Checks if the sides on the pieces are all matching
-	 * @param p1 A piece
-	 * @param p2 A piece
+	 * 
+	 * @param p1
+	 *            A piece
+	 * @param p2
+	 *            A piece
 	 * @return true if they match false if they don't
 	 */
-	public static boolean equals(Piece p1, Piece p2)
-	{
-		for(int i = 0; i < p1.piece.length; i++)
-		{
-			if(p1.piece[i] != p2.piece[i]) return false;
+	public static boolean equals(Piece p1, Piece p2) {
+		for (int i = 0; i < p1.piece.length; i++) {
+			if (p1.piece[i] != p2.piece[i])
+				return false;
 		}
 		return true;
 	}
-
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * Dimension dimension = new Dimension(550,550); JFrame f = new
-	 * JFrame("Puzzle"); f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 * f.setSize(700, 700); f.setMinimumSize(dimension); JPanel panel = new
-	 * JPanel(new GridBagLayout()); f.getContentPane().add(panel,
-	 * BorderLayout.NORTH);
-	 * 
-	 * PieceComponent piece = new PieceComponent(); f.add(piece); //
-	 * GridBagConstraints constraints = new GridBagConstraints(); //
-	 * constraints.gridheight = 1; // constraints.gridwidth = 1;
-	 * constraints.insets = new Insets(10,0,0,0); // Grid g = new Grid(); //
-	 * constraints.gridx = 0; // constraints.gridy = 0; panel.add(g.run(),
-	 * constraints); PuzzlePanel p = new PuzzlePanel(); f.add(p); // // //
-	 * constraints.gridx = 10; // constraints.gridy = 10;
-	 * 
-	 * //f.add(piece); // g.gridheight = 1; // g.gridwidth = 1;
-	 * 
-	 * 
-	 * 
-	 * // g.gridx = 0; // g.gridy = 0; // panel.add(piece, g);
-	 * f.setVisible(true); // f.add(panel); // f.add(p); // f.pack();
-	 * 
-	 * }
-	 */
-
 }
