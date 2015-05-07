@@ -59,13 +59,11 @@ public class PieceComponent extends JComponent {
 	 * @return
 	 */
 	public boolean isSamePiece(Piece p) {
-		for (int i = 0; i < 4; i++) {
-			if (PuzzlePanel.equals(piece, p)) {
-				return true;
-			}
-			rotate(1);
 
-		}
+		if (PuzzlePanel.equals(piece, p)) {
+			rotate(p.getOrientation());
+			return true;}
+
 		return false;
 	}
 
