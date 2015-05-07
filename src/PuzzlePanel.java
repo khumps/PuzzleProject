@@ -170,6 +170,7 @@ public class PuzzlePanel extends JPanel {
 	public void solve() {
 		clear();
 		puzzle.solve();
+		System.out.println(puzzle.getPiece(2, 2).getOrientation());
 		for (int i = 0; i < puzzle.rows; i++) {
 			for (int j = 0; j < puzzle.cols; j++) {
 				addPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
