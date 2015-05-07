@@ -16,6 +16,7 @@ public class PieceComponent extends JComponent {
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
+	private int orientation;
 
 	// Constructs a PieceComponent given a BufferedImage for the image of the
 	// piece it represents as well as a Piece for the Piece object associated
@@ -25,6 +26,7 @@ public class PieceComponent extends JComponent {
 
 		this.piece = piece;
 		piecePic = image;
+		orientation = piece.getOrientation();
 
 	}
 
@@ -62,7 +64,8 @@ public class PieceComponent extends JComponent {
 
 		if (PuzzlePanel.equals(piece, p)) {
 			rotate(p.getOrientation());
-			return true;}
+			return true;
+		}
 
 		return false;
 	}
@@ -76,13 +79,10 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
-	public PieceComponent rotateToMatch(Piece p) {
-		for (int i = 0; i < 4; i++) {
-			if (PuzzlePanel.equals(piece, p))
-				return this;
-			rotate(1);
-		}
-		return null;
+
+	public void defaultOrientation() {
+//		System.out.println(piece.getOrientation());
+		rotate(4 - (piece.getOrientation() % 4));
 	}
 
 	// Returns the value of piece (private data).
