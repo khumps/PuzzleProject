@@ -113,8 +113,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 					}
 				} else {/* Puts piece in unusedPieces */
 					if (display.getPuzzlePanel().inPiecesArea(x, y)) {
-
-						System.out.println("Ran");
 						display.getPuzzlePanel().getUnusedPieces()
 								.add(pieceHeld);
 						pieceHeld = null;
