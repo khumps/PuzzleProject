@@ -305,7 +305,6 @@ public class Puzzle {
 			ArrayList<Piece> al = getUnusedPieces();
 			if (test_solution(al)) {
 				isSolved = true;
-				System.out.println(toString());
 				return;
 			}
 
@@ -346,8 +345,6 @@ public class Puzzle {
 				bb = doesAnyRotationFit(i, j, p);
 				if (bb) {
 					setPiece(i, j, p);
-					// System.out.println("       Piece: " + p.toString() +
-					// " fits in ["+ i +"," + j +"]");
 				} else {
 					retval = false;
 					return retval;
