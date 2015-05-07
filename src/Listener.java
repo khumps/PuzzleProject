@@ -112,11 +112,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 								.remove(col * 2 + row);
 					}
 				} else {/* Puts piece in unusedPieces */
-					System.out.println(x + " " + y);
-					System.out
-							.println(display.getPuzzlePanel().unusedPieceArea.x);
-					System.out
-							.println(display.getPuzzlePanel().unusedPieceArea.y);
 					if (display.getPuzzlePanel().inPiecesArea(x, y)) {
 
 						System.out.println("Ran");
@@ -151,7 +146,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 	}
 
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		System.out.println(e.getPreciseWheelRotation());
 		if (holdingPiece) {
 			int r = (int) e.getPreciseWheelRotation();
 			if (r > 0)
