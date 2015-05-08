@@ -33,8 +33,6 @@ public class PuzzlePanel extends JPanel {
 	public Point mouseLocation;
 	protected boolean noFit = false;
 
-	static Color c = new Color(150, 200, 255);
-
 	public ArrayList<PieceComponent> getUnusedPieces() {
 		return unusedPieces;
 	}
@@ -47,6 +45,7 @@ public class PuzzlePanel extends JPanel {
 		addKeyListener(listener);
 		setFocusable(true);
 		requestFocusInWindow();
+		setMaximumSize(new Dimension(1000,1000));
 		for (int i = 0; i < pieces.length; i++) {
 			unusedPieces.add(new PieceComponent(imgs[i], pieces[i]));
 		}
@@ -55,11 +54,11 @@ public class PuzzlePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(c);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.BLACK);
 		Graphics2D g2 = (Graphics2D) g;
-		g2 .setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
+		g2.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
 				RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
 		puzzleArea = new Rectangle();
 		puzzleArea.setFrameFromCenter(getHeight() / 3, getHeight() / 3, 100,
@@ -144,9 +143,8 @@ public class PuzzlePanel extends JPanel {
 		}
 
 	}
-	
-	public void addPiece(int row, int col, PieceComponent p)
-	{
+
+	public void addPiece(int row, int col, PieceComponent p) {
 		pieces[row][col] = p;
 		unusedPieces.remove(p);
 	}
@@ -173,8 +171,11 @@ public class PuzzlePanel extends JPanel {
 	 */
 	public PieceComponent mergePiece(Piece piece) {
 		for (PieceComponent p : unusedPieces) {
-			if (p.isSamePiece(piece))
+			if (p.isSamePiece(piece) > - 1)
+			{
+				p.rotateImage(p.isSamePiece(piece));
 				return p;
+			}
 		}
 		return null;
 	}
@@ -183,15 +184,22 @@ public class PuzzlePanel extends JPanel {
 		clear();
 		puzzle.solve();
 		for (int i = 0; i < puzzle.rows; i++) {
+			
 			for (int j = 0; j < puzzle.cols; j++) {
-				addPiece(i, j, mergePiece(puzzle.getPiece(i, j)));
+				System.out.println(i + " " + j);
+				PieceComponent p = mergePiece(puzzle.getPiece(i, j));
+				System.out.println("MERGED:" + i + " " + j + p.getPiece().toString());
+				addPiece(i, j, p);
+
+				repaint();
 			}
 		}
 		repaint();
-		//return new abstract final static Object;
+		// return new abstract final static Object;
 	}
 
 	public void clear() { // FIX
+		
 		for (int i = 0; i < pieces[0].length; i++) {
 			for (int j = 0; j < pieces.length; j++) {
 				if (pieces[i][j] != null) {
@@ -199,6 +207,8 @@ public class PuzzlePanel extends JPanel {
 					pieces[i][j] = null;
 				}
 			}
+
+			//listener.pieceHeld = null;
 		}
 		puzzle.restart();
 		repaint();
@@ -207,6 +217,7 @@ public class PuzzlePanel extends JPanel {
 	public boolean isPieceHeld(PieceComponent p) {
 		if (p != null)
 			if (p.equals(listener.pieceHeld))
+				
 				return true;
 		return false;
 	}
@@ -247,18 +258,20 @@ public class PuzzlePanel extends JPanel {
 	public boolean doesFit(int row, int col, PieceComponent p) {
 		return puzzle.doesFit(row, col, p.getPiece());
 	}
-	
+
 	/**
 	 * Checks if the sides on the pieces are all matching
-	 * @param p1 A piece
-	 * @param p2 A piece
+	 * 
+	 * @param p1
+	 *            A piece
+	 * @param p2
+	 *            A piece
 	 * @return true if they match false if they don't
 	 */
-	public static boolean equals(Piece p1, Piece p2)
-	{
-		for(int i = 0; i < p1.piece.length; i++)
-		{
-			if(p1.piece[i] != p2.piece[i]) return false;
+	public static boolean equals(Piece p1, Piece p2) {
+		for (int i = 0; i < p1.piece.length; i++) {
+			if (p1.piece[i] != p2.piece[i])
+				return false;
 		}
 		return true;
 	}

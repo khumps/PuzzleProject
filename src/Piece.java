@@ -3,18 +3,20 @@ public class Piece {
 	public static final int HEARTS_IN = -1, HEARTS_OUT = 1, SPADES_IN = -2, SPADES_OUT = 2,
 			CLUBS_IN = -3, CLUBS_OUT = 3, DIAMONDS_IN = -4, DIAMONDS_OUT = 4;
 	protected int[] piece = new int[4];
-	private static int orientation;
+	private int orientation;
 	
 	public Piece(int north, int east, int south, int west) {
 		piece[0] = north;
 		piece[1] = east;
 		piece[2] = south;
 		piece[3] = west;
+		orientation = 0;
 	}
 	
 	public Piece(int[] edges){
 		for(int i = 0; i < edges.length; i++){
 			piece[i] = edges[i];
+			orientation = 0;
 		}
 	}
 	
@@ -53,12 +55,16 @@ public class Piece {
 		return a;
 	}
 	
+	public int getOrientation()
+	{
+		return orientation;
+	}
+	
 	public static void main(String[] args) {
 		Piece p = new Piece(1, 2, 3, 4);
 		System.out.println(p.toString());
 		p.rotate(-1);
 		System.out.println(p.toString());
-		System.out.println(orientation);
 	}
 
 }

@@ -28,7 +28,7 @@ public class Display extends JFrame {
 		createPieces();
 		loadImages();
 		setPreferredSize(new Dimension(900,900));
-		setMinimumSize(new Dimension(800,800));
+		setResizable(false);
 		listener = new Listener(this);
 		puzzlePanel = new PuzzlePanel(listener,imgs,pieces);
 		menu = new JMenuBar();

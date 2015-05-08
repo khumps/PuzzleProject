@@ -23,6 +23,7 @@ public class PieceComponent extends JComponent {
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
+	private int orientation = 0;
 
 	// Constructs a PieceComponent given a BufferedImage for the image of the
 	// piece it represents as well as a Piece for the Piece object associated
@@ -63,6 +64,7 @@ public class PieceComponent extends JComponent {
 	// rotates piece and repaints the PieceComponent.
 
 	public void rotate(int rotations) {
+		orientation = (orientation + rotations) % 4;
 		piece.rotate(rotations);
 		AffineTransform tx = new AffineTransform();
 		tx.rotate(rotations * Math.toRadians(90), piecePic.getWidth() / 2,
@@ -72,41 +74,66 @@ public class PieceComponent extends JComponent {
 		piecePic = op.filter(piecePic, null);
 		repaint();
 	}
-	
-	/**
-	 * Checks if the Implicit piece is the same as
-	 * the explicit piece by rotating it and seeing if they
-	 * are equal
-	 * @param p
-	 * @return
-	 */
-	public boolean isSamePiece(Piece p)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(PuzzlePanel.equals(piece, p))
-			{
-				return true;
-			}
-			rotate(1);
-		
-		}
-		return false;
+
+	public void rotateImage(int rotations) {
+		orientation = (orientation + rotations) % 4;
+		AffineTransform tx = new AffineTransform();
+		tx.rotate(rotations * Math.toRadians(90), piecePic.getWidth() / 2,
+				piecePic.getHeight() / 2);
+		AffineTransformOp op = new AffineTransformOp(tx,
+				AffineTransformOp.TYPE_BILINEAR);
+		piecePic = op.filter(piecePic, null);
+		repaint();
 	}
-	
-	//isSamePiece must return true
+
 	/**
-	 *  Given that the two pieces are the same rotates the implicit
-	 *  to match the explicit
+	 * Checks if the Implicit piece is the same as the explicit piece by
+	 * rotating it and seeing if they are equal
+	 * 
 	 * @param p
 	 * @return
 	 */
-	public PieceComponent rotateToMatch(Piece p)
-	{
-		for(int i = 0; i < 4; i++)
-		{
-			if(PuzzlePanel.equals(piece, p))
+	public int isSamePiece(Piece p) {
+		int numRotations = 0;
+		boolean foundMatch = false;
+		for (int i = 0; i < 4; i++) {
+			if (!foundMatch) {
+				if (piece.getEdge(1) == p.getEdge(i)) {
+					numRotations = i;
+				}
+				foundMatch = true;
+			}
+			/*
+			 * if (PuzzlePanel.equals(piece, p)) { return true;
+			 */
+			else {
+				if (piece.getEdge(i + numRotations) != p.getEdge(i))
+					return -1;
+			}
+
+			return numRotations;
+		}
+		// System.out.println("rotate");
+		// rotate(1);
+		// repaint();
+
+		return -1;
+	}
+
+	// isSamePiece must return true
+	/**
+	 * Given that the two pieces are the same rotates the implicit to match the
+	 * explicit
+	 * 
+	 * @param p
+	 * @return
+	 */
+	public PieceComponent rotateToMatch(Piece p) {
+		for (int i = 0; i < 4; i++) {
+			if (PuzzlePanel.equals(piece, p)) {
 				return this;
+			}
+			System.out.println("rotate " + i);
 			rotate(1);
 		}
 		return null;
@@ -133,18 +160,16 @@ public class PieceComponent extends JComponent {
 
 	// Tests the functionality of the PieceComponent class.
 
-	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		PieceComponent piece = new PieceComponent();
-		frame.setBackground(Color.BLUE);
-
-		frame.add(piece);
-		piece.rotate(2);
-		frame.setBackground(Color.BLUE);
-		frame.setVisible(true);
-		frame.setSize(1000, 1000);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
+	/*
+	 * public static void main(String[] args) { JFrame frame = new JFrame();
+	 * PieceComponent piece = new PieceComponent();
+	 * frame.setBackground(Color.BLUE);
+	 * 
+	 * frame.add(piece); piece.rotate(2); frame.setBackground(Color.BLUE);
+	 * frame.setVisible(true); frame.setSize(1000, 1000);
+	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 * 
+	 * }
+	 */
 
 }

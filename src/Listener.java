@@ -20,7 +20,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 	private Display display;
 	protected boolean holdingPiece = false;
 	protected PieceComponent pieceHeld = null;
-	
 
 	/**
 	 * 
