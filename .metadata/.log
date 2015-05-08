@@ -1,5 +1,0 @@
-
-!ENTRY org.eclipse.ui.ide 4 4 2015-03-31 11:41:59.062
-!MESSAGE Problems occurred refreshing the selected resources.
-!SUBENTRY 1 org.eclipse.core.resources 4 567 2015-03-31 11:41:59.062
-!MESSAGE The project description file (.project) for 'PuzzleProject' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
