@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -35,7 +36,7 @@ public class PuzzlePanel extends JPanel {
 		addKeyListener(listener);
 		setFocusable(true);
 		requestFocusInWindow();
-		setMaximumSize(new Dimension(1000,1000));
+		setMaximumSize(new Dimension(1000, 1000));
 		for (int i = 0; i < pieces.length; i++) {
 			unusedPieces.add(new PieceComponent(imgs[i], pieces[i]));
 		}
@@ -160,9 +161,8 @@ public class PuzzlePanel extends JPanel {
 	 */
 	public PieceComponent mergePiece(Piece piece) {
 		for (PieceComponent p : unusedPieces) {
-			if (p.isSamePiece(piece) > - 1)
-			{
-				p.rotateImage(p.isSamePiece(piece));
+			if (p.isSamePiece(piece)) {
+				p.rotate(1);
 				return p;
 			}
 		}
@@ -173,38 +173,37 @@ public class PuzzlePanel extends JPanel {
 		clear();
 		puzzle.solve();
 		for (int i = 0; i < puzzle.rows; i++) {
-			
+
 			for (int j = 0; j < puzzle.cols; j++) {
 				System.out.println(i + " " + j);
 				PieceComponent p = mergePiece(puzzle.getPiece(i, j));
-				System.out.println("MERGED:" + i + " " + j + p.getPiece().toString());
+				System.out.println("MERGED:" + i + " " + j
+						+ p.getPiece().toString());
 				addPiece(i, j, p);
 
 				repaint();
 			}
 		}
 		repaint();
-<<<<<<< HEAD
-		// return new abstract final static Object;
-=======
->>>>>>> origin/master
 	}
 
 	public void clear() { // FIX
-		
+
 		for (int i = 0; i < pieces[0].length; i++) {
 			for (int j = 0; j < pieces.length; j++) {
-				
+
 				if (pieces[i][j] != null) {
-					System.out.println(pieces[i][j].getPiece().getOrientation());
-//					pieces[i][j].rotate(4 - (pieces[i][j].getPiece().getOrientation() % 4));
+					System.out
+							.println(pieces[i][j].getPiece().getOrientation());
+					// pieces[i][j].rotate(4 -
+					// (pieces[i][j].getPiece().getOrientation() % 4));
 					pieces[i][j].defaultOrientation();
 					unusedPieces.add(pieces[i][j]);
 					pieces[i][j] = null;
 				}
 			}
 
-			//listener.pieceHeld = null;
+			// listener.pieceHeld = null;
 		}
 		puzzle.restart();
 		repaint();
@@ -213,7 +212,7 @@ public class PuzzlePanel extends JPanel {
 	public boolean isPieceHeld(PieceComponent p) {
 		if (p != null)
 			if (p.equals(listener.pieceHeld))
-				
+
 				return true;
 		return false;
 	}

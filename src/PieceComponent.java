@@ -16,11 +16,7 @@ public class PieceComponent extends JComponent {
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
-<<<<<<< HEAD
 	private int orientation = 0;
-=======
-	private int orientation;
->>>>>>> origin/master
 
 	// Constructs a PieceComponent given a BufferedImage for the image of the
 	// piece it represents as well as a Piece for the Piece object associated
@@ -58,7 +54,6 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 
-<<<<<<< HEAD
 	public void rotateImage(int rotations) {
 		orientation = (orientation + rotations) % 4;
 		AffineTransform tx = new AffineTransform();
@@ -70,8 +65,6 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 
-=======
->>>>>>> origin/master
 	/**
 	 * Checks if the Implicit piece is the same as the explicit piece by
 	 * rotating it and seeing if they are equal
@@ -79,8 +72,7 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
-<<<<<<< HEAD
-	public int isSamePiece(Piece p) {
+/*	public int isSamePiece(Piece p) {
 		int numRotations = 0;
 		boolean foundMatch = false;
 		for (int i = 0; i < 4; i++) {
@@ -90,9 +82,9 @@ public class PieceComponent extends JComponent {
 				}
 				foundMatch = true;
 			}
-			/*
+			
 			 * if (PuzzlePanel.equals(piece, p)) { return true;
-			 */
+			 
 			else {
 				if (piece.getEdge(i + numRotations) != p.getEdge(i))
 					return -1;
@@ -105,10 +97,9 @@ public class PieceComponent extends JComponent {
 		// repaint();
 
 		return -1;
-	}
+	}*/
 
 	// isSamePiece must return true
-=======
 	public boolean isSamePiece(Piece p) {
 
 		if (PuzzlePanel.equals(piece, p)) {
@@ -121,7 +112,6 @@ public class PieceComponent extends JComponent {
 
 	// isSamePiece must return true
 
->>>>>>> origin/master
 	/**
 	 * Given that the two pieces are the same rotates the implicit to match the
 	 * explicit
@@ -129,7 +119,6 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
-<<<<<<< HEAD
 	public PieceComponent rotateToMatch(Piece p) {
 		for (int i = 0; i < 4; i++) {
 			if (PuzzlePanel.equals(piece, p)) {
@@ -139,12 +128,10 @@ public class PieceComponent extends JComponent {
 			rotate(1);
 		}
 		return null;
-=======
-
+	}
 	public void defaultOrientation() {
 //		System.out.println(piece.getOrientation());
 		rotate(4 - (piece.getOrientation() % 4));
->>>>>>> origin/master
 	}
 
 	// Returns the value of piece (private data).
@@ -166,7 +153,6 @@ public class PieceComponent extends JComponent {
 		return new Point(piecePic.getWidth() / 2, piecePic.getHeight() / 2);
 	}
 
-<<<<<<< HEAD
 	// Tests the functionality of the PieceComponent class.
 
 	/*
@@ -181,6 +167,4 @@ public class PieceComponent extends JComponent {
 	 * }
 	 */
 
-=======
->>>>>>> origin/master
 }
