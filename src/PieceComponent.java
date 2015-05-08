@@ -2,17 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 
 // Akshay Karthik, Kevin Humphreys, Vijay Jeevanandam
 
@@ -23,7 +16,11 @@ public class PieceComponent extends JComponent {
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
+<<<<<<< HEAD
 	private int orientation = 0;
+=======
+	private int orientation;
+>>>>>>> origin/master
 
 	// Constructs a PieceComponent given a BufferedImage for the image of the
 	// piece it represents as well as a Piece for the Piece object associated
@@ -33,21 +30,7 @@ public class PieceComponent extends JComponent {
 
 		this.piece = piece;
 		piecePic = image;
-
-	}
-
-	// Constructs a default PieceComponent, setting piece to the Piece object
-	// associated with piece_1.png. This PieceComponent is assigned piece_1.png
-	// as its BufferedImage value for piecePic.
-
-	public PieceComponent() {
-		piece = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT, Piece.DIAMONDS_IN,
-				Piece.CLUBS_IN);
-		try {
-			piecePic = ImageIO.read(getClass().getResourceAsStream(
-					"piece_1.png"));
-		} catch (IOException e) {
-		}
+		orientation = piece.getOrientation();
 
 	}
 
@@ -75,6 +58,7 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 
+<<<<<<< HEAD
 	public void rotateImage(int rotations) {
 		orientation = (orientation + rotations) % 4;
 		AffineTransform tx = new AffineTransform();
@@ -86,6 +70,8 @@ public class PieceComponent extends JComponent {
 		repaint();
 	}
 
+=======
+>>>>>>> origin/master
 	/**
 	 * Checks if the Implicit piece is the same as the explicit piece by
 	 * rotating it and seeing if they are equal
@@ -93,6 +79,7 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
+<<<<<<< HEAD
 	public int isSamePiece(Piece p) {
 		int numRotations = 0;
 		boolean foundMatch = false;
@@ -121,6 +108,20 @@ public class PieceComponent extends JComponent {
 	}
 
 	// isSamePiece must return true
+=======
+	public boolean isSamePiece(Piece p) {
+
+		if (PuzzlePanel.equals(piece, p)) {
+			rotate(p.getOrientation());
+			return true;
+		}
+
+		return false;
+	}
+
+	// isSamePiece must return true
+
+>>>>>>> origin/master
 	/**
 	 * Given that the two pieces are the same rotates the implicit to match the
 	 * explicit
@@ -128,6 +129,7 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
+<<<<<<< HEAD
 	public PieceComponent rotateToMatch(Piece p) {
 		for (int i = 0; i < 4; i++) {
 			if (PuzzlePanel.equals(piece, p)) {
@@ -137,6 +139,12 @@ public class PieceComponent extends JComponent {
 			rotate(1);
 		}
 		return null;
+=======
+
+	public void defaultOrientation() {
+//		System.out.println(piece.getOrientation());
+		rotate(4 - (piece.getOrientation() % 4));
+>>>>>>> origin/master
 	}
 
 	// Returns the value of piece (private data).
@@ -158,6 +166,7 @@ public class PieceComponent extends JComponent {
 		return new Point(piecePic.getWidth() / 2, piecePic.getHeight() / 2);
 	}
 
+<<<<<<< HEAD
 	// Tests the functionality of the PieceComponent class.
 
 	/*
@@ -172,4 +181,6 @@ public class PieceComponent extends JComponent {
 	 * }
 	 */
 
+=======
+>>>>>>> origin/master
 }

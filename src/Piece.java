@@ -45,7 +45,9 @@ public class Piece {
 		orientation = orientation % 4;
 	}
 	
-	
+	public int getOrientation() {
+		return orientation;
+	}
 	
 	public String toString(){
 		String a = "";
@@ -65,7 +67,10 @@ public class Piece {
 		System.out.println(p.toString());
 		p.rotate(-1);
 		System.out.println(p.toString());
+<<<<<<< HEAD
+=======
+		System.out.println(p.getOrientation());
+>>>>>>> origin/master
 	}
 
 }
-

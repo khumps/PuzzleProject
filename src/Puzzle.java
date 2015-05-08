@@ -1,5 +1,8 @@
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> origin/master
 
 public class Puzzle {
 
@@ -56,6 +59,7 @@ public class Puzzle {
 
 	// copy refs of unused pieces into an array list
 	// in the first call, should return all pieces
+<<<<<<< HEAD
 	// Question: should the unusedPices reflect the current status- i.e., should
 	// we remove pieces from it
 	// as they get used?
@@ -70,6 +74,15 @@ public class Puzzle {
 			}
 		}
 		// System.out.println("-----");
+=======
+	public ArrayList<Piece> getUnusedPieces() {
+		ArrayList<Piece> unused = new ArrayList(rows * cols);
+		for (int i = 0; i < unusedPieces.length; i++) {
+			if (unusedPieces[i] != null) {
+				unused.add(unusedPieces[i]);
+			}
+		}
+>>>>>>> origin/master
 		return unused;
 	}
 
@@ -265,9 +278,12 @@ public class Puzzle {
 		int i = 0;
 		while (notdone) {
 			p.rotate();
+<<<<<<< HEAD
 			// System.out.println("   Trying: " + p.toString() + " at " + row +
 			// "," + col +
 			// " in doesAnyRotationFit" );
+=======
+>>>>>>> origin/master
 			i++;
 			if (doesFit(row, col, p))
 				fit = true;
@@ -286,6 +302,7 @@ public class Puzzle {
 		while (!done && i < rows) {
 			int j = 0;
 			while (!done && j < cols) {
+<<<<<<< HEAD
 				// System.out.println("       DoesFitInBoard " + p.toString() +
 				// " testing  ["+ i +"," + j +"]");
 				if (board.hasPiece(i, j)) {
@@ -294,6 +311,11 @@ public class Puzzle {
 					setPiece(i, j, p);
 					// System.out.println("       Piece: " + p.toString() +
 					// " fits in ["+ i +"," + j +"]");
+=======
+				if (board.hasPiece(i, j)) {
+				} else if (doesAnyRotationFit(i, j, p)) {
+					setPiece(i, j, p);
+>>>>>>> origin/master
 					done = true;
 				}
 				j++;
@@ -303,7 +325,11 @@ public class Puzzle {
 		return done;
 	}
 
+<<<<<<< HEAD
 	// generate a permutation of the piecses and see if it solves
+=======
+	// generate a permutation of the pieces and see if it solves
+>>>>>>> origin/master
 	public void solve() {
 		permute_and_test(unusedPieces, 0);
 	}
@@ -312,13 +338,18 @@ public class Puzzle {
 	// to be invoked with k = 0
 	public void permute_and_test(Piece[] a, int k) {
 
+<<<<<<< HEAD
 		// basis case
+=======
+		// base case
+>>>>>>> origin/master
 		if (isSolved)
 			return;
 		if (k == a.length) {
 			// Test this permutation
 			board.clear();
 			ArrayList<Piece> al = getUnusedPieces();
+<<<<<<< HEAD
 			// System.out.println(" checking combination  "+ al);
 			if (test_solution(al)) {
 				isSolved = true;
@@ -327,6 +358,12 @@ public class Puzzle {
 			}
 			// else
 			// System.out.println(" this permutation did not work");
+=======
+			if (test_solution(al)) {
+				isSolved = true;
+				return;
+			}
+>>>>>>> origin/master
 
 		} else {
 			for (int i = k; i < a.length; i++) {
@@ -365,8 +402,11 @@ public class Puzzle {
 				bb = doesAnyRotationFit(i, j, p);
 				if (bb) {
 					setPiece(i, j, p);
+<<<<<<< HEAD
 					// System.out.println("       Piece: " + p.toString() +
 					// " fits in ["+ i +"," + j +"]");
+=======
+>>>>>>> origin/master
 				} else {
 					retval = false;
 					return retval;
@@ -410,6 +450,7 @@ public class Puzzle {
 	// creat a sample 3x3 game
 	public static void main(String[] args) {
 		Piece[] pieces = new Piece[9];
+<<<<<<< HEAD
 		/*
 		 * pieces[0] = new Piece(1,2, -3, 4); pieces[3] = new Piece(3,2,1,-1);
 		 * pieces[6] = new Piece(-1, 3, 2, 4); pieces[1] = new Piece(3,-3, 1,
@@ -425,6 +466,8 @@ public class Puzzle {
 		 * Piece(1, 4, -4, -1); pieces[6] = new Piece(2, 4, -1, -4); pieces[7] =
 		 * new Piece(3, 1, -2, -1); pieces[8] = new Piece(3, -3, -4, 4);
 		 */
+=======
+>>>>>>> origin/master
 
 		pieces[0] = new Piece(Piece.CLUBS_OUT, Piece.HEARTS_OUT,
 				Piece.DIAMONDS_IN, Piece.CLUBS_IN);

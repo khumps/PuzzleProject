@@ -1,21 +1,11 @@
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PuzzlePanel extends JPanel {
@@ -152,7 +142,6 @@ public class PuzzlePanel extends JPanel {
 	public PieceComponent removePiece(int row, int col) {
 		puzzle.removePiece(row, col);
 		PieceComponent removed = pieces[row][col];
-		// unusedPieces.add(removed);
 		pieces[row][col] = null;
 		repaint();
 		return removed;
@@ -195,14 +184,21 @@ public class PuzzlePanel extends JPanel {
 			}
 		}
 		repaint();
+<<<<<<< HEAD
 		// return new abstract final static Object;
+=======
+>>>>>>> origin/master
 	}
 
 	public void clear() { // FIX
 		
 		for (int i = 0; i < pieces[0].length; i++) {
 			for (int j = 0; j < pieces.length; j++) {
+				
 				if (pieces[i][j] != null) {
+					System.out.println(pieces[i][j].getPiece().getOrientation());
+//					pieces[i][j].rotate(4 - (pieces[i][j].getPiece().getOrientation() % 4));
+					pieces[i][j].defaultOrientation();
 					unusedPieces.add(pieces[i][j]);
 					pieces[i][j] = null;
 				}
@@ -275,32 +271,4 @@ public class PuzzlePanel extends JPanel {
 		}
 		return true;
 	}
-
-	/*
-	 * public static void main(String[] args) {
-	 * 
-	 * Dimension dimension = new Dimension(550,550); JFrame f = new
-	 * JFrame("Puzzle"); f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	 * f.setSize(700, 700); f.setMinimumSize(dimension); JPanel panel = new
-	 * JPanel(new GridBagLayout()); f.getContentPane().add(panel,
-	 * BorderLayout.NORTH);
-	 * 
-	 * PieceComponent piece = new PieceComponent(); f.add(piece); //
-	 * GridBagConstraints constraints = new GridBagConstraints(); //
-	 * constraints.gridheight = 1; // constraints.gridwidth = 1;
-	 * constraints.insets = new Insets(10,0,0,0); // Grid g = new Grid(); //
-	 * constraints.gridx = 0; // constraints.gridy = 0; panel.add(g.run(),
-	 * constraints); PuzzlePanel p = new PuzzlePanel(); f.add(p); // // //
-	 * constraints.gridx = 10; // constraints.gridy = 10;
-	 * 
-	 * //f.add(piece); // g.gridheight = 1; // g.gridwidth = 1;
-	 * 
-	 * 
-	 * 
-	 * // g.gridx = 0; // g.gridy = 0; // panel.add(piece, g);
-	 * f.setVisible(true); // f.add(panel); // f.add(p); // f.pack();
-	 * 
-	 * }
-	 */
-
 }
