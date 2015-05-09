@@ -181,16 +181,13 @@ public class PuzzlePanel extends JPanel {
 	public void clear() { // FIX
 		for (int i = 0; i < pieces[0].length; i++) {
 			for (int j = 0; j < pieces.length; j++) {
-				
 				if (pieces[i][j] != null) {
-					System.out.println(pieces[i][j].getPiece().getOrientation());
-//					pieces[i][j].rotate(4 - (pieces[i][j].getPiece().getOrientation() % 4));
-					pieces[i][j].defaultOrientation();
 					unusedPieces.add(pieces[i][j]);
 					pieces[i][j] = null;
 				}
 			}
 		}
+
 		puzzle.restart();
 		repaint();
 	}
@@ -248,11 +245,4 @@ public class PuzzlePanel extends JPanel {
 	 *            A piece
 	 * @return true if they match false if they don't
 	 */
-	public static boolean equals(Piece p1, Piece p2) {
-		for (int i = 0; i < p1.piece.length; i++) {
-			if (p1.piece[i] != p2.piece[i])
-				return false;
-		}
-		return true;
-	}
 }
