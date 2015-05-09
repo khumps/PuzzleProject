@@ -16,7 +16,6 @@ public class PieceComponent extends JComponent {
 	public final static int CELL_SIZE = 15;
 	private Piece piece;
 	private BufferedImage piecePic;
-	private int orientation;
 
 	// Constructs a PieceComponent given a BufferedImage for the image of the
 	// piece it represents as well as a Piece for the Piece object associated
@@ -26,7 +25,6 @@ public class PieceComponent extends JComponent {
 
 		this.piece = piece;
 		piecePic = image;
-		orientation = piece.getOrientation();
 
 	}
 
@@ -42,8 +40,7 @@ public class PieceComponent extends JComponent {
 	// Rotates piecePic around its center 90 degrees using AffineTransform,
 	// rotates piece and repaints the PieceComponent.
 
-	public void rotate(int rotations) {
-		piece.rotate(rotations);
+	public void rotateImage(int rotations) {
 		AffineTransform tx = new AffineTransform();
 		tx.rotate(rotations * Math.toRadians(90), piecePic.getWidth() / 2,
 				piecePic.getHeight() / 2);
@@ -51,6 +48,11 @@ public class PieceComponent extends JComponent {
 				AffineTransformOp.TYPE_BILINEAR);
 		piecePic = op.filter(piecePic, null);
 		repaint();
+	}
+	
+	public void rotate(int rotations) {
+		rotateImage(rotations);
+		piece.rotate(rotations);
 	}
 
 	/**
@@ -62,8 +64,9 @@ public class PieceComponent extends JComponent {
 	 */
 	public boolean isSamePiece(Piece p) {
 
-		if (PuzzlePanel.equals(piece, p)) {
-			rotate(p.getOrientation());
+		if (p.sameAs(piece)) {
+			rotateImage(p.getOrientation());
+
 			return true;
 		}
 
@@ -79,11 +82,6 @@ public class PieceComponent extends JComponent {
 	 * @param p
 	 * @return
 	 */
-
-	public void defaultOrientation() {
-//		System.out.println(piece.getOrientation());
-		rotate(4 - (piece.getOrientation() % 4));
-	}
 
 	// Returns the value of piece (private data).
 
