@@ -290,6 +290,7 @@ public class Puzzle {
 	// generate a permutation of the pieces and see if it solves
 	public void solve() {
 		permute_and_test(unusedPieces, 0);
+		System.out.println(toString());
 	}
 
 	// recursive permutation of unused pieces
