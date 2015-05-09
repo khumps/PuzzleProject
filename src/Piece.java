@@ -47,6 +47,14 @@ public class Piece {
 		return orientation;
 	}
 	
+	public boolean sameAs(Piece p2) {
+		for (int i = 0; i < piece.length; i++) {
+			if (this.piece[i] != p2.piece[i])
+				return false;
+		}
+		return true;
+	}
+	
 	public String toString(){
 		String a = "";
 ;		a += "[" + piece[0] + ",";
