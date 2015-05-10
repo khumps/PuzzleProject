@@ -37,8 +37,8 @@ public class PieceComponent extends JComponent {
 				RenderingHints.VALUE_RENDER_QUALITY);
 	}
 
-	// Rotates piecePic around its center 90 degrees using AffineTransform,
-	// rotates piece and repaints the PieceComponent.
+	// Rotates piecePic around its center 90 degrees using AffineTransform, and
+	// repaints the PieceComponent.
 
 	public void rotateImage(int rotations) {
 		AffineTransform tx = new AffineTransform();
@@ -49,6 +49,8 @@ public class PieceComponent extends JComponent {
 		piecePic = op.filter(piecePic, null);
 		repaint();
 	}
+	
+	// Rotates the image while also rotating the Piece object
 	
 	public void rotate(int rotations) {
 		rotateImage(rotations);
