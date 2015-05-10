@@ -53,7 +53,7 @@ public class Display extends JFrame {
 		}
 	}
 
-	private void createPieces() /*Creates a piece for every image*/
+	private void createPieces() /*Creates a piece for every image and puts them in pieces[]*/
 	{
 		pieces[0] = new Piece(Piece.CLUBS_OUT,Piece.HEARTS_OUT,Piece.DIAMONDS_IN,Piece.CLUBS_IN);
 		pieces[1] = new Piece(Piece.SPADES_OUT,Piece.DIAMONDS_OUT,Piece.SPADES_IN,Piece.HEARTS_IN);
