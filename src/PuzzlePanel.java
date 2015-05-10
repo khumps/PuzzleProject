@@ -8,11 +8,6 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-/*
- * Vijay Jeevanandam, Kevin Humphries, Akshay Kathik
- * 
- * Creates a PuzzlePanel Object that contains PieceComponents and can be used in the Display class
- */
 public class PuzzlePanel extends JPanel {
 
 	protected PieceComponent[][] pieces = new PieceComponent[3][3];
@@ -30,31 +25,23 @@ public class PuzzlePanel extends JPanel {
 
 	static Color c = new Color(150, 200, 255);
 
-	/*
-	 * returns the unused pieces ArrayList
-	 */
 	public ArrayList<PieceComponent> getUnusedPieces() {
 		return unusedPieces;
 	}
 
-	/*
-	 * Creates a PuzzlePanel given a Listener, a buffered image and an array of
-	 * pieces that will be viewed as unusused pieces
-	 */
 	public PuzzlePanel(Listener listener, BufferedImage[] imgs, Piece[] pieces) {
 		this.listener = listener;
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		addMouseWheelListener(listener);
+		setFocusable(true);
+		requestFocusInWindow();
 		for (int i = 0; i < pieces.length; i++) {
 			unusedPieces.add(new PieceComponent(imgs[i], pieces[i]));
 		}
 		puzzle = new Puzzle(3, 3, pieces);
 	}
 
-	/*
-	 * Paints a grid of rectangles along with a section for the unused pieces
-	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(c);
@@ -126,23 +113,17 @@ public class PuzzlePanel extends JPanel {
 			for (int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY()
 					&& j + pieceSize < getHeight() && index < 9; j += pieceSize) {
 				if (index < unusedPieces.size())
-					if (unusedPieces.get(index) != null) {
-						g.drawImage(unusedPieces.get(index).getPiecePic(), i,
-								j, i + pieceSize, j + pieceSize, 0, 0,
-								unusedPieces.get(index).getPiecePic()
-										.getWidth(), unusedPieces.get(index)
-										.getPiecePic().getHeight(), this);
-						index++;
-					}
+					g.drawImage(unusedPieces.get(index).getPiecePic(), i, j, i
+							+ pieceSize, j + pieceSize, 0, 0,
+							unusedPieces.get(index).getPiecePic().getWidth(),
+							unusedPieces.get(index).getPiecePic().getHeight(),
+							this);
+				index++;
 			}
 		}
 
 	}
 
-	/*
-	 * Sets a piece in a spot on the grid given the row and column of that spot.
-	 * Then the piece is removed from the unused pieces ArrayList.
-	 */
 	public void setPiece(int row, int col, PieceComponent p) {
 		if (doesFit(row, col, p)) {
 			pieces[row][col] = p;
@@ -153,19 +134,11 @@ public class PuzzlePanel extends JPanel {
 
 	}
 
-	/*
-	 * Adds a piece in a spot on the grid given the row and column of that spot.
-	 * Then the piece is removed from the unused pieces ArrayList.
-	 */
 	public void addPiece(int row, int col, PieceComponent p) {
 		pieces[row][col] = p;
 		unusedPieces.remove(p);
 	}
 
-	/*
-	 * A piece in a spot on the grid(given the row and column of that spot) is
-	 * removed
-	 */
 	public PieceComponent removePiece(int row, int col) {
 		puzzle.removePiece(row, col);
 		PieceComponent removed = pieces[row][col];
@@ -174,10 +147,6 @@ public class PuzzlePanel extends JPanel {
 		return removed;
 	}
 
-	/*
-	 * Gets a piece from a specific spot on the board given the row and column
-	 * of that spot
-	 */
 	public PieceComponent getPiece(int row, int col) {
 
 		return pieces[row][col];
@@ -197,9 +166,6 @@ public class PuzzlePanel extends JPanel {
 		return null;
 	}
 
-	/*
-	 * Solves the grid; fills all the spots on the grid with the correct piece
-	 */
 	public void solve() {
 		clear();
 		puzzle.solve();
@@ -211,10 +177,6 @@ public class PuzzlePanel extends JPanel {
 		repaint();
 	}
 
-	/*
-	 * Clears the board of all pieces and adds those pieces to the unusedPieces
-	 * ArrayList
-	 */
 	public void clear() { // FIX
 		for (int i = 0; i < pieces[0].length; i++) {
 			for (int j = 0; j < pieces.length; j++) {
@@ -223,21 +185,16 @@ public class PuzzlePanel extends JPanel {
 					pieces[i][j] = null;
 				}
 			}
+		}
+		for (int i = 0; i < unusedPieces.size(); i++) {
+			unusedPieces.get(i).rotate(4 - (unusedPieces.get(i).getPiece().getOrientation() % 4));
 
 		}
-		if (listener.holdingPiece) {
-			unusedPieces.add(listener.pieceHeld);
-			listener.pieceHeld = null;
-			listener.holdingPiece = false;
-		}
+
 		puzzle.restart();
 		repaint();
 	}
 
-	/*
-	 * Determines if a specific piece is being held. Returns true if it is being
-	 * held, false otherwise
-	 */
 	public boolean isPieceHeld(PieceComponent p) {
 		if (p != null)
 			if (p.equals(listener.pieceHeld))
@@ -245,27 +202,16 @@ public class PuzzlePanel extends JPanel {
 		return false;
 	}
 
-	/*
-	 * gets the Puzzle object "puzzle"
-	 */
 	public Puzzle getPuzzle() {
 		return puzzle;
 	}
 
-	/*
-	 * Determines if a spot on the grid is empty given the row and column of
-	 * that spot. Returns true if the spot is empty, false otherwise.
-	 */
 	public boolean isEmpty(int row, int col) {
 		if (pieces[row][col] == null)
 			return true;
 		return false;
 	}
 
-	/*
-	 * Determines if the row and column specified exists on the board. Returns
-	 * true if the spot exists, false otherwise
-	 */
 	public boolean inBoard(int row, int col) {
 		if (row >= pieces.length)
 			return false;
@@ -274,10 +220,6 @@ public class PuzzlePanel extends JPanel {
 		return true;
 	}
 
-	/*
-	 * Checks if row,col is on a PieceComponent in unusedPiecePanel if there is
-	 * no piece below row,col it returns false
-	 */
 	public boolean inPieces(int row, int col) {
 		int val = col * 2 + row;
 		if (val < unusedPieces.size() && val > -1)
@@ -285,22 +227,14 @@ public class PuzzlePanel extends JPanel {
 		return false;
 	}
 
-	/*
-	 * Checks if row,col is inside the unusedPiecePanel area used for dropping
-	 * pieces back into unusedPieceArea
-	 */
-	public boolean inPiecesArea(int row, int col) {
-		if (row < 0 || row > unusedPieceArea.getWidth())
+	public boolean inPiecesArea(int x, int y) {
+		if (x < 0 || x > unusedPieceArea.getWidth())
 			return false;
-		if (col < 0 || col > unusedPieceArea.getHeight())
+		if (y < 0 || y > unusedPieceArea.getHeight())
 			return false;
 		return true;
 	}
 
-	/*
-	 * Determines if a given PieceComponent fits in a specific spot(given the
-	 * row and column of that spot) Returns true if it fits, false otherwise
-	 */
 	public boolean doesFit(int row, int col, PieceComponent p) {
 		return puzzle.doesFit(row, col, p.getPiece());
 	}
