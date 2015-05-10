@@ -10,20 +10,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 
-public class Listener extends MouseAdapter implements ActionListener,
-		KeyListener {
+public class Listener extends MouseAdapter implements ActionListener {
 	private String command;
 	private Display display;
 	protected boolean holdingPiece = false;
 	protected PieceComponent pieceHeld = null;
-	protected boolean solved = false;
+	protected boolean solved = false; /*
+									 * if solve is called becomes true and
+									 * prevents solve being clicked again until
+									 * clear is called
+									 * 
+									 * /**
+									 * 
+									 * @param display a Display object that
+									 * contains the necessary components for the
+									 * class to function
+									 */
 
-	/**
-	 * 
-	 * @param display
-	 *            a Display object that contains the necessary components for
-	 *            the class to function
-	 */
 	public Listener(Display display) {
 		this.display = display;
 	}
@@ -31,12 +34,11 @@ public class Listener extends MouseAdapter implements ActionListener,
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		command = e.getActionCommand();
-		if (command == "solve") {
+		if (command == "solve") { /* Solve button commands */
 			{
-				if(!solved)
-				{
-				display.getPuzzlePanel().solve();
-				solved = true;
+				if (!solved) {
+					display.getPuzzlePanel().solve();
+					solved = true;
 				}
 			}
 		}
@@ -45,29 +47,6 @@ public class Listener extends MouseAdapter implements ActionListener,
 			display.getPuzzlePanel().clear();
 			solved = false;
 		}
-	}
-
-	public void keyPressed(KeyEvent e) {
-		System.out.println("TEST");
-		if (holdingPiece) {
-			if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-				pieceHeld.rotate(1);
-
-			if (e.getKeyCode() == KeyEvent.VK_LEFT)
-				pieceHeld.rotate(3);
-
-			display.getPuzzlePanel().repaint();
-		}
-	}
-
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -129,22 +108,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 		}
 	}
 
-	public void mousePressed(MouseEvent e) {
-
-	}
-
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	public void mouseEntered(MouseEvent e) {
-
-	}
-
-	public void mouseExited(MouseEvent e) {
-
-	}
-
+	/* used to rotate pieces */
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (holdingPiece) {
 			int r = (int) e.getPreciseWheelRotation();
@@ -161,7 +125,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 		display.getPuzzlePanel().repaint();
 	}
 
-	public void mouseMoved(MouseEvent e) {
+	public void mouseMoved(MouseEvent e) { /* Drags pieces */
 		if (holdingPiece)
 			display.getPuzzlePanel().repaint();
 		display.getPuzzlePanel().mouseLocation = new Point(e.getPoint().x,
