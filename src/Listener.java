@@ -32,16 +32,10 @@ public class Listener extends MouseAdapter implements ActionListener,
 		command = e.getActionCommand();
 		if (command == "solve") {
 			display.getPuzzlePanel().solve();
-			System.out.println("solve");
 		}
 
 		if (command == "clear") {
 			display.getPuzzlePanel().clear();
-			System.out.println("clear");
-		}
-
-		if (command == "hint") {
-			System.out.println("hint");
 		}
 	}
 
