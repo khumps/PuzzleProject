@@ -114,12 +114,14 @@ public class PuzzlePanel extends JPanel {
 			for (int j = unusedPieceArea.y; j < unusedPieceArea.getMaxY()
 					&& j + pieceSize < getHeight() && index < 9; j += pieceSize) {
 				if (index < unusedPieces.size())
-					g.drawImage(unusedPieces.get(index).getPiecePic(), i, j, i
-							+ pieceSize, j + pieceSize, 0, 0,
-							unusedPieces.get(index).getPiecePic().getWidth(),
-							unusedPieces.get(index).getPiecePic().getHeight(),
-							this);
-				index++;
+					if (unusedPieces.get(index) != null) {
+						g.drawImage(unusedPieces.get(index).getPiecePic(), i,
+								j, i + pieceSize, j + pieceSize, 0, 0,
+								unusedPieces.get(index).getPiecePic()
+										.getWidth(), unusedPieces.get(index)
+										.getPiecePic().getHeight(), this);
+						index++;
+					}
 			}
 		}
 
@@ -186,8 +188,13 @@ public class PuzzlePanel extends JPanel {
 					pieces[i][j] = null;
 				}
 			}
-		}
 
+		}
+		if (listener.holdingPiece) {
+			unusedPieces.add(listener.pieceHeld);
+			listener.pieceHeld = null;
+			listener.holdingPiece = false;
+		}
 		puzzle.restart();
 		repaint();
 	}

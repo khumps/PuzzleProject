@@ -16,6 +16,7 @@ public class Listener extends MouseAdapter implements ActionListener,
 	private Display display;
 	protected boolean holdingPiece = false;
 	protected PieceComponent pieceHeld = null;
+	protected boolean solved = false;
 
 	/**
 	 * 
@@ -31,17 +32,15 @@ public class Listener extends MouseAdapter implements ActionListener,
 	public void actionPerformed(ActionEvent e) {
 		command = e.getActionCommand();
 		if (command == "solve") {
-			display.getPuzzlePanel().solve();
-			System.out.println("solve");
+			{
+				display.getPuzzlePanel().solve();
+				solved = true;
+			}
 		}
 
 		if (command == "clear") {
 			display.getPuzzlePanel().clear();
-			System.out.println("clear");
-		}
-
-		if (command == "hint") {
-			System.out.println("hint");
+			solved = false;
 		}
 	}
 
