@@ -108,7 +108,7 @@ public class Listener extends MouseAdapter implements ActionListener {
 		}
 	}
 
-	/* used to rotate pieces */
+	/* Rotates pieces */
 	public void mouseWheelMoved(MouseWheelEvent e) {
 		if (holdingPiece) {
 			int r = (int) e.getPreciseWheelRotation();
